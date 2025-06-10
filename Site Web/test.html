@@ -1,0 +1,2470 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAMBUA RH - Espace Employé</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Variables CSS pour une maintenance facile des couleurs */
+        :root {
+            --primary-color: #6ea8ff;
+            --secondary-color: #3f1b68;
+            --accent-color: #fb7253;
+            --light-bg: #f9f8f6;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-light: #3f1b68;
+            --success: #3f1b68;
+            --warning: #fb7253;
+            --danger: #fb7253;
+            --border-color: #777777;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Reset des styles par défaut */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Poppins, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+        }
+
+        /* Container principal avec Flexbox */
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+            margin: 10px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-color));
+            padding: 20px 0;
+            position: fixed;
+            height: calc(100vh - 20px);
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            border-radius: 25px;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+        }
+
+        .logo {
+            background-image: url('images/logo-TAMBUA.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            width: 180px;
+            height: 70px;
+            display: inline-block;
+            transform: translate(38px, 30px);
+        }
+
+        .logo span {
+            display: none;
+        }
+
+        .logo i {
+            display: none;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin: 60px 20px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 15px 30px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background-color: #f9f8f637;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background-color: #f9f8f6;
+            color: var(--secondary-color);
+            transform: translateX(50px);
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-link i {
+            margin-right: 15px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .nav-item h3 {
+            color: rgba(255, 255, 255, 0.278);
+        }
+
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+            background: var(--light-bg);
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            min-height: calc(100vh - 20px);
+        }
+
+        /* Header avec navbar */
+        .header {
+            background: var(--white);
+            padding: 15px 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--light-bg);
+            padding: 10px 15px;
+            border-radius: 25px;
+            border: 1px solid var(--border-color);
+            width: 300px;
+        }
+
+        .search-box input {
+            border: none;
+            background: none;
+            outline: none;
+            margin-left: 10px;
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .notification-badge {
+            position: relative;
+            color: var(--text-light);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent-color);
+            color: var(--white);
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Dropdown utilisateur */
+        .user-dropdown {
+            position: relative;
+        }
+
+        .user-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 25px;
+            transition: background-color 0.3s ease;
+        }
+
+        .user-btn:hover {
+            background-color: var(--light-bg);
+        }
+
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            min-width: 200px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--light-bg);
+        }
+
+        .dropdown-item i {
+            margin-right: 10px;
+            width: 16px;
+        }
+
+        /* PAGE SECTIONS - CORRECTION PRINCIPALE */
+        .page-section {
+            display: none; /* Masquer toutes les sections par défaut */
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .page-section.active {
+            display: block; /* Afficher seulement la section active */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards statistiques */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .stat-title {
+            color: var(--text-light);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .stat-change {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+        }
+
+        .change-positive {
+            color: var(--success);
+        }
+
+        .change-negative {
+            color: var(--danger);
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* Tables */
+        .table-container {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .table-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #e55a3c;
+            transform: translateY(-2px);
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .table th {
+            font-weight: 600;
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+        }
+
+        .table tbody tr:hover {
+            background-color: var(--light-bg);
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--success);
+        }
+
+        .status-pending {
+            background: rgba(255, 193, 7, 0.1);
+            color: var(--warning);
+        }
+
+        .status-inactive {
+            background: rgba(220, 53, 69, 0.1);
+            color: var(--danger);
+        }
+
+        /* Calendar Styles */
+        .calendar-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--light-bg);
+            border-radius: 10px;
+        }
+
+        .calendar-nav h3 {
+            margin: 0;
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .calendar-container {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .weekday {
+            padding: 1rem 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background: var(--border-color);
+        }
+
+        .calendar-day {
+            background: var(--white);
+            min-height: 80px;
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .calendar-day:hover {
+            background: var(--light-bg);
+        }
+
+        .calendar-day.other-month {
+            background: #f8f9fa;
+            color: #adb5bd;
+        }
+
+        .calendar-day.today {
+            background: rgba(110, 168, 255, 0.1);
+            border: 2px solid var(--primary-color);
+        }
+
+        .calendar-day.selected {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .calendar-day.has-event {
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .day-number {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .day-event {
+            background: var(--accent-color);
+            color: var(--white);
+            padding: 0.125rem 0.25rem;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            margin-bottom: 0.125rem;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .day-event.meeting {
+            background: var(--primary-color);
+        }
+
+        .day-event.deadline {
+            background: var(--warning);
+        }
+
+        .day-event.holiday {
+            background: var(--success);
+        }
+
+        .calendar-events {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: var(--light-bg);
+            border-radius: 10px;
+        }
+
+        .calendar-events h4 {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-size: 1rem;
+        }
+
+        .events-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .event-item {
+            padding: 0.75rem;
+            background: var(--white);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .event-item:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
+        }
+
+        .event-item.meeting {
+            border-left-color: var(--primary-color);
+        }
+
+        .event-item.deadline {
+            border-left-color: var(--warning);
+        }
+
+        .event-item.holiday {
+            border-left-color: var(--success);
+        }
+
+        .event-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .event-time {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .no-events {
+            text-align: center;
+            color: var(--text-light);
+            font-style: italic;
+            padding: 2rem;
+        }
+
+        .btn-secondary {
+            background: var(--text-light);
+            color: var(--white);
+            padding: 0.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Task/Leave Lists */
+        .task-list, .leave-list {
+            max-height: 350px;
+            overflow-y: auto;
+        }
+
+        .task-item, .leave-item {
+            background: var(--light-bg);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .task-item:hover, .leave-item:hover {
+            background: rgba(110, 168, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .task-item.completed {
+            border-left-color: var(--success);
+        }
+
+        .task-item.pending {
+            border-left-color: var(--warning);
+        }
+
+        .leave-item.approved {
+            border-left-color: var(--success);
+        }
+
+        .leave-item.pending {
+            border-left-color: var(--warning);
+        }
+
+        .leave-item.rejected {
+            border-left-color: var(--danger);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .item-date {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* Form Styles */
+        .form-container {
+            max-width: 800px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(110, 168, 255, 0.1);
+        }
+
+        /* Profile Styles */
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .profile-avatar-large {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .profile-details h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-details p {
+            opacity: 0.9;
+            margin-bottom: 0.25rem;
+        }
+
+        .document-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--light-bg);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .document-item:hover {
+            background: rgba(110, 168, 255, 0.1);
+        }
+
+        .document-info h4 {
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .document-info p {
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+
+        /* Payroll Styles */
+        .payroll-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 1.5rem;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .payroll-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        /* Mobile Overlay */
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-overlay.show {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text-dark);
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .mobile-menu-toggle:hover {
+            background-color: var(--light-bg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 15px;
+            }
+
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+
+            .header-actions {
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .search-box {
+                width: 100%;
+                order: 2;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .stat-card {
+                padding: 20px;
+            }
+
+            .table-container {
+                padding: 15px;
+                overflow-x: auto;
+            }
+
+            .table {
+                min-width: 600px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-content {
+                grid-template-columns: 1fr;
+            }
+
+            .payroll-summary {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 10px 15px;
+            }
+
+            .main-content {
+                padding: 10px;
+            }
+
+            .stat-card {
+                padding: 15px;
+            }
+
+            .stat-value {
+                font-size: 24px;
+            }
+
+            .table-container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Mobile Overlay -->
+        <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+        
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" id="sidebar">
+            <div class="logo">
+                <span>TAMBUA RH</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" data-page="dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="profile">
+                        <i class="fas fa-user"></i>
+                        <span>Mon Profil</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="leave">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Demande de Congé</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="payroll">
+                        <i class="fas fa-money-check-alt"></i>
+                        <span>Paie</span>
+                    </a>
+                </li>
+                <li class="nav-item"><h3>_______________________________</h3></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Rechercher...">
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <div class="notification-badge">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="notification-badge">
+                        <i class="fas fa-envelope"></i>
+                        <span class="badge">5</span>
+                    </div>
+                    <div class="user-dropdown">
+                        <button class="user-btn" onclick="toggleDropdown()">
+                            <div class="user-avatar">JD</div>
+                            <span>Jean Dupont</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu" id="userDropdown">
+                            <a href="#" class="dropdown-item" data-action="profile">
+                                <i class="fas fa-user"></i>
+                                Mon Profil
+                            </a>
+                            <a href="#" class="dropdown-item" data-action="logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Déconnexion
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="page-section active">
+                <h1>Dashboard Overview</h1>
+                
+                <!-- Statistics Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-title">Collègues Département</div>
+                            <div class="stat-icon" style="background: var(--primary-color);">
+                                <i class="fas fa-users"></i>
+                            </div>
+                        </div>
+                        <div class="stat-value">12</div>
+                        <div class="stat-change change-positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>IT Department</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-title">Tâches en Cours</div>
+                            <div class="stat-icon" style="background: var(--warning);">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                        </div>
+                        <div class="stat-value">5</div>
+                        <div class="stat-change change-positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+2 cette semaine</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-title">Congés Restants</div>
+                            <div class="stat-icon" style="background: var(--success);">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                        </div>
+                        <div class="stat-value">18</div>
+                        <div class="stat-change">
+                            <span>jours disponibles</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-title">Demandes en Attente</div>
+                            <div class="stat-icon" style="background: var(--accent-color);">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                        </div>
+                        <div class="stat-value">2</div>
+                        <div class="stat-change">
+                            <i class="fas fa-clock"></i>
+                            <span>En cours de traitement</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Content Grid -->
+                <div class="content-grid">
+                    <!-- Left Column -->
+                    <div>
+                        <!-- Calendar Section -->
+                        <div class="table-container">
+                            <div class="table-header">
+                                <h3 class="table-title">
+                                    <i class="fas fa-calendar-alt" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                                    Calendrier
+                                </h3>
+                                <button class="btn btn-primary" onclick="goToToday()">Aujourd'hui</button>
+                            </div>
+                            
+                            <!-- Calendar Navigation -->
+                            <div class="calendar-nav">
+                                <button class="btn btn-secondary" onclick="previousMonth()">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <h3 id="currentMonthYear"></h3>
+                                <button class="btn btn-secondary" onclick="nextMonth()">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Calendar Grid -->
+                            <div class="calendar-container">
+                                <div class="calendar-weekdays">
+                                    <div class="weekday">Lun</div>
+                                    <div class="weekday">Mar</div>
+                                    <div class="weekday">Mer</div>
+                                    <div class="weekday">Jeu</div>
+                                    <div class="weekday">Ven</div>
+                                    <div class="weekday">Sam</div>
+                                    <div class="weekday">Dim</div>
+                                </div>
+                                <div class="calendar-days" id="calendarDays"></div>
+                            </div>
+                            
+                            <!-- Calendar Events -->
+                            <div class="calendar-events">
+                                <h4>Événements du jour sélectionné</h4>
+                                <div id="selectedDateEvents" class="events-list">
+                                    <p class="no-events">Sélectionnez une date pour voir les événements</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tasks Section -->
+                        <div class="table-container" style="margin-top: 30px;">
+                            <div class="table-header">
+                                <h3 class="table-title">Mes Tâches</h3>
+                                <a href="#" class="btn btn-primary">Voir tout</a>
+                            </div>
+                            <div class="task-list">
+                                <div class="task-item pending">
+                                    <div class="item-header">
+                                        <h4 class="item-title">Développer la page de connexion</h4>
+                                        <span class="status-badge status-pending">En cours</span>
+                                    </div>
+                                    <p class="item-date">Échéance: 05/06/2025</p>
+                                </div>
+                                
+                                <div class="task-item pending">
+                                    <div class="item-header">
+                                        <h4 class="item-title">Révision du code de l'API</h4>
+                                        <span class="status-badge status-pending">À faire</span>
+                                    </div>
+                                    <p class="item-date">Échéance: 07/06/2025</p>
+                                </div>
+                                
+                                <div class="task-item completed">
+                                    <div class="item-header">
+                                        <h4 class="item-title">Mise à jour de la base de données</h4>
+                                        <span class="status-badge status-active">Terminé</span>
+                                    </div>
+                                    <p class="item-date">Terminé le: 01/06/2025</p>
+                                </div>
+                                
+                                <div class="task-item completed">
+                                    <div class="item-header">
+                                        <h4 class="item-title">Tests unitaires du module auth</h4>
+                                        <span class="status-badge status-active">Terminé</span>
+                                    </div>
+                                    <p class="item-date">Terminé le: 30/05/2025</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column -->
+                    <div>
+                        <!-- Recent Leave Requests -->
+                        <div class="table-container">
+                            <div class="table-header">
+                                <h3 class="table-title">Mes Demandes de Congé</h3>
+                                <a href="#" class="btn btn-primary">Historique</a>
+                            </div>
+                            <div class="leave-list">
+                                <div class="leave-item pending">
+                                    <div class="item-header">
+                                        <h4 class="item-title">Congés Annuels</h4>
+                                        <span class="status-badge status-pending">En attente</span>
+                                    </div>
+                                    <p class="item-date">15 - 19 Juillet 2025</p>
+                                </div>
+                                
+                                <div class="leave-item approved">
+                                    <div class="item-header">
+                                        <h4 class="item-title">Congé Maladie</h4>
+                                        <span class="status-badge status-active">Approuvé</span>
+                                    </div>
+                                    <p class="item-date">02 Juin 2025</p>
+                                </div>
+                                
+                                <div class="leave-item approved">
+                                    <div class="item-header">
+                                        <h4 class="item-title">RTT</h4>
+                                        <span class="status-badge status-active">Approuvé</span>
+                                    </div>
+                                    <p class="item-date">28 Mai 2025</p>
+                                </div>
+                                
+                                <div class="leave-item rejected">
+                                    <div class="item-header">
+                                        <h4 class="item-title">Congé Personnel</h4>
+                                        <span class="status-badge status-inactive">Refusé</span>
+                                    </div>
+                                    <p class="item-date">20 Mai 2025</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile" class="page-section">
+                <h1>Mon Profil</h1>
+                
+                <div class="profile-header">
+                    <div class="profile-avatar-large">JD</div>
+                    <div class="profile-details">
+                        <h2>Jean Dupont</h2>
+                        <p><strong>Poste:</strong> Développeur Frontend</p>
+                        <p><strong>Département:</strong> IT</p>
+                        <p><strong>Date d'embauche:</strong> 15 Mars 2023</p>
+                        <p><strong>Email:</strong> jean.dupont@tambua.com</p>
+                        <p><strong>ID Employé:</strong> EMP-2023-045</p>
+                    </div>
+                </div>
+                
+                <div class="content-grid">
+                    <!-- Personal Information -->
+                    <div class="table-container">
+                        <div class="table-header">
+                            <h3 class="table-title">Informations Personnelles</h3>
+                        </div>
+                        <form class="form-container">
+                            <div class="form-group">
+                                <label class="form-label">Nom Complet</label>
+                                <input type="text" class="form-control" value="Jean Dupont">
+                            </div>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">Téléphone</label>
+                                    <input type="tel" class="form-control" value="+33 6 12 34 56 78">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Date de Naissance</label>
+                                    <input type="date" class="form-control" value="1990-05-15">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Adresse</label>
+                                <textarea class="form-control" rows="3">123 Rue de la Paix, 75001 Paris, France</textarea>
+                            </div>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">Situation Familiale</label>
+                                    <select class="form-control">
+                                        <option>Célibataire</option>
+                                        <option selected>Marié(e)</option>
+                                        <option>Divorcé(e)</option>
+                                        <option>Veuf(ve)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Nombre d'enfants</label>
+                                    <input type="number" class="form-control" value="2" min="0">
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                Sauvegarder les modifications
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Documents -->
+                    <div class="table-container">
+                        <div class="table-header">
+                            <h3 class="table-title">Documents</h3>
+                        </div>
+                        
+                        <div class="document-item">
+                            <div class="document-info">
+                                <h4>Carte d'Identité</h4>
+                                <p>Document d'identité officiel</p>
+                            </div>
+                            <button class="btn btn-primary" onclick="downloadDocument('id')">
+                                <i class="fas fa-download"></i>
+                                Télécharger PDF
+                            </button>
+                        </div>
+                        
+                        <div class="document-item">
+                            <div class="document-info">
+                                <h4>Contrat de Travail</h4>
+                                <p>CDI - Développeur Frontend</p>
+                            </div>
+                            <button class="btn btn-primary" onclick="downloadDocument('contract')">
+                                <i class="fas fa-download"></i>
+                                Télécharger PDF
+                            </button>
+                        </div>
+                        
+                        <div class="document-item">
+                            <div class="document-info">
+                                <h4>Attestation de Salaire</h4>
+                                <p>Dernière attestation émise</p>
+                            </div>
+                            <button class="btn btn-primary" onclick="downloadDocument('salary')">
+                                <i class="fas fa-download"></i>
+                                Télécharger PDF
+                            </button>
+                        </div>
+                        
+                        <div class="document-item">
+                            <div class="document-info">
+                                <h4>Certificat de Travail</h4>
+                                <p>Certificat d'emploi actuel</p>
+                            </div>
+                            <button class="btn btn-primary" onclick="downloadDocument('work-certificate')">
+                                <i class="fas fa-download"></i>
+                                Télécharger PDF
+                            </button>
+                        </div>
+                        
+                        <div class="document-item">
+                            <div class="document-info">
+                                <h4>Relevé de Carrière</h4>
+                                <p>Historique complet</p>
+                            </div>
+                            <button class="btn btn-primary" onclick="downloadDocument('career')">
+                                <i class="fas fa-download"></i>
+                                Télécharger PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Leave Request Section -->
+            <section id="leave" class="page-section">
+                <h1>Demande de Congé</h1>
+                
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3 class="table-title">Nouvelle Demande</h3>
+                    </div>
+                    
+                    <form class="form-container" onsubmit="submitLeaveRequest(event)">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">Type de Congé *</label>
+                                <select class="form-control" required>
+                                    <option value="">Sélectionner le type</option>
+                                    <option value="annual">Congés Annuels</option>
+                                    <option value="sick">Congé Maladie</option>
+                                    <option value="maternity">Congé Maternité</option>
+                                    <option value="paternity">Congé Paternité</option>
+                                    <option value="rtt">RTT</option>
+                                    <option value="personal">Congé Personnel</option>
+                                    <option value="family">Congé Familial</option>
+                                    <option value="training">Formation</option>
+                                    <option value="other">Autre</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Durée</label>
+                                <select class="form-control">
+                                    <option value="full">Journée Complète</option>
+                                    <option value="morning">Demi-journée Matin</option>
+                                    <option value="afternoon">Demi-journée Après-midi</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">Date de Début *</label>
+                                <input type="date" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Date de Fin *</label>
+                                <input type="date" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Motif / Commentaires</label>
+                            <textarea class="form-control" rows="4" placeholder="Précisez le motif de votre demande (optionnel mais recommandé)"></textarea>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">Personne de Remplacement</label>
+                                <select class="form-control">
+                                    <option value="">Aucune</option>
+                                    <option value="marie.s">Marie Système</option>
+                                    <option value="paul.l">Paul Laurent</option>
+                                    <option value="sophie.c">Sophie Chen</option>
+                                    <option value="alice.m">Alice Martin</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Urgence</label>
+                                <select class="form-control">
+                                    <option value="normal">Normale</option>
+                                    <option value="urgent">Urgente</option>
+                                    <option value="emergency">Urgence Médicale</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Instructions Spéciales</label>
+                            <textarea class="form-control" rows="3" placeholder="Instructions pour votre remplaçant ou informations importantes"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="checkbox" required>
+                                Je confirme que les informations fournies sont exactes et que j'ai vérifié la disponibilité de mes congés.
+                            </label>
+                        </div>
+                        
+                        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i>
+                                Soumettre la Demande
+                            </button>
+                            <button type="reset" class="btn" style="background: var(--text-light); color: white;">
+                                <i class="fas fa-undo"></i>
+                                Réinitialiser
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Payroll Section -->
+            <section id="payroll" class="page-section">
+                <h1>Historique des Paies</h1>
+                
+                <!-- Summary Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-title">Salaire Mensuel Net</div>
+                            <div class="stat-icon" style="background: var(--primary-color);">
+                                <i class="fas fa-euro-sign"></i>
+                            </div>
+                        </div>
+                        <div class="stat-value">€3,200</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-title">Salaire Mensuel Brut</div>
+                            <div class="stat-icon" style="background: var(--primary-color);">
+                                <i class="fas fa-euro-sign"></i>
+                            </div>
+                        </div>
+                        <div class="stat-value">€4,500</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-title">Salaire Annuel Brut</div>
+                            <div class="stat-icon" style="background: var(--primary-color);">
+                                <i class="fas fa-euro-sign"></i>
+                            </div>
+                        </div>
+                        <div class="stat-value">€54,000</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-title">Jours de Congés Restants</div>
+                            <div class="stat-icon" style="background: var(--success);">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                        </div>
+                        <div class="stat-value">25</div>
+                    </div>
+                </div>
+                
+                <!-- Payroll Table -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3 class="table-title">Historique des Bulletins de Paie</h3>
+                    </div>
+                    
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Période</th>
+                                <th>Salaire Brut</th>
+                                <th>Cotisations</th>
+                                <th>Salaire Net</th>
+                                <th>Heures Travaillées</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Mai 2025</strong></td>
+                                <td>€4,500.00</td>
+                                <td>€1,300.00</td>
+                                <td>€3,200.00</td>
+                                <td>160h</td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="downloadPayslip('2025-05')">
+                                        <i class="fas fa-download"></i>
+                                        Télécharger
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Avril 2025</strong></td>
+                                <td>€4,500.00</td>
+                                <td>€1,300.00</td>
+                                <td>€3,200.00</td>
+                                <td>160h</td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="downloadPayslip('2025-04')">
+                                        <i class="fas fa-download"></i>
+                                        Télécharger
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Mars 2025</strong></td>
+                                <td>€4,500.00</td>
+                                <td>€1,300.00</td>
+                                <td>€3,200.00</td>
+                                <td>168h</td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="downloadPayslip('2025-03')">
+                                        <i class="fas fa-download"></i>
+                                        Télécharger
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Février 2025</strong></td>
+                                <td>€4,500.00</td>
+                                <td>€1,300.00</td>
+                                <td>€3,200.00</td>
+                                <td>152h</td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="downloadPayslip('2025-02')">
+                                        <i class="fas fa-download"></i>
+                                        Télécharger
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Janvier 2025</strong></td>
+                                <td>€4,500.00</td>
+                                <td>€1,300.00</td>
+                                <td>€3,200.00</td>
+                                <td>160h</td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="downloadPayslip('2025-01')">
+                                        <i class="fas fa-download"></i>
+                                        Télécharger
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+    // Fonction pour basculer le menu mobile
+    function toggleMobileMenu() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('mobileOverlay');
+        
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('show');
+        
+        if (sidebar.classList.contains('open')) {
+            overlay.style.display = 'block';
+            setTimeout(() => overlay.style.opacity = '1', 10);
+        } else {
+            overlay.style.opacity = '0';
+            setTimeout(() => overlay.style.display = 'none', 300);
+        }
+    }
+
+    // Fonction pour fermer le menu mobile
+    function closeMobileMenu() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('mobileOverlay');
+        
+        sidebar.classList.remove('open');
+        overlay.style.opacity = '0';
+        setTimeout(() => overlay.style.display = 'none', 300);
+    }
+
+    // Navigation entre les pages - FONCTION CORRIGÉE
+    function showPage(pageId) {
+        console.log('Switching to page:', pageId);
+        
+        // Masquer toutes les sections
+        document.querySelectorAll('.page-section').forEach(section => {
+            section.classList.remove('active');
+            section.style.display = 'none';
+        });
+        
+        // Afficher la section demandée
+        const targetSection = document.getElementById(pageId);
+        if (targetSection) {
+            targetSection.style.display = 'block';
+            targetSection.classList.add('active');
+            
+            // Scroll vers le haut
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            
+            console.log('Page switched successfully to:', pageId);
+        } else {
+            console.error(`Section with ID "${pageId}" not found`);
+        }
+        
+        // Mettre à jour la navigation active
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        const activeLink = document.querySelector(`[data-page="${pageId}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+        
+        // Mettre à jour l'URL
+        history.pushState(null, null, `#${pageId}`);
+        
+        // Fermer le menu mobile si ouvert
+        if (window.innerWidth <= 768) {
+            closeMobileMenu();
+        }
+    }
+
+    // Gestionnaire d'événements pour la navigation - CORRIGÉ
+    function setupNavigation() {
+        document.querySelectorAll('.nav-link[data-page]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = link.getAttribute('data-page');
+                console.log('Nav link clicked:', pageId);
+                if (pageId) {
+                    showPage(pageId);
+                }
+            });
+        });
+    }
+
+    // Gérer le bouton retour/avant du navigateur
+    window.addEventListener('popstate', () => {
+        const hash = window.location.hash.substring(1);
+        if (hash) {
+            showPage(hash);
+        } else {
+            showPage('dashboard');
+        }
+    });
+
+    // Toggle dropdown utilisateur
+    function toggleDropdown() {
+        const dropdown = document.getElementById('userDropdown');
+        dropdown.classList.toggle('show');
+    }
+
+    // Gestionnaire pour les actions du dropdown utilisateur
+    function handleDropdownAction(action) {
+        const dropdown = document.getElementById('userDropdown');
+        dropdown.classList.remove('show'); // Fermer le dropdown
+        
+        switch(action) {
+            case 'profile':
+                showPage('profile');
+                break;
+            case 'logout':
+                logout();
+                break;
+        }
+    }
+
+    // Fermer le dropdown si on clique ailleurs + gestion des actions
+    window.addEventListener('click', (e) => {
+        const dropdown = document.getElementById('userDropdown');
+        
+        // Gérer les clics sur les éléments du dropdown
+        if (e.target.closest('.dropdown-item')) {
+            e.preventDefault();
+            const action = e.target.closest('.dropdown-item').getAttribute('data-action');
+            if (action) {
+                handleDropdownAction(action);
+            }
+            return;
+        }
+        
+        // Fermer le dropdown si on clique ailleurs
+        if (!e.target.matches('.user-btn') && !e.target.closest('.user-btn')) {
+            if (dropdown && dropdown.classList.contains('show')) {
+                dropdown.classList.remove('show');
+            }
+        }
+    });
+
+    // Logout function
+    function logout() {
+        if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+            window.location.href = 'index.html';
+        }
+    }
+
+    // Document download functions
+    function downloadDocument(type) {
+        const documents = {
+            'id': 'Carte_Identité_Jean_Dupont.pdf',
+            'contract': 'Contrat_Travail_Jean_Dupont.pdf',
+            'salary': 'Attestation_Salaire_Jean_Dupont.pdf',
+            'work-certificate': 'Certificat_Travail_Jean_Dupont.pdf',
+            'career': 'Relevé_Carrière_Jean_Dupont.pdf'
+        };
+        
+        const fileName = documents[type];
+        if (fileName) {
+            showNotification(`Téléchargement de ${fileName} en cours...`, 'info');
+            
+            // Simulate download delay
+            setTimeout(() => {
+                showNotification('Téléchargement terminé !', 'success');
+            }, 2000);
+        }
+    }
+
+    // Payslip download function
+    function downloadPayslip(period) {
+        const fileName = `Bulletin_Paie_${period}_Jean_Dupont.pdf`;
+        showNotification(`Préparation du bulletin de paie ${period}...`, 'info');
+        
+        setTimeout(() => {
+            showNotification('Bulletin de paie téléchargé avec succès !', 'success');
+        }, 1500);
+    }
+
+    // Leave request submission
+    function submitLeaveRequest(event) {
+        event.preventDefault();
+        
+        // Validation du formulaire
+        if (!validateForm(event.target)) {
+            showNotification('Veuillez remplir tous les champs obligatoires.', 'error');
+            return;
+        }
+        
+        showNotification('Envoi de la demande en cours...', 'info');
+        
+        // Simulate API call
+        setTimeout(() => {
+            showNotification('Votre demande de congé a été soumise avec succès !', 'success');
+            event.target.reset();
+        }, 1500);
+    }
+
+    // Form validation
+    function validateForm(form) {
+        const requiredFields = form.querySelectorAll('[required]');
+        let isValid = true;
+        
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                field.style.borderColor = 'var(--danger)';
+                isValid = false;
+            } else {
+                field.style.borderColor = 'var(--border-color)';
+            }
+        });
+        
+        return isValid;
+    }
+
+    // Notification system
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--${type === 'success' ? 'success' : type === 'error' ? 'danger' : 'primary-color'});
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-hover);
+            z-index: 10000;
+            animation: slideInRight 0.3s ease;
+            max-width: 300px;
+            font-weight: 500;
+        `;
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+
+    // Initialize on page load - CORRIGÉ
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Employee Dashboard loaded successfully');
+        
+        // Setup navigation
+        setupNavigation();
+        
+        // Initialiser le calendrier
+        initCalendar();
+        
+        // Vérifier l'URL au chargement
+        const hash = window.location.hash.substring(1);
+        if (hash && ['dashboard', 'profile', 'leave', 'payroll'].includes(hash)) {
+            showPage(hash);
+        } else {
+            showPage('dashboard'); // Page par défaut
+        }
+        
+        // Add smooth scrolling for better UX
+        document.documentElement.style.scrollBehavior = 'smooth';
+        
+        // Add loading animation for cards
+        const cards = document.querySelectorAll('.stat-card, .table-container');
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+            card.style.animation = 'fadeInUp 0.6s ease forwards';
+        });
+        
+        // Add animation styles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+            
+            .badge {
+                animation: pulse 2s infinite;
+            }
+            
+            .stat-card, .table-container {
+                opacity: 0;
+            }
+            
+            .btn:active {
+                transform: translateY(1px);
+            }
+            
+            .employee-item:hover .employee-avatar {
+                transform: scale(1.1);
+                transition: transform 0.3s ease;
+            }
+            
+            .task-item:hover, .leave-item:hover {
+                box-shadow: var(--shadow-hover);
+            }
+            
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+            
+            /* Amélioration des transitions entre pages */
+            .page-section {
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            
+            .page-section.active {
+                opacity: 1;
+            }
+            
+            /* Effet hover sur les liens de navigation */
+            .nav-link {
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .nav-link::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+                transition: left 0.5s;
+            }
+            
+            .nav-link:hover::before {
+                left: 100%;
+            }
+            
+            /* Amélioration des boutons */
+            .btn {
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .btn::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                background: rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                transition: width 0.3s, height 0.3s;
+            }
+            
+            .btn:hover::after {
+                width: 120%;
+                height: 120%;
+            }
+            
+            /* Responsive améliorations */
+            @media (max-width: 768px) {
+                .nav-link {
+                    transform: none;
+                }
+                
+                .nav-link:hover,
+                .nav-link.active {
+                    transform: none;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Améliorer l'accessibilité
+        document.addEventListener('keydown', (e) => {
+            // Navigation au clavier
+            if (e.altKey) {
+                switch(e.key) {
+                    case '1':
+                        e.preventDefault();
+                        showPage('dashboard');
+                        break;
+                    case '2':
+                        e.preventDefault();
+                        showPage('profile');
+                        break;
+                    case '3':
+                        e.preventDefault();
+                        showPage('leave');
+                        break;
+                    case '4':
+                        e.preventDefault();
+                        showPage('payroll');
+                        break;
+                }
+            }
+            
+            // Escape pour fermer les menus
+            if (e.key === 'Escape') {
+                const dropdown = document.getElementById('userDropdown');
+                if (dropdown && dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                }
+                
+                if (window.innerWidth <= 768) {
+                    closeMobileMenu();
+                }
+            }
+        });
+        
+        // Ajouter des tooltips informatifs
+        document.querySelectorAll('[data-page]').forEach((link, index) => {
+            link.title = `Raccourci: Alt+${index + 1}`;
+        });
+        
+        // Auto-focus sur le champ de recherche avec Ctrl+F
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+                e.preventDefault();
+                const searchInput = document.querySelector('.search-box input');
+                if (searchInput) {
+                    searchInput.focus();
+                }
+            }
+        });
+        
+        // Améliorer la recherche
+        const searchInput = document.querySelector('.search-box input');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                console.log('Recherche:', searchTerm);
+                
+                // Simulation de recherche dans les employés
+                const employeeItems = document.querySelectorAll('.employee-item');
+                employeeItems.forEach(item => {
+                    const name = item.querySelector('h4').textContent.toLowerCase();
+                    const role = item.querySelector('p').textContent.toLowerCase();
+                    
+                    if (name.includes(searchTerm) || role.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = searchTerm ? 'none' : 'flex';
+                    }
+                });
+            });
+        }
+        
+        // Gestion des erreurs globales
+        window.addEventListener('error', (e) => {
+            console.error('Erreur détectée:', e.error);
+            showNotification('Une erreur est survenue. Veuillez actualiser la page.', 'error');
+        });
+        
+        // Performance monitoring
+        if ('performance' in window) {
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    const perfData = performance.getEntriesByType('navigation')[0];
+                    console.log('Page load time:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
+                }, 0);
+            });
+        }
+        
+        // Service Worker pour le cache (si nécessaire)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(err => {
+                console.log('Service Worker registration failed:', err);
+            });
+        }
+        
+        console.log('🚀 TAMBUA RH Dashboard fully initialized!');
+    });
+
+    // Fonctions utilitaires additionnelles
+    
+    // Fonction pour formater les dates
+    function formatDate(date) {
+        return new Intl.DateTimeFormat('fr-FR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        }).format(new Date(date));
+    }
+    
+    // Fonction pour formater les montants
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('fr-FR', {
+            style: 'currency',
+            currency: 'EUR'
+        }).format(amount);
+    }
+    
+    // Fonction de debounce pour optimiser les performances
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
+    // Fonction pour copier du texte dans le presse-papiers
+    async function copyToClipboard(text) {
+        try {
+            await navigator.clipboard.writeText(text);
+            showNotification('Copié dans le presse-papiers!', 'success');
+        } catch (err) {
+            showNotification('Impossible de copier le texte', 'error');
+        }
+    }
+    
+    // Fonction pour exporter des données
+    function exportData(format = 'json') {
+        const data = {
+            user: 'Jean Dupont',
+            department: 'IT',
+            tasks: 5,
+            leaveRequests: 2,
+            timestamp: new Date().toISOString()
+        };
+        
+        const filename = `tambua_rh_export_${new Date().toISOString().split('T')[0]}.${format}`;
+        
+        if (format === 'json') {
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            downloadBlob(blob, filename);
+        } else if (format === 'csv') {
+            const csv = Object.entries(data).map(([key, value]) => `${key},${value}`).join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            downloadBlob(blob, filename);
+        }
+        
+        showNotification(`Export ${format.toUpperCase()} généré!`, 'success');
+    }
+    
+    // Fonction utilitaire pour télécharger un blob
+    function downloadBlob(blob, filename) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+    
+    // Variables globales pour le calendrier
+    let currentDate = new Date();
+    let selectedDate = null;
+    
+    // Données d'événements simulées
+    const calendarEvents = {
+        '2025-06-05': [
+            { title: 'Réunion équipe', time: '09:00', type: 'meeting' },
+            { title: 'Deadline projet A', time: '17:00', type: 'deadline' }
+        ],
+        '2025-06-10': [
+            { title: 'Formation Vue.js', time: '14:00', type: 'meeting' }
+        ],
+        '2025-06-15': [
+            { title: 'Congé Marie S.', time: 'Toute la journée', type: 'holiday' }
+        ],
+        '2025-06-20': [
+            { title: 'Review de code', time: '10:30', type: 'meeting' },
+            { title: 'Présentation client', time: '15:00', type: 'meeting' }
+        ],
+        '2025-06-25': [
+            { title: 'Deadline rapport mensuel', time: '23:59', type: 'deadline' }
+        ]
+    };
+
+    // Fonction pour initialiser le calendrier
+    function initCalendar() {
+        updateCalendarDisplay();
+    }
+
+    // Fonction pour mettre à jour l'affichage du calendrier
+    function updateCalendarDisplay() {
+        updateMonthYear();
+        renderCalendarDays();
+    }
+
+    // Mettre à jour le titre mois/année
+    function updateMonthYear() {
+        const monthNames = [
+            'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+            'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+        ];
+        
+        const monthYearElement = document.getElementById('currentMonthYear');
+        if (monthYearElement) {
+            monthYearElement.textContent = `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+        }
+    }
+
+    // Rendre les jours du calendrier
+    function renderCalendarDays() {
+        const calendarDaysElement = document.getElementById('calendarDays');
+        if (!calendarDaysElement) return;
+
+        calendarDaysElement.innerHTML = '';
+
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        
+        // Premier jour du mois
+        const firstDay = new Date(year, month, 1);
+        // Dernier jour du mois
+        const lastDay = new Date(year, month + 1, 0);
+        
+        // Commencer par lundi (1) au lieu de dimanche (0)
+        const startDate = new Date(firstDay);
+        const dayOfWeek = (firstDay.getDay() + 6) % 7; // Convertir dimanche=0 en dimanche=6
+        startDate.setDate(firstDay.getDate() - dayOfWeek);
+
+        // Générer 42 jours (6 semaines)
+        for (let i = 0; i < 42; i++) {
+            const date = new Date(startDate);
+            date.setDate(startDate.getDate() + i);
+            
+            const dayElement = createDayElement(date, month);
+            calendarDaysElement.appendChild(dayElement);
+        }
+    }
+
+    // Créer un élément jour
+    function createDayElement(date, currentMonth) {
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'calendar-day';
+        
+        const dayNumber = document.createElement('div');
+        dayNumber.className = 'day-number';
+        dayNumber.textContent = date.getDate();
+        
+        // Classes CSS selon le contexte
+        if (date.getMonth() !== currentMonth) {
+            dayDiv.classList.add('other-month');
+        }
+        
+        // Jour d'aujourd'hui
+        const today = new Date();
+        if (date.toDateString() === today.toDateString()) {
+            dayDiv.classList.add('today');
+        }
+        
+        // Jour sélectionné
+        if (selectedDate && date.toDateString() === selectedDate.toDateString()) {
+            dayDiv.classList.add('selected');
+        }
+        
+        // Vérifier s'il y a des événements
+        const dateString = formatDateForEvents(date);
+        const events = calendarEvents[dateString] || [];
+        
+        if (events.length > 0) {
+            dayDiv.classList.add('has-event');
+        }
+        
+        dayDiv.appendChild(dayNumber);
+        
+        // Ajouter les événements (max 3 visibles)
+        events.slice(0, 3).forEach(event => {
+            const eventDiv = document.createElement('div');
+            eventDiv.className = `day-event ${event.type}`;
+            eventDiv.textContent = event.title;
+            eventDiv.title = `${event.title} - ${event.time}`;
+            dayDiv.appendChild(eventDiv);
+        });
+        
+        // Si plus de 3 événements, afficher un indicateur
+        if (events.length > 3) {
+            const moreDiv = document.createElement('div');
+            moreDiv.className = 'day-event';
+            moreDiv.textContent = `+${events.length - 3} autres`;
+            moreDiv.style.background = '#6c757d';
+            dayDiv.appendChild(moreDiv);
+        }
+        
+        // Gestionnaire de clic
+        dayDiv.addEventListener('click', () => selectDate(date));
+        
+        return dayDiv;
+    }
+
+    // Sélectionner une date
+    function selectDate(date) {
+        selectedDate = new Date(date);
+        updateCalendarDisplay();
+        showEventsForDate(date);
+    }
+
+    // Afficher les événements pour une date
+    function showEventsForDate(date) {
+        const eventsContainer = document.getElementById('selectedDateEvents');
+        if (!eventsContainer) return;
+
+        const dateString = formatDateForEvents(date);
+        const events = calendarEvents[dateString] || [];
+        
+        eventsContainer.innerHTML = '';
+        
+        if (events.length === 0) {
+            eventsContainer.innerHTML = '<p class="no-events">Aucun événement pour cette date</p>';
+            return;
+        }
+        
+        // Afficher la date sélectionnée
+        const dateHeader = document.createElement('h5');
+        dateHeader.textContent = formatDateDisplay(date);
+        dateHeader.style.marginBottom = '1rem';
+        dateHeader.style.color = 'var(--primary-color)';
+        eventsContainer.appendChild(dateHeader);
+        
+        // Afficher chaque événement
+        events.forEach(event => {
+            const eventDiv = document.createElement('div');
+            eventDiv.className = `event-item ${event.type}`;
+            
+            eventDiv.innerHTML = `
+                <div class="event-title">${event.title}</div>
+                <div class="event-time">${event.time}</div>
+            `;
+            
+            eventsContainer.appendChild(eventDiv);
+        });
+    }
+
+    // Navigation mois précédent
+    function previousMonth() {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        updateCalendarDisplay();
+    }
+
+    // Navigation mois suivant
+    function nextMonth() {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        updateCalendarDisplay();
+    }
+
+    // Aller à aujourd'hui
+    function goToToday() {
+        currentDate = new Date();
+        selectedDate = new Date();
+        updateCalendarDisplay();
+        showEventsForDate(selectedDate);
+    }
+
+    // Formater la date pour les événements (YYYY-MM-DD)
+    function formatDateForEvents(date) {
+        return date.toISOString().split('T')[0];
+    }
+
+    // Formater la date pour l'affichage
+    function formatDateDisplay(date) {
+        return date.toLocaleDateString('fr-FR', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    }
+    
+    // Fonction pour sauvegarder automatiquement les brouillons
+    function autoSave() {
+        const forms = document.querySelectorAll('form');
+        forms.forEach((form, index) => {
+            const inputs = form.querySelectorAll('input, textarea, select');
+            inputs.forEach(input => {
+                if (input.type !== 'password' && input.type !== 'submit') {
+                    input.addEventListener('input', debounce(() => {
+                        if (input.value.trim()) {
+                            const key = `tambua_autosave_${index}_${input.name || input.id || 'field'}`;
+                            try {
+                                localStorage.setItem(key, input.value);
+                                console.log('Auto-saved:', key);
+                            } catch (e) {
+                                console.warn('Could not save to localStorage:', e);
+                            }
+                        }
+                    }, 1000));
+                }
+            });
+        });
+    }
+    
+    // Initialiser l'auto-sauvegarde après un délai
+    setTimeout(autoSave, 2000);
+    
+    // Amélioration de l'expérience utilisateur avec des états de chargement
+    function showLoading(element) {
+        const originalText = element.textContent;
+        element.disabled = true;
+        element.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Chargement...';
+        
+        return () => {
+            element.disabled = false;
+            element.innerHTML = originalText;
+        };
+    }
+    
+    // Message de bienvenue contextuel
+    function showWelcomeMessage() {
+        const currentHour = new Date().getHours();
+        let greeting = 'Bonsoir';
+        
+        if (currentHour < 12) greeting = 'Bonjour';
+        else if (currentHour < 18) greeting = 'Bon après-midi';
+        
+        const welcomeMsg = `${greeting} Jean ! Vous avez 2 demandes en attente et 5 tâches à terminer.`;
+        
+        setTimeout(() => {
+            showNotification(welcomeMsg, 'info');
+        }, 1000);
+    }
+    
+    // Afficher le message de bienvenue au chargement
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(showWelcomeMessage, 2000);
+    });
+</script>
+</body>
+</html>
+box-shadow: var(--shadow);
