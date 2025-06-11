@@ -197,6 +197,8 @@
         /* Dropdown utilisateur */
         .user-dropdown {
             position: relative;
+            margin-left: 50px; /* Décalage de 5px vers la droite */
+            margin-top: 40px; /* Décalage de 5px vers le bas */
         }
 
         .user-btn {
@@ -206,20 +208,20 @@
             background-color: var(--light-bg);
             border: none;
             cursor: pointer;
-            padding: 8px 12px;
-            border-radius: 25px;
+            padding: 1px 1px;
+            border-radius: 15px;
             transition: background-color 0.3s ease;
         }
 
         .user-btn:hover {
-            background-color: #a6ceff;
+            background-color: #6ea8ff;
         }
 
         .user-avatar {
             width: 35px;
             height: 35px;
             border-radius: 50%;
-            background: var(--primary-color);
+            background: var(--secondary-color);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -229,18 +231,24 @@
 
         .dropdown-menu {
             position: absolute;
-            top: 100%;
-            right: 0;
+            /* top: 100%; ouvre vers le bas */
+            bottom: 100%; /* S'ouvre vers le haut */
+            right: 0; /* ..px vers la droite/ Garder à 0 car le décalage est déjà géré par le parent */
+            /* margin-bottom: 5px; 5px vers le bas */
             background: var(--white);
             border-radius: 10px;
             box-shadow: var(--shadow);
             min-width: 200px;
             display: none;
             z-index: 1000;
+            transform: scaleY(0);
+            transform-origin: bottom right;
+            transition: transform 0.2s ease;
         }
 
         .dropdown-menu.show {
             display: block;
+            transform: scaleY(1);
         }
 
         .dropdown-item {
@@ -391,6 +399,16 @@
 
         .btn-primary:hover {
             background: #e55a3c;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondaryx {
+            background: var(--secondary-color);
+            color: var(--white);
+        }
+
+        .btn-secondaryx:hover {
+            background: #412c8f;
             transform: translateY(-2px);
         }
 
@@ -1287,27 +1305,8 @@
                     </a>
                 </li>
             </ul>
-        </nav>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Header -->
-            <header class="header">
-                <div class="header-titles">
-                    <h2>Bonjour Jean Dupont 👋🏽</h2>
-                    <h5>Nous sommes le Jeudi 12 juin 2025</h5>
-                </div>
-
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <!-- <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Rechercher...">
-                    </div> -->
-                </div>
-                <div class="header-actions">
+            <div class="header-actions">
                     <!-- <div class="notification-badge">
                         <i class="fas fa-bell"></i>
                         <span class="badge">3</span>
@@ -1320,13 +1319,13 @@
                         <button class="user-btn" onclick="toggleDropdown()">
                             <div class="user-avatar">JD</div>
                             <span>Jean Dupont</span>
-                            <i class="fas fa-chevron-down"></i>
+                            <i class="fas fa-chevron-up"></i>
                         </button>
                         <div class="dropdown-menu" id="userDropdown">
-                            <a href="#" class="dropdown-item" data-action="profile">
+                            <!-- <a href="#" class="dropdown-item" data-action="profile">
                                 <i class="fas fa-user"></i>
                                 Mon Profil
-                            </a>
+                            </a> -->
                             <a href="#" class="dropdown-item" onclick="logout()">
                                 <i class="fas fa-sign-out-alt"></i>
                                 Déconnexion
@@ -1334,7 +1333,11 @@
                         </div>
                     </div>
                 </div>
-            </header>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            
 
             <!-- Dashboard Section -->
             <section id="dashboard" class="page-section active">
@@ -1492,6 +1495,27 @@
 
             <!-- Profile Section -->
             <section id="profile" class="page-section">
+
+                <!-- Header -->
+            <header class="header">
+                <div class="header-titles">
+                    <h2>Bonjour Jean Dupont 👋🏽</h2>
+                    <h5>Nous sommes le Jeudi 12 juin 2025</h5>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <!-- <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Rechercher...">
+                    </div> -->
+                </div>
+                
+            </header>
+
+
                 <div class="profile-info-grid">
                     <!-- Personal Information Header -->
                     <div class="profile-header">
@@ -1682,11 +1706,11 @@
                     <!-- Leave Main Content -->
                     <div class="leave-main">
                         <div class="leave-main-header">
-                            <button class="btn" id="cancelLeaveBtn" style="display: none;">
+                            <button class="btn btn-primary" id="cancelLeaveBtn" style="display: none;">
                                 <i class="fas fa-times"></i>
                                 Annuler cette demande
                             </button>
-                            <button class="btn btn-primary" onclick="openLeaveModal()">
+                            <button class="btn btn-secondaryx" onclick="openLeaveModal()">
                                 <i class="fas fa-plus"></i>
                                 Demande d'absence
                             </button>
