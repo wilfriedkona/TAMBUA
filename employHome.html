@@ -1928,74 +1928,75 @@
                 </div>
             </section>
 
-            <!-- Expenses Section -->
-            <section id="expenses" class="page-section">
-                <div class="expense-container">
-                    <div class="expense-header">
-                        <h2>Expenses</h2>
-                        <button class="btn btn-primary" onclick="openExpenseModal()">
-                            <i class="fas fa-plus"></i>
-                            Add New Expense
+            <!-- Section des Dépenses -->
+<section id="expenses" class="page-section">
+    <div class="expense-container">
+        <div class="expense-header">
+            <h2>Dépenses</h2>
+            <button class="btn btn-primary" onclick="openExpenseModal()">
+                <i class="fas fa-plus"></i>
+                Ajouter une nouvelle dépense
+            </button>
+        </div>
+        
+        <div class="expense-tabs">
+            <button class="tab-btn" onclick="switchTab('pending')">En attente</button>
+            <button class="tab-btn active" onclick="switchTab('approved')">Approuvé</button>
+            <button class="tab-btn" onclick="switchTab('rejected')">Rejeté</button>
+        </div>
+        
+        <table class="expense-table">
+            <thead>
+                <tr>
+                    <th>Catégorie de dépense</th>
+                    <th>Montant</th>
+                    <th>Date</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="expenseTableBody">
+                <tr>
+                    <td>Divers</td>
+                    <td>€195,00</td>
+                    <td>29-05-2025</td>
+                    <td><span class="status-badge status-active">Approuvé</span></td>
+                    <td>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-eye"></i>
+                            Voir
                         </button>
-                    </div>
-                    
-                    <div class="expense-tabs">
-                        <button class="tab-btn" onclick="switchTab('pending')">Pending</button>
-                        <button class="tab-btn active" onclick="switchTab('approved')">Approved</button>
-                        <button class="tab-btn" onclick="switchTab('rejected')">Rejected</button>
-                    </div>
-                    
-                    <table class="expense-table">
-                        <thead>
-                            <tr>
-                                <th>Expense Category</th>
-                                <th>Amount</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="expenseTableBody">
-                            <tr>
-                                <td>Miscellaneous</td>
-                                <td>€195.00</td>
-                                <td>29-05-2025</td>
-                                <td><span class="status-badge status-active">Approved</span></td>
-                                <td>
-                                    <button class="btn btn-primary">
-                                        <i class="fas fa-eye"></i>
-                                        View
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Travel</td>
-                                <td>€402.00</td>
-                                <td>16-05-2025</td>
-                                <td><span class="status-badge status-active">Approved</span></td>
-                                <td>
-                                    <button class="btn btn-primary">
-                                        <i class="fas fa-eye"></i>
-                                        View
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Office Supplies</td>
-                                <td>€75.50</td>
-                                <td>12-05-2025</td>
-                                <td><span class="status-badge status-active">Approved</span></td>
-                                <td>
-                                    <button class="btn btn-primary">
-                                        <i class="fas fa-eye"></i>
-                                        View
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Voyage</td>
+                    <td>€402,00</td>
+                    <td>16-05-2025</td>
+                    <td><span class="status-badge status-active">Approuvé</span></td>
+                    <td>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-eye"></i>
+                            Voir
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Fournitures de bureau</td>
+                    <td>€75,50</td>
+                    <td>12-05-2025</td>
+                    <td><span class="status-badge status-active">Approuvé</span></td>
+                    <td>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-eye"></i>
+                            Voir
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
         </main>
     </div>
 
@@ -2073,67 +2074,68 @@
         </div>
     </div>
 
-    <!-- Expense Modal -->
-    <div class="modal" id="expenseModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Add New Expense</h3>
-                <button class="close-btn" onclick="closeExpenseModal()">
-                    <i class="fas fa-times"></i>
-                </button>
+   <!-- Modal des Dépenses -->
+<div class="modal" id="expenseModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title">Ajouter une nouvelle dépense</h3>
+            <button class="close-btn" onclick="closeExpenseModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <form id="expenseForm" onsubmit="submitExpense(event)">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Catégorie de dépense *</label>
+                    <select class="form-control" required>
+                        <option value="">Sélectionnez une catégorie de dépense...</option>
+                        <option value="office-supplies">Fournitures de bureau</option>
+                        <option value="travel">Voyage</option>
+                        <option value="utilities">Services publics</option>
+                        <option value="miscellaneous">Divers</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Montant *</label>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="background: var(--light-bg); padding: 0.75rem 1rem; border: 2px solid var(--border-color); border-radius: 10px 0 0 10px;">FCFA</span>
+                        <input type="number" class="form-control" placeholder="Veuillez entrer le montant" required style="border-radius: 0 10px 10px 0; border-left: none;">
+                    </div>
+                </div>
             </div>
             
-            <form id="expenseForm" onsubmit="submitExpense(event)">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label class="form-label">Expense Category *</label>
-                        <select class="form-control" required>
-                            <option value="">Select Expense Category...</option>
-                            <option value="office-supplies">Office Supplies</option>
-                            <option value="travel">Travel</option>
-                            <option value="utilities">Utilities</option>
-                            <option value="miscellaneous">Miscellaneous</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Amount *</label>
-                        <div style="display: flex; align-items: center; gap: 0.5rem;">
-                            <span style="background: var(--light-bg); padding: 0.75rem 1rem; border: 2px solid var(--border-color); border-radius: 10px 0 0 10px;">EUR</span>
-                            <input type="number" class="form-control" placeholder="Please Enter Amount" required style="border-radius: 0 10px 10px 0; border-left: none;">
-                        </div>
-                    </div>
+            <div class="form-group">
+                <label class="form-label">Numéro de référence</label>
+                <input type="text" class="form-control" placeholder="Veuillez entrer le numéro de référence">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Télécharger le reçu</label>
+                <div class="file-upload" onclick="document.getElementById('expenseFile').click()">
+                    <i class="fas fa-upload"></i>
+                    <p>Télécharger</p>
+                    <input type="file" id="expenseFile" style="display: none;" accept=".pdf,.jpg,.jpeg,.png">
                 </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Reference Number</label>
-                    <input type="text" class="form-control" placeholder="Please Enter Reference Number">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Upload Receipt</label>
-                    <div class="file-upload" onclick="document.getElementById('expenseFile').click()">
-                        <i class="fas fa-upload"></i>
-                        <p>Upload</p>
-                        <input type="file" id="expenseFile" style="display: none;" accept=".pdf,.jpg,.jpeg,.png">
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Notes</label>
-                    <textarea class="form-control" rows="4" placeholder="Please Enter Notes"></textarea>
-                </div>
-                
-                <div class="modal-actions">
-                    <button type="button" class="btn btn-cancel" onclick="closeExpenseModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-check"></i>
-                        Create
-                    </button>
-                </div>
-            </form>
-        </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Notes</label>
+                <textarea class="form-control" rows="4" placeholder="Veuillez entrer des notes"></textarea>
+            </div>
+            
+            <div class="modal-actions">
+                <button type="button" class="btn btn-cancel" onclick="closeExpenseModal()">Annuler</button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-check"></i>
+                    Créer
+                </button>
+            </div>
+        </form>
     </div>
+</div>
+
 
     <script>
         // Variables globales pour le calendrier
