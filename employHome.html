@@ -55,14 +55,7 @@
             </ul>
 
             <div class="header-actions">
-                    <!-- <div class="notification-badge">
-                        <i class="fas fa-bell"></i>
-                        <span class="badge">3</span>
-                    </div>
-                    <div class="notification-badge">
-                        <i class="fas fa-envelope"></i>
-                        <span class="badge">5</span>
-                    </div> -->
+                    
                     <div class="user-dropdown">
                         <button class="user-btn" onclick="toggleDropdown()">
                             <div class="user-avatar">JD</div>
@@ -70,10 +63,7 @@
                             <i class="fas fa-chevron-up"></i>
                         </button>
                         <div class="dropdown-menu" id="userDropdown">
-                            <!-- <a href="#" class="dropdown-item" data-action="profile">
-                                <i class="fas fa-user"></i>
-                                Mon Profil
-                            </a> -->
+                            
                             <a href="#" class="dropdown-item" onclick="logout()">
                                 <i class="fas fa-sign-out-alt"></i>
                                 Déconnexion
@@ -119,33 +109,6 @@
                         </div>
                     </div>
 
-                    <!-- <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-title">Demandes en Attente</div>
-                            <div class="stat-icon" style="background: var(--accent-color);">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                        </div>
-                        <div class="stat-value">2</div>
-                        <div class="stat-change">
-                            <i class="fas fa-clock"></i>
-                            <span>En cours de traitement</span>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-title">Notes de frais</div>
-                            <div class="stat-icon" style="background: var(--warning);">
-                                <i class="fas fa-receipt"></i>
-                            </div>
-                        </div>
-                        <div class="stat-value">3</div>
-                        <div class="stat-change change-positive">
-                            <i class="fas fa-arrow-up"></i>
-                            <span>Ce mois</span>
-                        </div>
-                    </div> -->
                 </div>
                 
                 <!-- Content Grid -->
@@ -659,74 +622,448 @@
                 </div>
             </section>
 
-            <!-- Section des Dépenses -->
-<section id="expenses" class="page-section">
-    <div class="expense-container">
-        <div class="expense-header">
-            <h2>Dépenses</h2>
-            <button class="btn btn-primary" onclick="openExpenseModal()">
-                <i class="fas fa-plus"></i>
-                Ajouter une nouvelle dépense
-            </button>
-        </div>
-        
-        <div class="expense-tabs">
-            <button class="tab-btn" onclick="switchTab('pending')">En attente</button>
-            <button class="tab-btn active" onclick="switchTab('approved')">Approuvé</button>
-            <button class="tab-btn" onclick="switchTab('rejected')">Rejeté</button>
-        </div>
-        
-        <table class="expense-table">
-            <thead>
-                <tr>
-                    <th>Catégorie de dépense</th>
-                    <th>Montant</th>
-                    <th>Date</th>
-                    <th>Statut</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="expenseTableBody">
-                <tr>
-                    <td>Divers</td>
-                    <td>€195,00</td>
-                    <td>29-05-2025</td>
-                    <td><span class="status-badge status-active">Approuvé</span></td>
-                    <td>
-                        <button class="btn btn-primary">
-                            <i class="fas fa-eye"></i>
-                            Voir
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Voyage</td>
-                    <td>€402,00</td>
-                    <td>16-05-2025</td>
-                    <td><span class="status-badge status-active">Approuvé</span></td>
-                    <td>
-                        <button class="btn btn-primary">
-                            <i class="fas fa-eye"></i>
-                            Voir
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Fournitures de bureau</td>
-                    <td>€75,50</td>
-                    <td>12-05-2025</td>
-                    <td><span class="status-badge status-active">Approuvé</span></td>
-                    <td>
-                        <button class="btn btn-primary">
-                            <i class="fas fa-eye"></i>
-                            Voir
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</section>
+            <!-- Section Note de Frais mise à jour -->
+            <section id="expenses" class="page-section">
+                <div class="expenses-page-container">
+                    <!-- Sidebar des notes de frais -->
+                    <div class="expenses-sidebar">
+                        <div class="expenses-sidebar-header">
+                            <h3>Mes notes de frais</h3>
+                            
+                            <!-- Filtres -->
+                            <div class="filter-container">
+                                <div class="filter-tabs">
+                                    <button class="filter-tab active" onclick="filterExpenses('all')" data-filter="all">
+                                        <i class="fas fa-list"></i>
+                                        Toutes
+                                    </button>
+                                    <button class="filter-tab" onclick="filterExpenses('pending')" data-filter="pending">
+                                        <i class="fas fa-clock"></i>
+                                        En attente
+                                    </button>
+                                    <button class="filter-tab" onclick="filterExpenses('approved')" data-filter="approved">
+                                        <i class="fas fa-check-circle"></i>
+                                        Approuvé
+                                    </button>
+                                    <button class="filter-tab" onclick="filterExpenses('rejected')" data-filter="rejected">
+                                        <i class="fas fa-times-circle"></i>
+                                        Annulé
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="expenses-list" id="expensesList">
+                            <div class="expense-item" onclick="selectExpense(this, 1)" data-status="approved" data-id="1">
+                                <div class="expense-item-content">
+                                    <div class="expense-title">Transport - Déplacement client</div>
+                                    <div class="expense-amount">25,000 FCFA</div>
+                                    <div class="expense-date">Soumis le 15/06/2025</div>
+                                </div>
+                                <div class="expense-status">
+                                    <i class="fas fa-check-circle status-approved"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="expense-item" onclick="selectExpense(this, 2)" data-status="pending" data-id="2">
+                                <div class="expense-item-content">
+                                    <div class="expense-title">Repas d'affaires</div>
+                                    <div class="expense-amount">15,750 FCFA</div>
+                                    <div class="expense-date">Soumis le 12/06/2025</div>
+                                </div>
+                                <div class="expense-status">
+                                    <i class="fas fa-clock status-pending"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="expense-item" onclick="selectExpense(this, 3)" data-status="approved" data-id="3">
+                                <div class="expense-item-content">
+                                    <div class="expense-title">Fournitures de bureau</div>
+                                    <div class="expense-amount">8,500 FCFA</div>
+                                    <div class="expense-date">Soumis le 10/06/2025</div>
+                                </div>
+                                <div class="expense-status">
+                                    <i class="fas fa-check-circle status-approved"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="expense-item" onclick="selectExpense(this, 4)" data-status="rejected" data-id="4">
+                                <div class="expense-item-content">
+                                    <div class="expense-title">Taxi - Réunion externe</div>
+                                    <div class="expense-amount">12,000 FCFA</div>
+                                    <div class="expense-date">Soumis le 08/06/2025</div>
+                                </div>
+                                <div class="expense-status">
+                                    <i class="fas fa-times-circle status-rejected"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="expense-item" onclick="selectExpense(this, 5)" data-status="pending" data-id="5">
+                                <div class="expense-item-content">
+                                    <div class="expense-title">Hébergement - Mission</div>
+                                    <div class="expense-amount">45,000 FCFA</div>
+                                    <div class="expense-date">Soumis le 05/06/2025</div>
+                                </div>
+                                <div class="expense-status">
+                                    <i class="fas fa-clock status-pending"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="expense-item" onclick="selectExpense(this, 6)" data-status="approved" data-id="6">
+                                <div class="expense-item-content">
+                                    <div class="expense-title">Carburant - Véhicule société</div>
+                                    <div class="expense-amount">30,000 FCFA</div>
+                                    <div class="expense-date">Soumis le 03/06/2025</div>
+                                </div>
+                                <div class="expense-status">
+                                    <i class="fas fa-check-circle status-approved"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Zone de détails -->
+                    <div class="expenses-preview">
+                        <div class="expenses-preview-header">
+                            <div class="preview-title">
+                                <h2 id="expensePreviewTitle">Détails de la note de frais</h2>
+                                <p id="expensePreviewSubtitle">Sélectionnez une note pour voir les détails</p>
+                            </div>
+                            <button class="add-expense-btn" onclick="openExpenseModal()">
+                                <i class="fas fa-plus"></i>
+                                Ajouter une nouvelle note
+                            </button>
+                        </div>
+                        
+                        <!-- État vide -->
+                        <div class="empty-expense-preview" id="emptyExpensePreview">
+                            <div class="empty-icon">
+                                <i class="fas fa-receipt"></i>
+                            </div>
+                            <h3>Aucune note sélectionnée</h3>
+                            <p>Sélectionnez une note pour voir les détails</p>
+                        </div>
+                        
+                        <!-- Détails de la note -->
+                        <div class="expense-details" id="expenseDetails" style="display: none;">
+                            <div class="expense-details-content">
+                                <!-- Détail note 1 -->
+                                <div class="expense-detail-item" id="expenseDetail1">
+                                    <div class="expense-detail-header">
+                                        <h3>Transport - Déplacement client</h3>
+                                        <span class="status-badge status-approved-badge">
+                                            <i class="fas fa-check-circle"></i>
+                                            Approuvé
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="expense-info-grid">
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Type de dépense</div>
+                                            <div class="expense-info-value">Transport</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Montant</div>
+                                            <div class="expense-info-value">25,000 FCFA</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Date de la dépense</div>
+                                            <div class="expense-info-value">15 Juin 2025</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Date de soumission</div>
+                                            <div class="expense-info-value">15 Juin 2025</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Numéro de référence</div>
+                                            <div class="expense-info-value">REF-2025-001</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Statut</div>
+                                            <div class="expense-info-value">
+                                                <span class="status-badge status-approved-badge">Approuvé</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="expense-description">
+                                        <div class="expense-info-label">Description</div>
+                                        <div class="expense-info-value">Frais de transport pour rendez-vous client à Plateau. Taxi aller-retour depuis le bureau.</div>
+                                    </div>
+                                    
+                                    <div class="expense-actions" style="display: none;">
+                                        <button class="btn-cancel-expense" onclick="cancelExpense(1)">
+                                            <i class="fas fa-times"></i>
+                                            Annuler cette note
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Détail note 2 -->
+                                <div class="expense-detail-item" id="expenseDetail2" style="display: none;">
+                                    <div class="expense-detail-header">
+                                        <h3>Repas d'affaires</h3>
+                                        <span class="status-badge status-pending-badge">
+                                            <i class="fas fa-clock"></i>
+                                            En attente
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="expense-info-grid">
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Type de dépense</div>
+                                            <div class="expense-info-value">Repas</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Montant</div>
+                                            <div class="expense-info-value">15,750 FCFA</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Date de la dépense</div>
+                                            <div class="expense-info-value">12 Juin 2025</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Date de soumission</div>
+                                            <div class="expense-info-value">12 Juin 2025</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Numéro de référence</div>
+                                            <div class="expense-info-value">REF-2025-002</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Statut</div>
+                                            <div class="expense-info-value">
+                                                <span class="status-badge status-pending-badge">En attente</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="expense-description">
+                                        <div class="expense-info-label">Description</div>
+                                        <div class="expense-info-value">Déjeuner d'affaires avec prospects. Restaurant Le Bô à Cocody.</div>
+                                    </div>
+                                    
+                                    <div class="expense-actions">
+                                        <button class="btn-cancel-expense" onclick="cancelExpense(2)">
+                                            <i class="fas fa-times"></i>
+                                            Annuler cette note
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Détail note 3 -->
+                                <div class="expense-detail-item" id="expenseDetail3" style="display: none;">
+                                    <div class="expense-detail-header">
+                                        <h3>Fournitures de bureau</h3>
+                                        <span class="status-badge status-approved-badge">
+                                            <i class="fas fa-check-circle"></i>
+                                            Approuvé
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="expense-info-grid">
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Type de dépense</div>
+                                            <div class="expense-info-value">Fournitures</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Montant</div>
+                                            <div class="expense-info-value">8,500 FCFA</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Date de la dépense</div>
+                                            <div class="expense-info-value">10 Juin 2025</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Date de soumission</div>
+                                            <div class="expense-info-value">10 Juin 2025</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Numéro de référence</div>
+                                            <div class="expense-info-value">REF-2025-003</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Statut</div>
+                                            <div class="expense-info-value">
+                                                <span class="status-badge status-approved-badge">Approuvé</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="expense-description">
+                                        <div class="expense-info-label">Description</div>
+                                        <div class="expense-info-value">Achat de stylos, cahiers et autres fournitures pour l'équipe.</div>
+                                    </div>
+                                    
+                                    <div class="expense-actions" style="display: none;">
+                                        <button class="btn-cancel-expense" onclick="cancelExpense(3)">
+                                            <i class="fas fa-times"></i>
+                                            Annuler cette note
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Détail note 4 -->
+                                <div class="expense-detail-item" id="expenseDetail4" style="display: none;">
+                                    <div class="expense-detail-header">
+                                        <h3>Taxi - Réunion externe</h3>
+                                        <span class="status-badge status-rejected-badge">
+                                            <i class="fas fa-times-circle"></i>
+                                            Annulé
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="expense-info-grid">
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Type de dépense</div>
+                                            <div class="expense-info-value">Transport</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Montant</div>
+                                            <div class="expense-info-value">12,000 FCFA</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Date de la dépense</div>
+                                            <div class="expense-info-value">08 Juin 2025</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Date de soumission</div>
+                                            <div class="expense-info-value">08 Juin 2025</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Numéro de référence</div>
+                                            <div class="expense-info-value">REF-2025-004</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Statut</div>
+                                            <div class="expense-info-value">
+                                                <span class="status-badge status-rejected-badge">Annulé</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="expense-description">
+                                        <div class="expense-info-label">Description</div>
+                                        <div class="expense-info-value">Transport en taxi pour réunion externe annulée au dernier moment.</div>
+                                    </div>
+                                    
+                                    <div class="expense-actions" style="display: none;">
+                                        <button class="btn-cancel-expense" onclick="cancelExpense(4)">
+                                            <i class="fas fa-times"></i>
+                                            Annuler cette note
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Détail note 5 -->
+                                <div class="expense-detail-item" id="expenseDetail5" style="display: none;">
+                                    <div class="expense-detail-header">
+                                        <h3>Hébergement - Mission</h3>
+                                        <span class="status-badge status-pending-badge">
+                                            <i class="fas fa-clock"></i>
+                                            En attente
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="expense-info-grid">
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Type de dépense</div>
+                                            <div class="expense-info-value">Hébergement</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Montant</div>
+                                            <div class="expense-info-value">45,000 FCFA</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Date de la dépense</div>
+                                            <div class="expense-info-value">05 Juin 2025</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Date de soumission</div>
+                                            <div class="expense-info-value">05 Juin 2025</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Numéro de référence</div>
+                                            <div class="expense-info-value">REF-2025-005</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Statut</div>
+                                            <div class="expense-info-value">
+                                                <span class="status-badge status-pending-badge">En attente</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="expense-description">
+                                        <div class="expense-info-label">Description</div>
+                                        <div class="expense-info-value">Nuitée à l'hôtel Ibis Abidjan pour mission de formation de 2 jours.</div>
+                                    </div>
+                                    
+                                    <div class="expense-actions">
+                                        <button class="btn-cancel-expense" onclick="cancelExpense(5)">
+                                            <i class="fas fa-times"></i>
+                                            Annuler cette note
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Détail note 6 -->
+                                <div class="expense-detail-item" id="expenseDetail6" style="display: none;">
+                                    <div class="expense-detail-header">
+                                        <h3>Carburant - Véhicule société</h3>
+                                        <span class="status-badge status-approved-badge">
+                                            <i class="fas fa-check-circle"></i>
+                                            Approuvé
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="expense-info-grid">
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Type de dépense</div>
+                                            <div class="expense-info-value">Carburant</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Montant</div>
+                                            <div class="expense-info-value">30,000 FCFA</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Date de la dépense</div>
+                                            <div class="expense-info-value">03 Juin 2025</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Date de soumission</div>
+                                            <div class="expense-info-value">03 Juin 2025</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Numéro de référence</div>
+                                            <div class="expense-info-value">REF-2025-006</div>
+                                        </div>
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Statut</div>
+                                            <div class="expense-info-value">
+                                                <span class="status-badge status-approved-badge">Approuvé</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="expense-description">
+                                        <div class="expense-info-label">Description</div>
+                                        <div class="expense-info-value">Plein d'essence pour véhicule de société utilisé pour les déplacements clients de la semaine.</div>
+                                    </div>
+                                    
+                                    <div class="expense-actions" style="display: none;">
+                                        <button class="btn-cancel-expense" onclick="cancelExpense(6)">
+                                            <i class="fas fa-times"></i>
+                                            Annuler cette note
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
 
         </main>
     </div>
@@ -1265,17 +1602,255 @@
             }
         });
 
-        // Gestion des onglets des dépenses
-        function switchTab(tab) {
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
+        // Variables globales pour la section note de frais
+        let currentSelectedExpense = null;
+        let currentFilter = 'all';
+
+        // Fonction pour sélectionner une note de frais
+        function selectExpense(element, expenseId) {
+            // Retirer la sélection de tous les éléments
+            document.querySelectorAll('.expense-item').forEach(item => {
+                item.classList.remove('selected');
             });
             
-            event.target.classList.add('active');
+            // Sélectionner l'élément cliqué
+            element.classList.add('selected');
+            currentSelectedExpense = expenseId;
             
-            // Ici vous pouvez filtrer les données selon l'onglet
-            console.log('Switched to tab:', tab);
+            // Mettre à jour l'en-tête
+            updateExpensePreviewHeader(expenseId);
+            
+            // Masquer l'état vide et afficher les détails
+            document.getElementById('emptyExpensePreview').style.display = 'none';
+            document.getElementById('expenseDetails').style.display = 'block';
+            
+            // Masquer tous les détails
+            document.querySelectorAll('.expense-detail-item').forEach(detail => {
+                detail.style.display = 'none';
+            });
+            
+            // Afficher le détail correspondant
+            const detailElement = document.getElementById(`expenseDetail${expenseId}`);
+            if (detailElement) {
+                detailElement.style.display = 'block';
+            }
+            
+            // Afficher/masquer le bouton d'annulation selon le statut
+            const expenseStatus = element.getAttribute('data-status');
+            const actionsElement = detailElement?.querySelector('.expense-actions');
+            if (actionsElement) {
+                if (expenseStatus === 'pending') {
+                    actionsElement.style.display = 'flex';
+                } else {
+                    actionsElement.style.display = 'none';
+                }
+            }
         }
+
+        // Fonction pour mettre à jour l'en-tête de prévisualisation
+        function updateExpensePreviewHeader(expenseId) {
+            const expenseData = {
+                1: { title: 'Transport - Déplacement client', subtitle: 'Note de frais du 15 Juin 2025' },
+                2: { title: 'Repas d\'affaires', subtitle: 'Note de frais du 12 Juin 2025' },
+                3: { title: 'Fournitures de bureau', subtitle: 'Note de frais du 10 Juin 2025' },
+                4: { title: 'Taxi - Réunion externe', subtitle: 'Note de frais du 08 Juin 2025' },
+                5: { title: 'Hébergement - Mission', subtitle: 'Note de frais du 05 Juin 2025' },
+                6: { title: 'Carburant - Véhicule société', subtitle: 'Note de frais du 03 Juin 2025' }
+            };
+            
+            const expense = expenseData[expenseId];
+            if (expense) {
+                document.getElementById('expensePreviewTitle').textContent = expense.title;
+                document.getElementById('expensePreviewSubtitle').textContent = expense.subtitle;
+            }
+        }
+
+        // Fonction pour filtrer les notes de frais
+        function filterExpenses(filter) {
+            // Mettre à jour les onglets actifs
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            const activeTab = document.querySelector(`[data-filter="${filter}"]`);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+            
+            currentFilter = filter;
+            
+            // Filtrer les éléments
+            const expenseItems = document.querySelectorAll('.expense-item');
+            expenseItems.forEach(item => {
+                const status = item.getAttribute('data-status');
+                
+                if (filter === 'all' || status === filter) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Réinitialiser la sélection si l'élément sélectionné n'est plus visible
+            const selectedItem = document.querySelector('.expense-item.selected');
+            if (selectedItem && selectedItem.style.display === 'none') {
+                resetExpenseSelection();
+            }
+        }
+
+        // Fonction pour réinitialiser la sélection
+        function resetExpenseSelection() {
+            currentSelectedExpense = null;
+            
+            // Retirer toutes les sélections
+            document.querySelectorAll('.expense-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Afficher l'état vide
+            document.getElementById('emptyExpensePreview').style.display = 'flex';
+            document.getElementById('expenseDetails').style.display = 'none';
+            
+            // Réinitialiser le titre
+            document.getElementById('expensePreviewTitle').textContent = 'Détails de la note de frais';
+            document.getElementById('expensePreviewSubtitle').textContent = 'Sélectionnez une note pour voir les détails';
+        }
+
+        // Fonction pour annuler une note de frais
+        function cancelExpense(expenseId) {
+            const expenseData = {
+                1: 'Transport - Déplacement client',
+                2: 'Repas d\'affaires',
+                3: 'Fournitures de bureau',
+                4: 'Taxi - Réunion externe',
+                5: 'Hébergement - Mission',
+                6: 'Carburant - Véhicule société'
+            };
+            
+            const expenseName = expenseData[expenseId];
+            
+            if (confirm(`Êtes-vous sûr de vouloir annuler la note de frais "${expenseName}" ?`)) {
+                showNotification('Note de frais annulée avec succès', 'success');
+                
+                // Mettre à jour le statut dans la sidebar
+                const expenseItem = document.querySelector(`[data-id="${expenseId}"]`);
+                if (expenseItem) {
+                    expenseItem.setAttribute('data-status', 'rejected');
+                    const statusIcon = expenseItem.querySelector('.expense-status i');
+                    if (statusIcon) {
+                        statusIcon.className = 'fas fa-times-circle status-rejected';
+                    }
+                }
+                
+                // Mettre à jour le badge de statut dans les détails
+                const detailElement = document.getElementById(`expenseDetail${expenseId}`);
+                if (detailElement) {
+                    const statusBadge = detailElement.querySelector('.status-badge');
+                    if (statusBadge) {
+                        statusBadge.className = 'status-badge status-rejected-badge';
+                        statusBadge.innerHTML = '<i class="fas fa-times-circle"></i> Annulé';
+                    }
+                    
+                    // Masquer le bouton d'annulation
+                    const actionsElement = detailElement.querySelector('.expense-actions');
+                    if (actionsElement) {
+                        actionsElement.style.display = 'none';
+                    }
+                }
+                
+                // Appliquer le filtre actuel pour rafraîchir la vue
+                filterExpenses(currentFilter);
+            }
+        }
+
+        // Fonction pour ouvrir le modal de création de note de frais
+        function openExpenseModal() {
+            const modal = document.getElementById('expenseModal');
+            if (modal) {
+                modal.classList.add('show');
+            } else {
+                console.warn('Modal expenseModal not found');
+            }
+        }
+
+        // Fonction pour soumettre une nouvelle note de frais
+        function submitExpense(event) {
+            event.preventDefault();
+            
+            showNotification('Nouvelle note de frais soumise avec succès !', 'success');
+            
+            const modal = document.getElementById('expenseModal');
+            if (modal) {
+                modal.classList.remove('show');
+                event.target.reset();
+            }
+            
+            // Ici, vous pourriez ajouter la nouvelle note à la liste
+            // Dans une vraie application, cela viendrait du serveur
+        }
+
+        // Initialisation de la section note de frais
+        function initExpensesSection() {
+            // Réinitialiser l'état
+            resetExpenseSelection();
+            
+            // Appliquer le filtre par défaut
+            filterExpenses('all');
+            
+            console.log('Section note de frais initialisée');
+        }
+
+        // Système de notification (si pas déjà défini)
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#059669' : type === 'error' ? '#dc2626' : '#6ea8ff'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+                z-index: 10000;
+                animation: slideInRight 0.3s ease;
+                max-width: 300px;
+                font-weight: 500;
+                font-family: 'Poppins', sans-serif;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Initialiser quand la section devient active
+        document.addEventListener('DOMContentLoaded', function() {
+            // Observer les changements de section
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        const expensesSection = document.getElementById('expenses');
+                        if (expensesSection && expensesSection.classList.contains('active')) {
+                            initExpensesSection();
+                        }
+                    }
+                });
+            });
+            
+            const expensesSection = document.getElementById('expenses');
+            if (expensesSection) {
+                observer.observe(expensesSection, {
+                    attributes: true,
+                    attributeFilter: ['class']
+                });
+            }
+        })
 
         // Soumission des formulaires
         function submitLeaveRequest(event) {
@@ -1287,14 +1862,6 @@
             
             // Ajouter la nouvelle demande à la sidebar (simulation)
             // Dans une vraie application, cela viendrait du serveur
-        }
-
-        function submitExpense(event) {
-            event.preventDefault();
-            
-            showNotification('Your expense has been submitted successfully!', 'success');
-            closeExpenseModal();
-            event.target.reset();
         }
 
         // Document download functions
