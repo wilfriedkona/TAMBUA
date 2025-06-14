@@ -226,9 +226,9 @@
             right: 0; /* ..px vers la droite/ Garder à 0 car le décalage est déjà géré par le parent */
             /* margin-bottom: 5px; 5px vers le bas */
             background: var(--white);
-            border-radius: 10px;
+            border-radius: 8px;
             box-shadow: var(--shadow);
-            min-width: 200px;
+            min-width: 100px;
             display: none;
             z-index: 1000;
             transform: scaleY(0);
@@ -244,14 +244,16 @@
         .dropdown-item {
             display: flex;
             align-items: center;
-            padding: 12px 20px;
+            padding: 8px 60px;
             color: var(--text-dark);
             text-decoration: none;
             transition: background-color 0.3s ease;
+            border-radius: 8px;
         }
 
         .dropdown-item:hover {
-            background-color: var(--light-bg);
+            background-color: var(--accent-color);
+            border-radius: 8px;
         }
 
         .dropdown-item i {
@@ -923,7 +925,7 @@
 
         .payroll-item.selected {
             background: #eff6ff;
-            border-right: 3px solid #6ea8ff;
+            border-right: 3px solid #fb7253;
         }
 
         .payroll-item-content {
@@ -1039,7 +1041,7 @@
 
         .empty-icon i {
             font-size: 32px;
-            color: #9ca3af;
+            color: #3f1b68;
         }
 
         .empty-preview h3 {
@@ -1053,7 +1055,7 @@
         .empty-preview p {
             font-family: 'Poppins', sans-serif;
             font-size: 14px;
-            color: #6b7280;
+            color: #0000006d;
             margin: 0;
         }
 
