@@ -41,7 +41,7 @@
             display: flex;
             min-height: 100vh;
             margin: 10px;
-            border-radius: 20px;
+            /* border-radius: 20px; */
             overflow: hidden;
             box-shadow: var(--shadow);
         }
@@ -56,9 +56,9 @@
             overflow-y: auto;
             transition: transform 0.3s ease;
             z-index: 1000;
-            border-radius: 25px;
+            /* border-radius: 25px;
             border-top-left-radius: 20px;
-            border-bottom-left-radius: 20px;
+            border-bottom-left-radius: 20px; */
         }
 
         .logo {
@@ -841,30 +841,290 @@
         }
 
         /* Payroll Styles */
-        .payroll-summary {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .summary-card {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--white);
-            padding: 1.5rem;
-            border-radius: 20px;
-            text-align: center;
-        }
-
-        .payroll-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--white);
-            border-radius: 15px;
+       /* Section Bulletin de Paie Styles */
+        .payroll-page-container {
+            display: flex;
+            height: calc(100vh - 50px);
+            gap: 0;
+            /* border-radius: 15px; */
             overflow: hidden;
-            box-shadow: var(--shadow);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
+        /* Sidebar des bulletins */
+        .payroll-sidebar {
+            width: 280px;
+            background: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .payroll-sidebar-header {
+            padding: 24px;
+            border-bottom: 1px solid #e5e7eb;
+            background: #ffffff;
+        }
+
+        .payroll-sidebar-header h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0 0 16px 0;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input-wrapper i {
+            position: absolute;
+            left: 12px;
+            color: #9ca3af;
+            font-size: 14px;
+            z-index: 1;
+        }
+
+        .payroll-search {
+            width: 100%;
+            padding: 10px 12px 10px 36px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            background: #f9fafb;
+            transition: all 0.2s ease;
+        }
+
+        .payroll-search:focus {
+            outline: none;
+            border-color: #6ea8ff;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(110, 168, 255, 0.1);
+        }
+
+        .payroll-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0;
+        }
+
+        .payroll-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            border-bottom: 1px solid #f3f4f6;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #ffffff;
+        }
+
+        .payroll-item:hover {
+            background: #f8fafc;
+        }
+
+        .payroll-item.selected {
+            background: #eff6ff;
+            border-right: 3px solid #6ea8ff;
+        }
+
+        .payroll-item-content {
+            flex: 1;
+        }
+
+        .payroll-month {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .payroll-date {
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .payroll-item i {
+            color: #d1d5db;
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .payroll-item:hover i,
+        .payroll-item.selected i {
+            color: #6ea8ff;
+            transform: translateX(2px);
+        }
+
+        /* Zone de prévisualisation */
+        .payroll-preview {
+            flex: 1;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .payroll-preview-header {
+            padding: 24px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ffffff;
+        }
+
+        .preview-title h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0 0 4px 0;
+        }
+
+        .preview-title p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            color: #6b7280;
+            margin: 0;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #6ea8ff;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(110, 168, 255, 0.2);
+        }
+
+        .download-btn:hover {
+            background: #5b9cff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(110, 168, 255, 0.3);
+        }
+
+        .download-btn i {
+            font-size: 14px;
+        }
+
+        /* État vide */
+        .empty-preview {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .empty-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .empty-icon i {
+            font-size: 32px;
+            color: #9ca3af;
+        }
+
+        .empty-preview h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #374151;
+            margin: 0 0 8px 0;
+        }
+
+        .empty-preview p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            color: #6b7280;
+            margin: 0;
+        }
+
+        /* Prévisualisation PDF */
+        .pdf-preview {
+            flex: 1;
+            padding: 24px;
+            background: #f9fafb;
+        }
+
+        .pdf-preview iframe {
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: #ffffff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .payroll-page-container {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .payroll-sidebar {
+                width: 100%;
+                max-height: 300px;
+            }
+            
+            .payroll-preview {
+                height: 600px;
+            }
+            
+            .payroll-preview-header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: stretch;
+            }
+            
+            .download-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Scrollbar personnalisée pour la sidebar */
+        .payroll-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .payroll-list::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        .payroll-list::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 2px;
+        }
+
+        .payroll-list::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
         /* Leave Page Styles */
         .leave-page-container {
             display: flex;
@@ -1799,132 +2059,115 @@
             </section>
 
             <!-- Payroll Section -->
+            <!-- Section Bulletin de Paie mise à jour -->
             <section id="payroll" class="page-section">
-                <!-- Summary Cards -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-title">Salaire Mensuel Net</div>
-                            <div class="stat-icon" style="background: var(--primary-color);">
-                                <i class="fas fa-euro-sign"></i>
+                <div class="payroll-page-container">
+                    <!-- Sidebar des bulletins -->
+                    <div class="payroll-sidebar">
+                        <div class="payroll-sidebar-header">
+                            <h3>Mes bulletins de paie</h3>
+                            <div class="search-container">
+                                <div class="search-input-wrapper">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" placeholder="Recherche" class="payroll-search" id="payrollSearch">
+                                </div>
                             </div>
                         </div>
-                        <div class="stat-value">€3,200</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-title">Salaire Mensuel Brut</div>
-                            <div class="stat-icon" style="background: var(--primary-color);">
-                                <i class="fas fa-euro-sign"></i>
+                        
+                        <div class="payroll-list" id="payrollList">
+                            <div class="payroll-item" onclick="selectPayroll(this, '2025-06')" data-month="juin" data-year="2025">
+                                <div class="payroll-item-content">
+                                    <div class="payroll-month">Juin 2025</div>
+                                    <div class="payroll-date">Publié le 05/07/2025</div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            
+                            <div class="payroll-item" onclick="selectPayroll(this, '2025-05')" data-month="mai" data-year="2025">
+                                <div class="payroll-item-content">
+                                    <div class="payroll-month">Mai 2025</div>
+                                    <div class="payroll-date">Publié le 05/06/2025</div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            
+                            <div class="payroll-item" onclick="selectPayroll(this, '2025-04')" data-month="avril" data-year="2025">
+                                <div class="payroll-item-content">
+                                    <div class="payroll-month">Avril 2025</div>
+                                    <div class="payroll-date">Publié le 05/05/2025</div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            
+                            <div class="payroll-item" onclick="selectPayroll(this, '2025-03')" data-month="mars" data-year="2025">
+                                <div class="payroll-item-content">
+                                    <div class="payroll-month">Mars 2025</div>
+                                    <div class="payroll-date">Publié le 05/04/2025</div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            
+                            <div class="payroll-item" onclick="selectPayroll(this, '2025-02')" data-month="février" data-year="2025">
+                                <div class="payroll-item-content">
+                                    <div class="payroll-month">Février 2025</div>
+                                    <div class="payroll-date">Publié le 05/03/2025</div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            
+                            <div class="payroll-item" onclick="selectPayroll(this, '2025-01')" data-month="janvier" data-year="2025">
+                                <div class="payroll-item-content">
+                                    <div class="payroll-month">Janvier 2025</div>
+                                    <div class="payroll-date">Publié le 05/02/2025</div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+
+                            <div class="payroll-item" onclick="selectPayroll(this, '2024-12')" data-month="décembre" data-year="2024">
+                                <div class="payroll-item-content">
+                                    <div class="payroll-month">Décembre 2024</div>
+                                    <div class="payroll-date">Publié le 05/01/2025</div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+
+                            <div class="payroll-item" onclick="selectPayroll(this, '2024-11')" data-month="novembre" data-year="2024">
+                                <div class="payroll-item-content">
+                                    <div class="payroll-month">Novembre 2024</div>
+                                    <div class="payroll-date">Publié le 05/12/2024</div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
                             </div>
                         </div>
-                        <div class="stat-value">€4,500</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-title">Salaire Annuel Brut</div>
-                            <div class="stat-icon" style="background: var(--primary-color);">
-                                <i class="fas fa-euro-sign"></i>
-                            </div>
-                        </div>
-                        <div class="stat-value">€54,000</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-title">Jours de Congés Restants</div>
-                            <div class="stat-icon" style="background: var(--success);">
-                                <i class="fas fa-calendar"></i>
-                            </div>
-                        </div>
-                        <div class="stat-value">25</div>
-                    </div>
-                </div>
-                
-                <!-- Payroll Table -->
-                <div class="table-container">
-                    <div class="table-header">
-                        <h3 class="table-title">Historique des Bulletins de Paie</h3>
                     </div>
                     
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Période</th>
-                                <th>Salaire Brut</th>
-                                <th>Cotisations</th>
-                                <th>Salaire Net</th>
-                                <th>Heures Travaillées</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Mai 2025</strong></td>
-                                <td>€4,500.00</td>
-                                <td>€1,300.00</td>
-                                <td>€3,200.00</td>
-                                <td>160h</td>
-                                <td>
-                                    <button class="btn btn-primary" onclick="downloadPayslip('2025-05')">
-                                        <i class="fas fa-download"></i>
-                                        Télécharger
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>Avril 2025</strong></td>
-                                <td>€4,500.00</td>
-                                <td>€1,300.00</td>
-                                <td>€3,200.00</td>
-                                <td>160h</td>
-                                <td>
-                                    <button class="btn btn-primary" onclick="downloadPayslip('2025-04')">
-                                        <i class="fas fa-download"></i>
-                                        Télécharger
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>Mars 2025</strong></td>
-                                <td>€4,500.00</td>
-                                <td>€1,300.00</td>
-                                <td>€3,200.00</td>
-                                <td>168h</td>
-                                <td>
-                                    <button class="btn btn-primary" onclick="downloadPayslip('2025-03')">
-                                        <i class="fas fa-download"></i>
-                                        Télécharger
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>Février 2025</strong></td>
-                                <td>€4,500.00</td>
-                                <td>€1,300.00</td>
-                                <td>€3,200.00</td>
-                                <td>152h</td>
-                                <td>
-                                    <button class="btn btn-primary" onclick="downloadPayslip('2025-02')">
-                                        <i class="fas fa-download"></i>
-                                        Télécharger
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>Janvier 2025</strong></td>
-                                <td>€4,500.00</td>
-                                <td>€1,300.00</td>
-                                <td>€3,200.00</td>
-                                <td>160h</td>
-                                <td>
-                                    <button class="btn btn-primary" onclick="downloadPayslip('2025-01')">
-                                        <i class="fas fa-download"></i>
-                                        Télécharger
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <!-- Zone de prévisualisation -->
+                    <div class="payroll-preview">
+                        <div class="payroll-preview-header">
+                            <div class="preview-title">
+                                <h2 id="previewTitle">Prévisualisation du bulletin</h2>
+                                <p id="previewSubtitle">Sélectionnez un mois pour prévisualiser le bulletin</p>
+                            </div>
+                            <button class="download-btn" id="downloadBtn" style="display: none;" onclick="downloadCurrentPayroll()">
+                                <i class="fas fa-download"></i>
+                                Télécharger mon bulletin
+                            </button>
+                        </div>
+                        
+                        <!-- État vide -->
+                        <div class="empty-preview" id="emptyPreview">
+                            <div class="empty-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <h3>Aucun bulletin sélectionné</h3>
+                            <p>Sélectionnez un mois pour prévisualiser le bulletin</p>
+                        </div>
+                        
+                        <!-- Prévisualisation PDF -->
+                        <div class="pdf-preview" id="pdfPreview" style="display: none;">
+                            <iframe id="pdfFrame" src="" width="100%" height="100%" frameborder="0"></iframe>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -2586,15 +2829,158 @@
             }
         }
 
-        // Payslip download function
-        function downloadPayslip(period) {
-            const fileName = `Bulletin_Paie_${period}_Jean_Dupont.pdf`;
-            showNotification(`Préparation du bulletin de paie ${period}...`, 'info');
+       // Variables globales pour la section bulletin de paie
+        let currentSelectedPayroll = null;
+
+        // Fonction pour sélectionner un bulletin de paie
+        function selectPayroll(element, period) {
+            // Retirer la sélection de tous les éléments
+            document.querySelectorAll('.payroll-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Sélectionner l'élément cliqué
+            element.classList.add('selected');
+            currentSelectedPayroll = period;
+            
+            // Mettre à jour l'en-tête
+            updatePreviewHeader(period);
+            
+            // Masquer l'état vide et afficher la prévisualisation
+            document.getElementById('emptyPreview').style.display = 'none';
+            document.getElementById('pdfPreview').style.display = 'block';
+            document.getElementById('downloadBtn').style.display = 'inline-flex';
+            
+            // Charger le PDF
+            loadPDFPreview(period);
+        }
+
+        // Fonction pour mettre à jour l'en-tête de prévisualisation
+        function updatePreviewHeader(period) {
+            const [year, month] = period.split('-');
+            const monthNames = {
+                '01': 'Janvier', '02': 'Février', '03': 'Mars', '04': 'Avril',
+                '05': 'Mai', '06': 'Juin', '07': 'Juillet', '08': 'Août',
+                '09': 'Septembre', '10': 'Octobre', '11': 'Novembre', '12': 'Décembre'
+            };
+            
+            const monthName = monthNames[month];
+            const title = document.getElementById('previewTitle');
+            const subtitle = document.getElementById('previewSubtitle');
+            
+            title.textContent = `Bulletin de paie - ${monthName} ${year}`;
+            subtitle.textContent = `Prévisualisation du bulletin de paie`;
+        }
+
+        // Fonction pour charger la prévisualisation PDF
+        function loadPDFPreview(period) {
+            const pdfFrame = document.getElementById('pdfFrame');
+            
+            // Afficher un message de chargement
+            pdfFrame.style.display = 'none';
+            
+            // Simuler le chargement
+            setTimeout(() => {
+                // Utiliser le PDF fourni
+                pdfFrame.src = 'docs/Bulletin de paie TAMBUA.pdf';
+                pdfFrame.style.display = 'block';
+            }, 500);
+        }
+
+        // Fonction pour télécharger le bulletin actuel
+        function downloadCurrentPayroll() {
+            if (!currentSelectedPayroll) {
+                showNotification('Aucun bulletin sélectionné', 'error');
+                return;
+            }
+            
+            const [year, month] = currentSelectedPayroll.split('-');
+            const monthNames = {
+                '01': 'Janvier', '02': 'Février', '03': 'Mars', '04': 'Avril',
+                '05': 'Mai', '06': 'Juin', '07': 'Juillet', '08': 'Août',
+                '09': 'Septembre', '10': 'Octobre', '11': 'Novembre', '12': 'Décembre'
+            };
+            
+            const monthName = monthNames[month];
+            const fileName = `Bulletin_Paie_${monthName}_${year}_Jean_Dupont.pdf`;
+            
+            showNotification(`Téléchargement de ${fileName} en cours...`, 'info');
+            
+            // Créer un lien de téléchargement
+            const link = document.createElement('a');
+            link.href = 'docs/Bulletin de paie TAMBUA.pdf';
+            link.download = fileName;
+            link.click();
             
             setTimeout(() => {
                 showNotification('Bulletin de paie téléchargé avec succès !', 'success');
-            }, 1500);
+            }, 1000);
         }
+
+        // Fonction de recherche dans les bulletins
+        function initPayrollSearch() {
+            const searchInput = document.getElementById('payrollSearch');
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const payrollItems = document.querySelectorAll('.payroll-item');
+                
+                payrollItems.forEach(item => {
+                    const month = item.dataset.month;
+                    const year = item.dataset.year;
+                    const monthText = item.querySelector('.payroll-month').textContent.toLowerCase();
+                    
+                    if (monthText.includes(searchTerm) || 
+                        month.includes(searchTerm) || 
+                        year.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // Initialisation de la section bulletin de paie
+        function initPayrollSection() {
+            // Initialiser la recherche
+            initPayrollSearch();
+            
+            // Réinitialiser l'état
+            currentSelectedPayroll = null;
+            document.getElementById('emptyPreview').style.display = 'flex';
+            document.getElementById('pdfPreview').style.display = 'none';
+            document.getElementById('downloadBtn').style.display = 'none';
+            
+            // Réinitialiser le titre
+            document.getElementById('previewTitle').textContent = 'Prévisualisation du bulletin';
+            document.getElementById('previewSubtitle').textContent = 'Sélectionnez un mois pour prévisualiser le bulletin';
+            
+            console.log('Section bulletin de paie initialisée');
+        }
+
+        // Initialiser quand la section devient active
+        document.addEventListener('DOMContentLoaded', function() {
+            // Observer les changements de section
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        const payrollSection = document.getElementById('payroll');
+                        if (payrollSection && payrollSection.classList.contains('active')) {
+                            initPayrollSection();
+                        }
+                    }
+                });
+            });
+            
+            const payrollSection = document.getElementById('payroll');
+            if (payrollSection) {
+                observer.observe(payrollSection, {
+                    attributes: true,
+                    attributeFilter: ['class']
+                });
+            }
+        });
 
         // Notification system
         function showNotification(message, type = 'info') {
