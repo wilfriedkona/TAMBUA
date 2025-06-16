@@ -1448,15 +1448,15 @@
         }
 
         .status-approved {
-            color: #4bd082;
+            color: #3f1b68;
         }
 
         .status-pending {
-            color: #d97706;
+            color: #8c75ff;
         }
 
         .status-rejected {
-            color: #dc2626;
+            color: #fb7253;
         }
 
         /* Zone de prévisualisation */
@@ -1496,7 +1496,7 @@
             align-items: center;
             gap: 8px;
             padding: 12px 20px;
-            background: #6ea8ff;
+            background: #3f1b68;
             color: #ffffff;
             border: none;
             border-radius: 8px;
@@ -1509,7 +1509,7 @@
         }
 
         .add-expense-btn:hover {
-            background: #5b9cff;
+            background: #412c8f;
             transform: translateY(-1px);
             box-shadow: 0 4px 8px rgba(110, 168, 255, 0.3);
         }
@@ -1651,18 +1651,18 @@
         }
 
         .status-approved-badge {
-            background: rgba(5, 150, 105, 0.1);
-            color: #059669;
+            background: #3f1b68;
+            color: #ffffff;
         }
 
         .status-pending-badge {
-            background: rgba(217, 119, 6, 0.1);
-            color: #d97706;
+            background: #8c75ff;
+            color: #ffffff;
         }
 
         .status-rejected-badge {
-            background: rgba(220, 38, 38, 0.1);
-            color: #dc2626;
+            background: #fb7253;
+            color: #ffffff;
         }
 
         .status-badge i {
@@ -1682,7 +1682,7 @@
             align-items: center;
             gap: 8px;
             padding: 10px 16px;
-            background: #dc2626;
+            background: #fb7253;
             color: #ffffff;
             border: none;
             border-radius: 6px;
@@ -1694,7 +1694,7 @@
         }
 
         .btn-cancel-expense:hover {
-            background: #b91c1c;
+            background: #f7512c;
             transform: translateY(-1px);
         }
 
@@ -1911,3 +1911,89 @@
                 padding: 10px;
             }
         }
+
+        /* _________________ */
+
+        .leave-calendar-container {
+    margin-bottom: 24px;
+}
+
+.mini-calendar {
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    margin-top: 8px;
+}
+
+.mini-calendar-header {
+    background: #6ea8ff;
+    color: #ffffff;
+    padding: 12px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.mini-calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: #f8fafc;
+}
+
+.mini-weekday {
+    padding: 8px 4px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #6b7280;
+    border-right: 1px solid #e5e7eb;
+}
+
+.mini-weekday:last-child {
+    border-right: none;
+}
+
+.mini-calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background: #e5e7eb;
+}
+
+.mini-calendar-day {
+    background: #ffffff;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: #374151;
+    border-right: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.mini-calendar-day.other-month {
+    background: #f8fafc;
+    color: #9ca3af;
+}
+
+.mini-calendar-day.leave-day {
+    background: #3f1b68;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.mini-calendar-day.today {
+    background: #6ea8ff;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.mini-calendar-day.today.leave-day {
+    background: #3f1b68;
+    border: 2px solid #6ea8ff;
+}
