@@ -874,6 +874,25 @@
                     <div class="payroll-sidebar">
                         <div class="payroll-sidebar-header">
                             <h3>Mes bulletins de paie</h3>
+
+                                <!-- Filtres par année -->
+                                    <div class="filter-container">
+                                        <div class="filter-tabs">
+                                            <button class="filter-tab active" onclick="filterPayrollByYear('all')" data-filter="all">
+                                                <i class="fas fa-list"></i>
+                                                Tous
+                                            </button>
+                                            <button class="filter-tab" onclick="filterPayrollByYear('2025')" data-filter="2025">
+                                                <i class="fas fa-calendar"></i>
+                                                2025
+                                            </button>
+                                            <button class="filter-tab" onclick="filterPayrollByYear('2024')" data-filter="2024">
+                                                <i class="fas fa-calendar"></i>
+                                                2024
+                                            </button>
+                                        </div>
+                                    </div>
+
                             <div class="search-container">
                                 <div class="search-input-wrapper">
                                     <i class="fas fa-search"></i>
@@ -2696,11 +2715,105 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
+            // Variable globale pour le filtre d'année actuel
+            let currentPayrollYearFilter = 'all';
+
+            // Fonction pour filtrer les bulletins par année
+            function filterPayrollByYear(year) {
+                // Mettre à jour les onglets actifs
+                document.querySelectorAll('.payroll-sidebar .filter-tab').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                
+                const activeTab = document.querySelector(`.payroll-sidebar [data-filter="${year}"]`);
+                if (activeTab) {
+                    activeTab.classList.add('active');
+                }
+                
+                currentPayrollYearFilter = year;
+                
+                // Filtrer les éléments de bulletins
+                const payrollItems = document.querySelectorAll('.payroll-item');
+                payrollItems.forEach(item => {
+                    const itemYear = item.getAttribute('data-year');
+                    
+                    if (year === 'all' || itemYear === year) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Réinitialiser la sélection si l'élément sélectionné n'est plus visible
+                const selectedItem = document.querySelector('.payroll-item.selected');
+                if (selectedItem && selectedItem.style.display === 'none') {
+                    resetPayrollSelection();
+                }
+            }
+
+            // Fonction pour réinitialiser la sélection des bulletins
+            function resetPayrollSelection() {
+                currentSelectedPayroll = null;
+                
+                // Retirer toutes les sélections
+                document.querySelectorAll('.payroll-item').forEach(item => {
+                    item.classList.remove('selected');
+                });
+                
+                // Afficher l'état vide
+                document.getElementById('emptyPreview').style.display = 'flex';
+                document.getElementById('pdfPreview').style.display = 'none';
+                document.getElementById('downloadBtn').style.display = 'none';
+                
+                // Réinitialiser le titre
+                document.getElementById('previewTitle').textContent = 'Prévisualisation du bulletin';
+                document.getElementById('previewSubtitle').textContent = 'Sélectionnez un mois pour prévisualiser le bulletin';
+            }
+
+            // Mise à jour de la fonction de recherche pour tenir compte du filtre
+            function initPayrollSearch() {
+                const searchInput = document.getElementById('payrollSearch');
+                
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    const payrollItems = document.querySelectorAll('.payroll-item');
+                    
+                    payrollItems.forEach(item => {
+                        const month = item.dataset.month;
+                        const year = item.dataset.year;
+                        const monthText = item.querySelector('.payroll-month').textContent.toLowerCase();
+                        
+                        // Vérifier à la fois le terme de recherche et le filtre d'année
+                        const matchesSearch = monthText.includes(searchTerm) || 
+                                            month.includes(searchTerm) || 
+                                            year.includes(searchTerm);
+                        
+                        const matchesYearFilter = currentPayrollYearFilter === 'all' || 
+                                                year === currentPayrollYearFilter;
+                        
+                        if (matchesSearch && matchesYearFilter) {
+                            item.style.display = 'flex';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            }
+
+
+
+
         // Initialisation de la section bulletin de paie
         function initPayrollSection() {
             // Initialiser la recherche
             initPayrollSearch();
+             // Appliquer le filtre par défaut
+            filterPayrollByYear('all');
             
+            // Réinitialiser l'état
+            resetPayrollSelection();
+    
+    console.log('Section bulletin de paie initialisée avec filtres');
             // Réinitialiser l'état
             currentSelectedPayroll = null;
             document.getElementById('emptyPreview').style.display = 'flex';
