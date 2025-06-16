@@ -78,126 +78,141 @@
             
 
             <!-- Dashboard Section -->
+            <!-- Section Dashboard mise à jour -->
             <section id="dashboard" class="page-section active">
-                <!-- Statistics Cards -->
-                <div class="stats-grid">
-
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-title">Mes demandes de congé</div>
-                            <div class="stat-icon" style="background: var(--primary-color);">
-                                <i class="fas fa-calendar"></i>
+                <div class="expenses-page-container">
+                    <!-- Zone principale du dashboard -->
+                    <div class="dashboard-main-area">
+                        <!-- Header du dashboard -->
+                        <div class="expenses-preview-header">
+                            <div class="preview-title">
+                                <h2>Tableau de bord</h2>
+                                <p>Bienvenue Jean Dupont, voici un aperçu de vos informations</p>
                             </div>
+                            <button class="add-expense-btn" onclick="goToLeavesSection()">
+                                <i class="fas fa-calendar-plus"></i>
+                                Demander congé
+                            </button>
                         </div>
-                        <div class="stat-value">Vous avez 03 demandes de congés en attentes</div>
-                        <div class="stat-change change-positive">
-                            <!-- <i class="fas fa-arrow-up"></i> -->
-                            <span>Voir mes demandes de congés</span>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-title">Mes bulletins</div>
-                            <div class="stat-icon" style="background: var(--success);">
-                                <i class="fas fa-users"></i>
-                            </div>
-                        </div>
-                        <div class="stat-value">Votre rémunération nette s'est élévé à  ......  en Mai</div>
-                        <div class="stat-change">
-                            <span>Voir le bulletin de paie</span>
-                        </div>
-                    </div>
-
-                </div>
-                
-                <!-- Content Grid -->
-                <div class="content-grid">
-                    <!-- Left Column - Calendar -->
-                    <div>
-                        <div class="table-container">
-                            <div class="table-header">
-                                <h3 class="table-title">
-                                    <i class="fas fa-calendar-alt" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
-                                    Calendrier
-                                </h3>
-                                <button class="btn btn-primary" onclick="goToToday()">Aujourd'hui</button>
-                            </div>
-                            
-                            <!-- Calendar Navigation -->
-                            <div class="calendar-nav">
-                                <button class="btn btn-secondary" onclick="previousMonth()">
-                                    <i class="fas fa-chevron-left"></i>
-                                </button>
-                                <h3 id="currentMonthYear"></h3>
-                                <button class="btn btn-secondary" onclick="nextMonth()">
-                                    <i class="fas fa-chevron-right"></i>
-                                </button>
-                            </div>
-                            
-                            <!-- Calendar Grid -->
-                            <div class="calendar-container">
-                                <div class="calendar-weekdays">
-                                    <div class="weekday">Lun</div>
-                                    <div class="weekday">Mar</div>
-                                    <div class="weekday">Mer</div>
-                                    <div class="weekday">Jeu</div>
-                                    <div class="weekday">Ven</div>
-                                    <div class="weekday">Sam</div>
-                                    <div class="weekday">Dim</div>
-                                </div>
-                                <div class="calendar-days" id="calendarDays"></div>
-                            </div>
-                            
-                            <!-- Calendar Events -->
-                            <div class="calendar-events">
-                                <h4>Événements du jour sélectionné</h4>
-                                <div id="selectedDateEvents" class="events-list">
-                                    <p class="no-events">Sélectionnez une date pour voir les événements</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Right Column -->
-                    <div>
-                        <!-- Recent Leave Requests -->
-                        <div class="table-container">
-                            <div class="table-header">
-                                <h3 class="table-title">Mes Demandes de Congé</h3>
-                                <a href="#" class="btn btn-primary" onclick="showPage('leave')">Historique</a>
-                            </div>
-                            <div class="leave-list">
-                                <div class="leave-item pending">
-                                    <div class="item-header">
-                                        <h4 class="item-title">Congés Annuels</h4>
-                                        <span class="status-badge status-pending">En attente</span>
+                        
+                        <!-- Contenu principal -->
+                        <div class="expense-details">
+                            <div class="expense-details-content">
+                                <!-- Statistics Cards -->
+                                <div class="dashboard-stats-grid">
+                                    <div class="dashboard-stat-card">
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Mes demandes de congé</div>
+                                            <div class="expense-info-value">Vous avez 03 demandes de congés en attente</div>
+                                            <button class="dashboard-link-btn" onclick="goToLeavesSection()">
+                                                <i class="fas fa-arrow-right"></i>
+                                                Voir mes demandes de congés
+                                            </button>
+                                        </div>
                                     </div>
-                                    <p class="item-date">15 - 19 Juillet 2025</p>
+
+                                    <div class="dashboard-stat-card">
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Mes bulletins</div>
+                                            <div class="expense-info-value">Votre rémunération nette s'est élevée à 3,200€ en Mai</div>
+                                            <button class="dashboard-link-btn" onclick="goToPayrollSection()">
+                                                <i class="fas fa-arrow-right"></i>
+                                                Voir le bulletin de paie
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                                 
-                                <div class="leave-item approved">
-                                    <div class="item-header">
-                                        <h4 class="item-title">Congé Maladie</h4>
-                                        <span class="status-badge status-active">Approuvé</span>
+                                <!-- Content Grid -->
+                                <div class="dashboard-content-grid">
+                                    <!-- Left Column - Calendar -->
+                                    <div class="dashboard-calendar-section">
+                                        <div class="expense-detail-header">
+                                            <h3>
+                                                <i class="fas fa-calendar-alt" style="color: #6ea8ff; margin-right: 0.5rem;"></i>
+                                                Calendrier des jours fériés
+                                            </h3>
+                                            <button class="btn btn-primary" onclick="goToToday()">Aujourd'hui</button>
+                                        </div>
+                                        
+                                        <!-- Calendar Navigation -->
+                                        <div class="calendar-nav-dashboard">
+                                            <button class="btn btn-secondary" onclick="previousMonthDashboard()">
+                                                <i class="fas fa-chevron-left"></i>
+                                            </button>
+                                            <h3 id="currentMonthYearDashboard"></h3>
+                                            <button class="btn btn-secondary" onclick="nextMonthDashboard()">
+                                                <i class="fas fa-chevron-right"></i>
+                                            </button>
+                                        </div>
+                                        
+                                        <!-- Calendar Grid (même style que mes congés) -->
+                                        <div class="mini-calendar" id="dashboardCalendar">
+                                            <!-- Le calendrier sera généré par JavaScript -->
+                                        </div>
+                                        
+                                        <!-- Légende -->
+                                        <div class="calendar-legend">
+                                            <div class="legend-item">
+                                                <div class="legend-color holiday-color"></div>
+                                                <span>Jours fériés</span>
+                                            </div>
+                                            <div class="legend-item">
+                                                <div class="legend-color today-color"></div>
+                                                <span>Aujourd'hui</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p class="item-date">02 Juin 2025</p>
-                                </div>
-                                
-                                <div class="leave-item approved">
-                                    <div class="item-header">
-                                        <h4 class="item-title">Formation</h4>
-                                        <span class="status-badge status-active">Approuvé</span>
+                                    
+                                    <!-- Right Column - Recent Leave Requests -->
+                                    <div class="dashboard-leave-section">
+                                        <div class="expense-detail-header">
+                                            <h3>Mes Demandes de Congé</h3>
+                                            <button class="btn btn-primary" onclick="goToLeavesSection()">Historique</button>
+                                        </div>
+                                        
+                                        <div class="dashboard-leave-list">
+                                            <div class="dashboard-leave-item pending" onclick="goToLeavesSection()">
+                                                <div class="expense-info-item">
+                                                    <div class="leave-item-header">
+                                                        <div class="expense-info-label">Congés Annuels</div>
+                                                        <span class="status-badge status-pending-badge">En attente</span>
+                                                    </div>
+                                                    <div class="expense-info-value">15 - 19 Juillet 2025</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="dashboard-leave-item approved" onclick="goToLeavesSection()">
+                                                <div class="expense-info-item">
+                                                    <div class="leave-item-header">
+                                                        <div class="expense-info-label">Congé Maladie</div>
+                                                        <span class="status-badge status-approved-badge">Approuvé</span>
+                                                    </div>
+                                                    <div class="expense-info-value">02 Juin 2025</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="dashboard-leave-item approved" onclick="goToLeavesSection()">
+                                                <div class="expense-info-item">
+                                                    <div class="leave-item-header">
+                                                        <div class="expense-info-label">RTT</div>
+                                                        <span class="status-badge status-approved-badge">Approuvé</span>
+                                                    </div>
+                                                    <div class="expense-info-value">28 Mai 2025</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="dashboard-leave-item rejected" onclick="goToLeavesSection()">
+                                                <div class="expense-info-item">
+                                                    <div class="leave-item-header">
+                                                        <div class="expense-info-label">Congé Personnel</div>
+                                                        <span class="status-badge status-rejected-badge">Refusé</span>
+                                                    </div>
+                                                    <div class="expense-info-value">20 Mai 2025</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p class="item-date">28 Mai 2025</p>
-                                </div>
-                                
-                                <div class="leave-item rejected">
-                                    <div class="item-header">
-                                        <h4 class="item-title">Congé Personnel</h4>
-                                        <span class="status-badge status-inactive">Refusé</span>
-                                    </div>
-                                    <p class="item-date">20 Mai 2025</p>
                                 </div>
                             </div>
                         </div>
@@ -1581,30 +1596,6 @@
 
 
     <script>
-        // Variables globales pour le calendrier
-        let currentDate = new Date();
-        let selectedDate = null;
-        
-        // Données d'événements simulées
-        const calendarEvents = {
-            '2025-06-05': [
-                { title: 'Réunion équipe', time: '09:00', type: 'meeting' },
-                { title: 'Deadline projet A', time: '17:00', type: 'deadline' }
-            ],
-            '2025-06-10': [
-                { title: 'Formation Vue.js', time: '14:00', type: 'meeting' }
-            ],
-            '2025-06-15': [
-                { title: 'Congé Marie S.', time: 'Toute la journée', type: 'holiday' }
-            ],
-            '2025-06-20': [
-                { title: 'Review de code', time: '10:30', type: 'meeting' },
-                { title: 'Présentation client', time: '15:00', type: 'meeting' }
-            ],
-            '2025-06-25': [
-                { title: 'Deadline rapport mensuel', time: '23:59', type: 'deadline' }
-            ]
-        };
 
         // Fonction pour basculer le menu mobile
         function toggleMobileMenu() {
@@ -1750,175 +1741,13 @@
             }
         }
 
-        // Fonctions du calendrier
-        function initCalendar() {
-            updateCalendarDisplay();
-        }
+       
+            
+          
 
-        function updateCalendarDisplay() {
-            updateMonthYear();
-            renderCalendarDays();
-        }
+       
 
-        function updateMonthYear() {
-            const monthNames = [
-                'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
-                'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
-            ];
-            
-            const monthYearElement = document.getElementById('currentMonthYear');
-            if (monthYearElement) {
-                monthYearElement.textContent = `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
-            }
-        }
-
-        // function renderCalendarDays() {
-        //     const calendarDays
-
-         function renderCalendarDays() {
-            const calendarDaysElement = document.getElementById('calendarDays');
-            if (!calendarDaysElement) return;
-
-            calendarDaysElement.innerHTML = '';
-
-            const year = currentDate.getFullYear();
-            const month = currentDate.getMonth();
-            
-            const firstDay = new Date(year, month, 1);
-            const lastDay = new Date(year, month + 1, 0);
-            
-            const startDate = new Date(firstDay);
-            const dayOfWeek = (firstDay.getDay() + 6) % 7;
-            startDate.setDate(firstDay.getDate() - dayOfWeek);
-
-            for (let i = 0; i < 42; i++) {
-                const date = new Date(startDate);
-                date.setDate(startDate.getDate() + i);
-                
-                const dayElement = createDayElement(date, month);
-                calendarDaysElement.appendChild(dayElement);
-            }
-        }
-
-        function createDayElement(date, currentMonth) {
-            const dayDiv = document.createElement('div');
-            dayDiv.className = 'calendar-day';
-            
-            const dayNumber = document.createElement('div');
-            dayNumber.className = 'day-number';
-            dayNumber.textContent = date.getDate();
-            
-            if (date.getMonth() !== currentMonth) {
-                dayDiv.classList.add('other-month');
-            }
-            
-            const today = new Date();
-            if (date.toDateString() === today.toDateString()) {
-                dayDiv.classList.add('today');
-            }
-            
-            if (selectedDate && date.toDateString() === selectedDate.toDateString()) {
-                dayDiv.classList.add('selected');
-            }
-            
-            const dateString = formatDateForEvents(date);
-            const events = calendarEvents[dateString] || [];
-            
-            if (events.length > 0) {
-                dayDiv.classList.add('has-event');
-            }
-            
-            dayDiv.appendChild(dayNumber);
-            
-            events.slice(0, 3).forEach(event => {
-                const eventDiv = document.createElement('div');
-                eventDiv.className = `day-event ${event.type}`;
-                eventDiv.textContent = event.title;
-                eventDiv.title = `${event.title} - ${event.time}`;
-                dayDiv.appendChild(eventDiv);
-            });
-            
-            if (events.length > 3) {
-                const moreDiv = document.createElement('div');
-                moreDiv.className = 'day-event';
-                moreDiv.textContent = `+${events.length - 3} autres`;
-                moreDiv.style.background = '#6c757d';
-                dayDiv.appendChild(moreDiv);
-            }
-            
-            dayDiv.addEventListener('click', () => selectDate(date));
-            
-            return dayDiv;
-        }
-
-        function selectDate(date) {
-            selectedDate = new Date(date);
-            updateCalendarDisplay();
-            showEventsForDate(date);
-        }
-
-        function showEventsForDate(date) {
-            const eventsContainer = document.getElementById('selectedDateEvents');
-            if (!eventsContainer) return;
-
-            const dateString = formatDateForEvents(date);
-            const events = calendarEvents[dateString] || [];
-            
-            eventsContainer.innerHTML = '';
-            
-            if (events.length === 0) {
-                eventsContainer.innerHTML = '<p class="no-events">Aucun événement pour cette date</p>';
-                return;
-            }
-            
-            const dateHeader = document.createElement('h5');
-            dateHeader.textContent = formatDateDisplay(date);
-            dateHeader.style.marginBottom = '1rem';
-            dateHeader.style.color = 'var(--primary-color)';
-            eventsContainer.appendChild(dateHeader);
-            
-            events.forEach(event => {
-                const eventDiv = document.createElement('div');
-                eventDiv.className = `event-item ${event.type}`;
-                
-                eventDiv.innerHTML = `
-                    <div class="event-title">${event.title}</div>
-                    <div class="event-time">${event.time}</div>
-                `;
-                
-                eventsContainer.appendChild(eventDiv);
-            });
-        }
-
-        function previousMonth() {
-            currentDate.setMonth(currentDate.getMonth() - 1);
-            updateCalendarDisplay();
-        }
-
-        function nextMonth() {
-            currentDate.setMonth(currentDate.getMonth() + 1);
-            updateCalendarDisplay();
-        }
-
-        function goToToday() {
-            currentDate = new Date();
-            selectedDate = new Date();
-            updateCalendarDisplay();
-            showEventsForDate(selectedDate);
-        }
-
-        function formatDateForEvents(date) {
-            return date.toISOString().split('T')[0];
-        }
-
-        function formatDateDisplay(date) {
-            return date.toLocaleDateString('fr-FR', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-        }
+       
        
         function closeLeaveModal() {
             document.getElementById('leaveModal').classList.remove('show');
@@ -2800,7 +2629,216 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
 
+            // Variables globales pour le calendrier du dashboard
+            let currentDashboardDate = new Date();
 
+            // Jours fériés français 2025
+            const holidays2025 = {
+                '2025-01-01': 'Jour de l\'An',
+                '2025-04-21': 'Lundi de Pâques',
+                '2025-05-01': 'Fête du Travail',
+                '2025-05-08': 'Victoire 1945',
+                '2025-05-29': 'Ascension',
+                '2025-06-09': 'Lundi de Pentecôte',
+                '2025-07-14': 'Fête Nationale',
+                '2025-08-15': 'Assomption',
+                '2025-11-01': 'Toussaint',
+                '2025-11-11': 'Armistice 1918',
+                '2025-12-25': 'Noël'
+            };
+
+            // Jours fériés français 2024
+            const holidays2024 = {
+                '2024-01-01': 'Jour de l\'An',
+                '2024-04-01': 'Lundi de Pâques',
+                '2024-05-01': 'Fête du Travail',
+                '2024-05-08': 'Victoire 1945',
+                '2024-05-09': 'Ascension',
+                '2024-05-20': 'Lundi de Pentecôte',
+                '2024-07-14': 'Fête Nationale',
+                '2024-08-15': 'Assomption',
+                '2024-11-01': 'Toussaint',
+                '2024-11-11': 'Armistice 1918',
+                '2024-12-25': 'Noël'
+            };
+
+            // Fonction pour générer le calendrier du dashboard
+            function generateDashboardCalendar() {
+                const calendarElement = document.getElementById('dashboardCalendar');
+                if (!calendarElement) return;
+                
+                const year = currentDashboardDate.getFullYear();
+                const month = currentDashboardDate.getMonth();
+                
+                // Déterminer les jours fériés selon l'année
+                const holidays = year === 2025 ? holidays2025 : holidays2024;
+                
+                // Créer l'en-tête du calendrier
+                const monthNames = [
+                    'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+                    'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+                ];
+                
+                const header = document.createElement('div');
+                header.className = 'mini-calendar-header';
+                header.textContent = `${monthNames[month]} ${year}`;
+                
+                // Créer les jours de la semaine
+                const weekdays = document.createElement('div');
+                weekdays.className = 'mini-calendar-weekdays';
+                
+                const dayNames = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+                dayNames.forEach(day => {
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'mini-weekday';
+                    dayElement.textContent = day;
+                    weekdays.appendChild(dayElement);
+                });
+                
+                // Créer la grille des jours
+                const daysGrid = document.createElement('div');
+                daysGrid.className = 'mini-calendar-days';
+                
+                // Calculer le premier jour du mois et le nombre de jours
+                const firstDay = new Date(year, month, 1);
+                const lastDay = new Date(year, month + 1, 0);
+                const daysInMonth = lastDay.getDate();
+                
+                // Calculer le jour de la semaine du premier jour
+                let startDayOfWeek = (firstDay.getDay() + 6) % 7;
+                
+                // Ajouter les jours du mois précédent
+                const prevMonth = new Date(year, month - 1, 0);
+                const daysInPrevMonth = prevMonth.getDate();
+                
+                for (let i = startDayOfWeek - 1; i >= 0; i--) {
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'mini-calendar-day other-month';
+                    dayElement.textContent = daysInPrevMonth - i;
+                    daysGrid.appendChild(dayElement);
+                }
+                
+                // Ajouter les jours du mois actuel
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'mini-calendar-day';
+                    dayElement.textContent = day;
+                    
+                    const currentDate = new Date(year, month, day);
+                    const today = new Date();
+                    const dateString = formatDateString(currentDate);
+                    
+                    // Marquer aujourd'hui
+                    if (currentDate.toDateString() === today.toDateString()) {
+                        dayElement.classList.add('today');
+                    }
+                    
+                    // Marquer les jours fériés
+                    if (holidays[dateString]) {
+                        dayElement.classList.add('holiday');
+                        dayElement.title = holidays[dateString];
+                    }
+                    
+                    daysGrid.appendChild(dayElement);
+                }
+                
+                // Compléter avec les jours du mois suivant
+                const totalCells = daysGrid.children.length;
+                const remainingCells = 42 - totalCells;
+                
+                for (let day = 1; day <= remainingCells && day <= 14; day++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'mini-calendar-day other-month';
+                    dayElement.textContent = day;
+                    daysGrid.appendChild(dayElement);
+                }
+                
+                // Vider le calendrier et ajouter les nouveaux éléments
+                calendarElement.innerHTML = '';
+                calendarElement.appendChild(header);
+                calendarElement.appendChild(weekdays);
+                calendarElement.appendChild(daysGrid);
+            }
+
+            // Fonction pour formater une date en string
+            function formatDateString(date) {
+                return date.toISOString().split('T')[0];
+            }
+
+            // Fonction pour mettre à jour l'affichage du mois/année
+            function updateDashboardMonthYear() {
+                const monthNames = [
+                    'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+                    'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+                ];
+                
+                const monthYearElement = document.getElementById('currentMonthYearDashboard');
+                if (monthYearElement) {
+                    monthYearElement.textContent = `${monthNames[currentDashboardDate.getMonth()]} ${currentDashboardDate.getFullYear()}`;
+                }
+            }
+
+            // Navigation du calendrier dashboard
+            function previousMonthDashboard() {
+                currentDashboardDate.setMonth(currentDashboardDate.getMonth() - 1);
+                updateDashboardMonthYear();
+                generateDashboardCalendar();
+            }
+
+            function nextMonthDashboard() {
+                currentDashboardDate.setMonth(currentDashboardDate.getMonth() + 1);
+                updateDashboardMonthYear();
+                generateDashboardCalendar();
+            }
+
+            function goToToday() {
+                currentDashboardDate = new Date();
+                updateDashboardMonthYear();
+                generateDashboardCalendar();
+            }
+
+            // Fonctions de redirection
+            function goToLeavesSection() {
+                showPage('leave');
+            }
+
+            function goToPayrollSection() {
+                showPage('payroll');
+            }
+
+            // Initialisation du calendrier dashboard
+            function initDashboardCalendar() {
+                updateDashboardMonthYear();
+                generateDashboardCalendar();
+            }
+
+            // Initialiser quand la section dashboard devient active
+            document.addEventListener('DOMContentLoaded', function() {
+                // Observer les changements de section
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                            const dashboardSection = document.getElementById('dashboard');
+                            if (dashboardSection && dashboardSection.classList.contains('active')) {
+                                initDashboardCalendar();
+                            }
+                        }
+                    });
+                });
+                
+                const dashboardSection = document.getElementById('dashboard');
+                if (dashboardSection) {
+                    observer.observe(dashboardSection, {
+                        attributes: true,
+                        attributeFilter: ['class']
+                    });
+                    
+                    // Initialiser immédiatement si c'est la section active
+                    if (dashboardSection.classList.contains('active')) {
+                        initDashboardCalendar();
+                    }
+                }
+            });
 
 
         // Initialisation de la section bulletin de paie
@@ -2885,8 +2923,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Setup navigation
             setupNavigation();
             
-            // Initialiser le calendrier
-            initCalendar();
+           
             
             // Vérifier l'URL au chargement
             const hash = window.location.hash.substring(1);

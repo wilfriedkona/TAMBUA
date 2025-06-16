@@ -1997,3 +1997,181 @@
     background: #3f1b68;
     border: 2px solid #6ea8ff;
 }
+
+/* CSS spécifique au dashboard */
+
+.dashboard-main-area {
+    width: 100%;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.dashboard-stat-card {
+    border-left: 3px solid #6ea8ff;
+}
+
+.dashboard-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    color: #6ea8ff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 8px;
+}
+
+.dashboard-link-btn:hover {
+    color: #3f1b68;
+    transform: translateX(4px);
+}
+
+.dashboard-link-btn i {
+    font-size: 10px;
+}
+
+.dashboard-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.dashboard-calendar-section,
+.dashboard-leave-section {
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.calendar-nav-dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 8px;
+}
+
+.calendar-nav-dashboard h3 {
+    margin: 0;
+    color: #1f2937;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.calendar-nav-dashboard .btn {
+    padding: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #6ea8ff;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.calendar-nav-dashboard .btn:hover {
+    background: #3f1b68;
+    transform: translateY(-1px);
+}
+
+.calendar-legend {
+    display: flex;
+    gap: 20px;
+    margin-top: 16px;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 8px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+}
+
+.holiday-color {
+    background: #3f1b68;
+}
+
+.today-color {
+    background: #6ea8ff;
+}
+
+.dashboard-leave-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.dashboard-leave-item {
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.dashboard-leave-item:hover {
+    background: rgba(110, 168, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.leave-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+/* Jours fériés dans le calendrier */
+.mini-calendar-day.holiday {
+    background: #3f1b68;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.mini-calendar-day.today.holiday {
+    background: #3f1b68;
+    border: 2px solid #6ea8ff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-stats-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .dashboard-content-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
