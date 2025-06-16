@@ -55,10 +55,10 @@
             background-image: url('images/logo-TAMBUA.png');
             background-repeat: no-repeat;
             background-size: contain;
-            width: 180px;
+            width: 150px;
             height: 70px;
             display: inline-block;
-            transform: translate(38px, 30px);
+            transform: translate(55px, 20px);
         }
 
         .logo span {
