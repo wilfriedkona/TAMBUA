@@ -1405,13 +1405,13 @@
 
         .filter-tab:hover {
             background: #f9fafb;
-            border-color: #6ea8ff;
+            border-color: #fb7253;
         }
 
         .filter-tab.active {
-            background: #6ea8ff;
+            background: #fb7253;
             color: #ffffff;
-            border-color: #6ea8ff;
+            border-color: #fb7253;
         }
 
         .filter-tab i {
