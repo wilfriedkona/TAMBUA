@@ -188,7 +188,7 @@
         .user-dropdown {
             position: relative;
             margin-left: 50px; /* Décalage de 5px vers la droite */
-            margin-top: 250px; /* Décalage de 5px vers le bas */
+            margin-top: 225px; /* Décalage de 5px vers le bas */
         }
 
         .user-btn {
@@ -221,8 +221,8 @@
 
         .dropdown-menu {
             position: absolute;
-            /* top: 100%; ouvre vers le bas */
-            bottom: 100%; /* S'ouvre vers le haut */
+            top: 100%; /* ouvre vers le bas */
+           /*  bottom: 100%; S'ouvre vers le haut */
             right: 0; /* ..px vers la droite/ Garder à 0 car le décalage est déjà géré par le parent */
             /* margin-bottom: 5px; 5px vers le bas */
             background: var(--white);
@@ -244,7 +244,7 @@
         .dropdown-item {
             display: flex;
             align-items: center;
-            padding: 8px 60px;
+            padding: 8px 6px;
             color: var(--text-dark);
             text-decoration: none;
             transition: background-color 0.3s ease;
