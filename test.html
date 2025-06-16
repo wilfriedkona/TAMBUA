@@ -1,0 +1,538 @@
+<!-- Section Mon Profil mise à jour -->
+<section id="profile" class="page-section">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-titles">
+            <h2>Bonjour Jean Dupont 👋🏽</h2>
+            <h5>Nous sommes le Jeudi 12 juin 2025</h5>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="expenses-page-container">
+        <!-- Sidebar des sections du profil -->
+        <div class="expenses-sidebar">
+            <div class="expenses-sidebar-header">
+                <h3>Mon profil</h3>
+                
+                <!-- Navigation du profil -->
+                <div class="filter-container">
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" onclick="filterProfileSection('info')" data-filter="info">
+                            <i class="fas fa-user"></i>
+                            Informations
+                        </button>
+                        <button class="filter-tab" onclick="filterProfileSection('bank')" data-filter="bank">
+                            <i class="fas fa-university"></i>
+                            Bancaire
+                        </button>
+                        <button class="filter-tab" onclick="filterProfileSection('documents')" data-filter="documents">
+                            <i class="fas fa-file-alt"></i>
+                            Documents
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="expenses-list" id="profileSectionsList">
+                <div class="expense-item" onclick="selectProfileSection(this, 'info')" data-section="info" data-id="info">
+                    <div class="expense-item-content">
+                        <div class="expense-title">Informations personnelles</div>
+                        <div class="expense-amount">Profil complet</div>
+                        <div class="expense-date">Dernière mise à jour : 15/06/2025</div>
+                    </div>
+                    <div class="expense-status">
+                        <i class="fas fa-user status-approved"></i>
+                    </div>
+                </div>
+                
+                <div class="expense-item" onclick="selectProfileSection(this, 'bank')" data-section="bank" data-id="bank">
+                    <div class="expense-item-content">
+                        <div class="expense-title">Informations bancaires</div>
+                        <div class="expense-amount">TAMBUA BANK</div>
+                        <div class="expense-date">Compte vérifié</div>
+                    </div>
+                    <div class="expense-status">
+                        <i class="fas fa-university status-approved"></i>
+                    </div>
+                </div>
+                
+                <div class="expense-item" onclick="selectProfileSection(this, 'documents')" data-section="documents" data-id="documents">
+                    <div class="expense-item-content">
+                        <div class="expense-title">Mes documents</div>
+                        <div class="expense-amount">5 documents</div>
+                        <div class="expense-date">Tous à jour</div>
+                    </div>
+                    <div class="expense-status">
+                        <i class="fas fa-file-alt status-approved"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Zone de contenu -->
+        <div class="expenses-preview">
+            <div class="expenses-preview-header">
+                <div class="preview-title">
+                    <h2 id="profilePreviewTitle">Profil de Jean Dupont</h2>
+                    <p id="profilePreviewSubtitle">Développeur Frontend - Département IT</p>
+                </div>
+                <button class="add-expense-btn" onclick="editProfile()">
+                    <i class="fas fa-edit"></i>
+                    Modifier le profil
+                </button>
+            </div>
+            
+            <!-- Contenu des sections -->
+            <div class="expense-details" id="profileDetails">
+                <div class="expense-details-content">
+                    <!-- Section Informations personnelles -->
+                    <div class="expense-detail-item" id="profileSectionInfo">
+                        <div class="expense-detail-header">
+                            <h3>Informations Personnelles</h3>
+                            <span class="status-badge status-approved-badge">
+                                <i class="fas fa-check-circle"></i>
+                                Profil complet
+                            </span>
+                        </div>
+                        
+                        <!-- Photo de profil -->
+                        <div class="profile-avatar-section">
+                            <div class="profile-avatar-large">JD</div>
+                            <div class="profile-main-info">
+                                <h2>Jean Dupont</h2>
+                                <p><strong>Poste:</strong> Développeur Frontend</p>
+                                <p><strong>Département:</strong> IT</p>
+                                <p><strong>Date d'embauche:</strong> 15 Mars 2023</p>
+                                <p><strong>ID Employé:</strong> EMP-2023-045</p>
+                            </div>
+                        </div>
+                        
+                        <div class="expense-info-grid">
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Nom Complet</div>
+                                <div class="expense-info-value">Jean Dupont</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Email</div>
+                                <div class="expense-info-value">jean.dupont@tambua.com</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Téléphone</div>
+                                <div class="expense-info-value">+33 6 12 34 56 78</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Date de Naissance</div>
+                                <div class="expense-info-value">15 Mai 1990</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Situation Familiale</div>
+                                <div class="expense-info-value">Marié(e)</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Nombre d'enfants</div>
+                                <div class="expense-info-value">2</div>
+                            </div>
+                        </div>
+                        
+                        <div class="expense-description">
+                            <div class="expense-info-label">Adresse</div>
+                            <div class="expense-info-value">123 Rue de la Paix, 75001 Paris, France</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Section Informations bancaires -->
+                    <div class="expense-detail-item" id="profileSectionBank" style="display: none;">
+                        <div class="expense-detail-header">
+                            <h3>Informations Bancaires</h3>
+                            <span class="status-badge status-approved-badge">
+                                <i class="fas fa-shield-alt"></i>
+                                Sécurisé
+                            </span>
+                        </div>
+                        
+                        <div class="expense-info-grid">
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Nom du titulaire</div>
+                                <div class="expense-info-value">Jean Dupont</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Numéro de compte</div>
+                                <div class="expense-info-value">7845269652656</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Nom de banque</div>
+                                <div class="expense-info-value">TAMBUA BANK, CI</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Code BIC</div>
+                                <div class="expense-info-value">123456</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Succursale</div>
+                                <div class="expense-info-value">Abidjan - Plateau</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">ID de contribuable</div>
+                                <div class="expense-info-value">12345</div>
+                            </div>
+                        </div>
+                        
+                        <div class="bank-security-info">
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">
+                                    <i class="fas fa-lock" style="margin-right: 8px; color: #3f1b68;"></i>
+                                    Sécurité
+                                </div>
+                                <div class="expense-info-value">
+                                    Vos informations bancaires sont chiffrées et sécurisées selon les standards PCI DSS.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Section Documents -->
+                    <div class="expense-detail-item" id="profileSectionDocuments" style="display: none;">
+                        <div class="expense-detail-header">
+                            <h3>Mes Documents</h3>
+                            <span class="status-badge status-approved-badge">
+                                <i class="fas fa-file-check"></i>
+                                5 documents
+                            </span>
+                        </div>
+                        
+                        <div class="documents-grid">
+                            <div class="document-card">
+                                <div class="document-icon">
+                                    <i class="fas fa-id-card"></i>
+                                </div>
+                                <div class="document-info">
+                                    <div class="expense-info-label">Carte d'Identité</div>
+                                    <div class="expense-info-value">Document d'identité officiel</div>
+                                </div>
+                                <button class="document-download-btn" onclick="downloadDocument('id')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="document-card">
+                                <div class="document-icon">
+                                    <i class="fas fa-file-contract"></i>
+                                </div>
+                                <div class="document-info">
+                                    <div class="expense-info-label">Contrat de Travail</div>
+                                    <div class="expense-info-value">CDI - Développeur Frontend</div>
+                                </div>
+                                <button class="document-download-btn" onclick="downloadDocument('contract')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="document-card">
+                                <div class="document-icon">
+                                    <i class="fas fa-money-check-alt"></i>
+                                </div>
+                                <div class="document-info">
+                                    <div class="expense-info-label">Attestation de Salaire</div>
+                                    <div class="expense-info-value">Dernière attestation émise</div>
+                                </div>
+                                <button class="document-download-btn" onclick="downloadDocument('salary')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="document-card">
+                                <div class="document-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <div class="document-info">
+                                    <div class="expense-info-label">Certificat de Travail</div>
+                                    <div class="expense-info-value">Certificat d'emploi actuel</div>
+                                </div>
+                                <button class="document-download-btn" onclick="downloadDocument('work-certificate')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="document-card">
+                                <div class="document-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="document-info">
+                                    <div class="expense-info-label">Relevé de Carrière</div>
+                                    <div class="expense-info-value">Historique complet</div>
+                                </div>
+                                <button class="document-download-btn" onclick="downloadDocument('career')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CSS spécifique au profil -->
+<style>
+.profile-avatar-section {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 24px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+    border-radius: 12px;
+    border-left: 4px solid #6ea8ff;
+}
+
+.profile-avatar-large {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #3f1b68;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    flex-shrink: 0;
+}
+
+.profile-main-info h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 8px 0;
+}
+
+.profile-main-info p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #6b7280;
+    margin: 4px 0;
+}
+
+.bank-security-info {
+    margin-top: 24px;
+    padding: 16px;
+    background: #f0f9ff;
+    border-radius: 8px;
+    border-left: 3px solid #3f1b68;
+}
+
+.documents-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.document-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: #f9fafb;
+    border-radius: 8px;
+    border-left: 3px solid #6ea8ff;
+    transition: all 0.2s ease;
+}
+
+.document-card:hover {
+    background: #f0f9ff;
+    transform: translateY(-1px);
+}
+
+.document-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    background: #6ea8ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.document-info {
+    flex: 1;
+}
+
+.document-download-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #3f1b68;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.document-download-btn:hover {
+    background: #412c8f;
+    transform: translateY(-1px);
+}
+
+.document-download-btn i {
+    font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-avatar-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+    
+    .document-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+    
+    .documents-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<script>
+// Variables globales pour la section profil
+let currentSelectedProfileSection = 'info';
+let currentProfileFilter = 'info';
+
+// Fonction pour sélectionner une section du profil
+function selectProfileSection(element, sectionId) {
+    // Retirer la sélection de tous les éléments
+    document.querySelectorAll('#profileSectionsList .expense-item').forEach(item => {
+        item.classList.remove('selected');
+    });
+    
+    // Sélectionner l'élément cliqué
+    element.classList.add('selected');
+    currentSelectedProfileSection = sectionId;
+    
+    // Mettre à jour l'en-tête
+    updateProfilePreviewHeader(sectionId);
+    
+    // Masquer toutes les sections
+    document.querySelectorAll('.expense-detail-item').forEach(detail => {
+        detail.style.display = 'none';
+    });
+    
+    // Afficher la section correspondante
+    const detailElement = document.getElementById(`profileSection${sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}`);
+    if (detailElement) {
+        detailElement.style.display = 'block';
+    }
+}
+
+// Fonction pour filtrer les sections du profil
+function filterProfileSection(filter) {
+    // Mettre à jour les onglets actifs
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    const activeTab = document.querySelector(`[data-filter="${filter}"]`);
+    if (activeTab) {
+        activeTab.classList.add('active');
+    }
+    
+    currentProfileFilter = filter;
+    
+    // Sélectionner automatiquement la section correspondante
+    const sectionElement = document.querySelector(`[data-section="${filter}"]`);
+    if (sectionElement) {
+        selectProfileSection(sectionElement, filter);
+    }
+}
+
+// Fonction pour mettre à jour l'en-tête de prévisualisation
+function updateProfilePreviewHeader(sectionId) {
+    const sectionTitles = {
+        'info': { title: 'Informations Personnelles', subtitle: 'Profil complet et à jour' },
+        'bank': { title: 'Informations Bancaires', subtitle: 'Données sécurisées et chiffrées' },
+        'documents': { title: 'Mes Documents', subtitle: '5 documents disponibles au téléchargement' }
+    };
+    
+    const section = sectionTitles[sectionId];
+    if (section) {
+        document.getElementById('profilePreviewTitle').textContent = section.title;
+        document.getElementById('profilePreviewSubtitle').textContent = section.subtitle;
+    }
+}
+
+// Fonction pour éditer le profil
+function editProfile() {
+    showNotification('Fonctionnalité de modification en cours de développement', 'info');
+}
+
+// Document download functions (déjà existante, on la garde)
+function downloadDocument(type) {
+    const documents = {
+        'id': 'Carte_Identité_Jean_Dupont.pdf',
+        'contract': 'Contrat_Travail_Jean_Dupont.pdf',
+        'salary': 'Attestation_Salaire_Jean_Dupont.pdf',
+        'work-certificate': 'Certificat_Travail_Jean_Dupont.pdf',
+        'career': 'Relevé_Carrière_Jean_Dupont.pdf'
+    };
+    
+    const fileName = documents[type];
+    if (fileName) {
+        showNotification(`Téléchargement de ${fileName} en cours...`, 'info');
+        
+        setTimeout(() => {
+            showNotification('Téléchargement terminé !', 'success');
+        }, 2000);
+    }
+}
+
+// Initialisation de la section profil
+function initProfileSection() {
+    // Sélectionner la première section par défaut
+    filterProfileSection('info');
+    
+    console.log('Section profil initialisée');
+}
+
+// Initialiser quand la section devient active
+document.addEventListener('DOMContentLoaded', function() {
+    // Observer les changements de section
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const profileSection = document.getElementById('profile');
+                if (profileSection && profileSection.classList.contains('active')) {
+                    initProfileSection();
+                }
+            }
+        });
+    });
+    
+    const profileSection = document.getElementById('profile');
+    if (profileSection) {
+        observer.observe(profileSection, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+    }
+});
+</script>

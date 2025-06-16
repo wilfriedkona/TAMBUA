@@ -221,182 +221,236 @@
             </section>
 
             <!-- Profile Section -->
+            <!-- Section Mon Profil mise à jour -->
             <section id="profile" class="page-section">
-
                 <!-- Header -->
-            <header class="header">
-                <div class="header-titles">
-                    <h2>Bonjour Jean Dupont 👋🏽</h2>
-                    <h5>Nous sommes le Jeudi 12 juin 2025</h5>
-                </div>
-
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <!-- <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Rechercher...">
-                    </div> -->
-                </div>
-                
-            </header>
-
-
-                <div class="profile-info-grid">
-                    <!-- Personal Information Header -->
-                    <div class="profile-header">
-                        <div class="profile-avatar-large">JD</div>
-                        <div class="profile-details">
-                            <h2>Jean Dupont</h2>
-                            <p><strong>Poste:</strong> Développeur Frontend</p>
-                            <p><strong>Département:</strong> IT</p>
-                            <p><strong>Date d'embauche:</strong> 15 Mars 2023</p>
-                            <p><strong>Email:</strong> jean.dupont@tambua.com</p>
-                            <p><strong>ID Employé:</strong> EMP-2023-045</p>
-                        </div>
+                <header class="header">
+                    <div class="header-titles">
+                        <h2>Bonjour Jean Dupont 👋🏽</h2>
+                        <h5>Nous sommes le Jeudi 12 juin 2025</h5>
                     </div>
 
-                    <!-- Bank Information -->
-                    <div class="bank-info">
-                        <h3>Détail du compte bancaire</h3>
-                        <div class="bank-detail">
-                            <span class="bank-label">Nom du titulaire du compte :</span>
-                            <span class="bank-value">Jean Dupont</span>
-                        </div>
-                        <div class="bank-detail">
-                            <span class="bank-label">Numéro de compte :</span>
-                            <span class="bank-value">7845269652656</span>
-                        </div>
-                        <div class="bank-detail">
-                            <span class="bank-label">Nom de banque :</span>
-                            <span class="bank-value">TAMBUA BANK, CI</span>
-                        </div>
-                        <div class="bank-detail">
-                            <span class="bank-label">Code d'identifiant bancaire :</span>
-                            <span class="bank-value">123456</span>
-                        </div>
-                        <div class="bank-detail">
-                            <span class="bank-label">Emplacement de la succursale :</span>
-                            <span class="bank-value">Abidjan - Plateau</span>
-                        </div>
-                        <div class="bank-detail">
-                            <span class="bank-label">ID de contribuable :</span>
-                            <span class="bank-value">12345</span>
-                        </div>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                            <i class="fas fa-bars"></i>
+                        </button>
                     </div>
-                </div>
-                
-                <div class="content-grid">
-                    <!-- Personal Information Form -->
-                    <div class="table-container">
-                        <div class="table-header">
-                            <h3 class="table-title">Informations Personnelles</h3>
-                        </div>
-                        <form class="form-container">
-                            <div class="form-group">
-                                <label class="form-label">Nom Complet</label>
-                                <input type="text" class="form-control" value="Jean Dupont">
+                </header>
+
+                <div class="expenses-page-container">
+                    <!-- Zone principale du profil -->
+                    <div class="dashboard-main-area">
+                        <!-- Header du profil -->
+                        <div class="expenses-preview-header">
+                            <div class="preview-title">
+                                <h2>Mon Profil</h2>
+                                <p>Gérez vos informations personnelles et professionnelles</p>
                             </div>
-                            
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label class="form-label">Téléphone</label>
-                                    <input type="tel" class="form-control" value="+33 6 12 34 56 78">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Date de Naissance</label>
-                                    <input type="date" class="form-control" value="1990-05-15">
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label">Adresse</label>
-                                <textarea class="form-control" rows="3">123 Rue de la Paix, 75001 Paris, France</textarea>
-                            </div>
-                            
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label class="form-label">Situation Familiale</label>
-                                    <select class="form-control">
-                                        <option>Célibataire</option>
-                                        <option selected>Marié(e)</option>
-                                        <option>Divorcé(e)</option>
-                                        <option>Veuf(ve)</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Nombre d'enfants</label>
-                                    <input type="number" class="form-control" value="2" min="0">
-                                </div>
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary">
+                            <button class="add-expense-btn" onclick="saveProfileChanges()">
                                 <i class="fas fa-save"></i>
                                 Sauvegarder les modifications
                             </button>
-                        </form>
-                    </div>
-                    
-                    <!-- Documents -->
-                    <div class="table-container">
-                        <div class="table-header">
-                            <h3 class="table-title">Documents</h3>
                         </div>
                         
-                        <div class="document-item">
-                            <div class="document-info">
-                                <h4>Carte d'Identité</h4>
-                                <p>Document d'identité officiel</p>
+                        <!-- Contenu principal -->
+                        <div class="expense-details">
+                            <div class="expense-details-content">
+                                
+                                <!-- Profile Header Cards -->
+                                <div class="profile-header-grid">
+                                    <!-- Personal Information Header -->
+                                    <div class="profile-header-card">
+                                        <div class="expense-detail-header">
+                                            <h3>Informations Générales</h3>
+                                        </div>
+                                        <div class="profile-avatar-section">
+                                            <div class="profile-avatar-large">JD</div>
+                                            <div class="profile-basic-info">
+                                                <div class="expensex-infox-itemx">
+                                                    <div class="expense-info-label">Nom Complet</div>
+                                                    <div class="expense-info-value">Jean Dupont</div>
+                                                </div>
+                                                <div class="expensex-infox-itemx">
+                                                    <div class="expense-info-label">Poste</div>
+                                                    <div class="expense-info-value">Développeur Frontend</div>
+                                                </div>
+                                                <div class="expensex-infox-itemx">
+                                                    <div class="expense-info-label">Département</div>
+                                                    <div class="expense-info-value">IT</div>
+                                                </div>
+                                                <div class="expensex-infox-itemx">
+                                                    <div class="expense-info-label">Date d'embauche</div>
+                                                    <div class="expense-info-value">15 Mars 2023</div>
+                                                </div>
+                                                <div class="expensex-infox-itemx">
+                                                    <div class="expense-info-label">Email</div>
+                                                    <div class="expense-info-value">jean.dupont@tambua.com</div>
+                                                </div>
+                                                <div class="expensex-infox-itemx">
+                                                    <div class="expense-info-label">ID Employé</div>
+                                                    <div class="expense-info-value">EMP-2023-045</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Bank Information -->
+                                    <div class="profile-header-card">
+                                        <div class="expense-detail-header">
+                                            <h3>Détail du compte bancaire</h3>
+                                        </div>
+                                        <div class="bank-details-grid">
+                                            <div class="expensex-infox-itemx">
+                                                <div class="expense-info-label">Nom du titulaire du compte</div>
+                                                <div class="expense-info-value">Jean Dupont</div>
+                                            </div>
+                                            <div class="expensex-infox-itemx">
+                                                <div class="expense-info-label">Numéro de compte</div>
+                                                <div class="expense-info-value">7845269652656</div>
+                                            </div>
+                                            <div class="expensex-infox-itemx">
+                                                <div class="expense-info-label">Nom de banque</div>
+                                                <div class="expense-info-value">TAMBUA BANK, CI</div>
+                                            </div>
+                                            <div class="expensex-infox-itemx">
+                                                <div class="expense-info-label">Code d'identifiant bancaire</div>
+                                                <div class="expense-info-value">123456</div>
+                                            </div>
+                                            <div class="expensex-infox-itemx">
+                                                <div class="expense-info-label">Emplacement de la succursale</div>
+                                                <div class="expense-info-value">Abidjan - Plateau</div>
+                                            </div>
+                                            <div class="expensex-infox-itemx">
+                                                <div class="expense-info-label">ID de contribuable</div>
+                                                <div class="expense-info-value">12345</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Content Grid -->
+                                <div class="dashboard-content-grid">
+                                    <!-- Left Column - Personal Information Form -->
+                                    <div class="profile-form-section">
+                                        <div class="expense-detail-header">
+                                            <h3>Informations Personnelles</h3>
+                                        </div>
+                                        
+                                        <form class="profile-form">
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Nom Complet</div>
+                                                <input type="text" class="profile-form-control" value="Jean Dupont">
+                                            </div>
+                                            
+                                            <div class="profile-form-grid">
+                                                <div class="expense-info-item">
+                                                    <div class="expense-info-label">Téléphone</div>
+                                                    <input type="tel" class="profile-form-control" value="+33 6 12 34 56 78">
+                                                </div>
+                                                <div class="expense-info-item">
+                                                    <div class="expense-info-label">Date de Naissance</div>
+                                                    <input type="date" class="profile-form-control" value="1990-05-15">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Adresse</div>
+                                                <textarea class="profile-form-control" rows="3">123 Rue de la Paix, 75001 Paris, France</textarea>
+                                            </div>
+                                            
+                                            <div class="profile-form-grid">
+                                                <div class="expense-info-item">
+                                                    <div class="expense-info-label">Situation Familiale</div>
+                                                    <select class="profile-form-control">
+                                                        <option>Célibataire</option>
+                                                        <option selected>Marié(e)</option>
+                                                        <option>Divorcé(e)</option>
+                                                        <option>Veuf(ve)</option>
+                                                    </select>
+                                                </div>
+                                                <div class="expense-info-item">
+                                                    <div class="expense-info-label">Nombre d'enfants</div>
+                                                    <input type="number" class="profile-form-control" value="2" min="0">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    
+                                    <!-- Right Column - Documents -->
+                                    <div class="profile-documents-section">
+                                        <div class="expense-detail-header">
+                                            <h3>Documents</h3>
+                                        </div>
+                                        
+                                        <div class="documents-list">
+                                            <div class="document-item-card" onclick="downloadDocument('id')">
+                                                <div class="document-icon">
+                                                    <i class="fas fa-id-card"></i>
+                                                </div>
+                                                <div class="document-info">
+                                                    <div class="expense-info-label">Carte d'Identité</div>
+                                                    <div class="expense-info-value">Document d'identité officiel</div>
+                                                </div>
+                                                <div class="document-action">
+                                                    <i class="fas fa-download"></i>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="document-item-card" onclick="downloadDocument('contract')">
+                                                <div class="document-icon">
+                                                    <i class="fas fa-file-contract"></i>
+                                                </div>
+                                                <div class="document-info">
+                                                    <div class="expense-info-label">Contrat de Travail</div>
+                                                    <div class="expense-info-value">CDI - Développeur Frontend</div>
+                                                </div>
+                                                <div class="document-action">
+                                                    <i class="fas fa-download"></i>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="document-item-card" onclick="downloadDocument('salary')">
+                                                <div class="document-icon">
+                                                    <i class="fas fa-file-invoice-dollar"></i>
+                                                </div>
+                                                <div class="document-info">
+                                                    <div class="expense-info-label">Attestation de Salaire</div>
+                                                    <div class="expense-info-value">Dernière attestation émise</div>
+                                                </div>
+                                                <div class="document-action">
+                                                    <i class="fas fa-download"></i>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="document-item-card" onclick="downloadDocument('work-certificate')">
+                                                <div class="document-icon">
+                                                    <i class="fas fa-certificate"></i>
+                                                </div>
+                                                <div class="document-info">
+                                                    <div class="expense-info-label">Certificat de Travail</div>
+                                                    <div class="expense-info-value">Certificat d'emploi actuel</div>
+                                                </div>
+                                                <div class="document-action">
+                                                    <i class="fas fa-download"></i>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="document-item-card" onclick="downloadDocument('career')">
+                                                <div class="document-icon">
+                                                    <i class="fas fa-file-alt"></i>
+                                                </div>
+                                                <div class="document-info">
+                                                    <div class="expense-info-label">Relevé de Carrière</div>
+                                                    <div class="expense-info-value">Historique complet</div>
+                                                </div>
+                                                <div class="document-action">
+                                                    <i class="fas fa-download"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <button class="btn btn-primary" onclick="downloadDocument('id')">
-                                <i class="fas fa-download"></i>
-                                Télécharger PDF
-                            </button>
-                        </div>
-                        
-                        <div class="document-item">
-                            <div class="document-info">
-                                <h4>Contrat de Travail</h4>
-                                <p>CDI - Développeur Frontend</p>
-                            </div>
-                            <button class="btn btn-primary" onclick="downloadDocument('contract')">
-                                <i class="fas fa-download"></i>
-                                Télécharger PDF
-                            </button>
-                        </div>
-                        
-                        <div class="document-item">
-                            <div class="document-info">
-                                <h4>Attestation de Salaire</h4>
-                                <p>Dernière attestation émise</p>
-                            </div>
-                            <button class="btn btn-primary" onclick="downloadDocument('salary')">
-                                <i class="fas fa-download"></i>
-                                Télécharger PDF
-                            </button>
-                        </div>
-                        
-                        <div class="document-item">
-                            <div class="document-info">
-                                <h4>Certificat de Travail</h4>
-                                <p>Certificat d'emploi actuel</p>
-                            </div>
-                            <button class="btn btn-primary" onclick="downloadDocument('work-certificate')">
-                                <i class="fas fa-download"></i>
-                                Télécharger PDF
-                            </button>
-                        </div>
-                        
-                        <div class="document-item">
-                            <div class="document-info">
-                                <h4>Relevé de Carrière</h4>
-                                <p>Historique complet</p>
-                            </div>
-                            <button class="btn btn-primary" onclick="downloadDocument('career')">
-                                <i class="fas fa-download"></i>
-                                Télécharger PDF
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -2411,6 +2465,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         })
+
+        // Fonction pour sauvegarder les modifications du profil
+        function saveProfileChanges() {
+            // Simuler la sauvegarde
+            showNotification('Modifications sauvegardées avec succès !', 'success');
+        }
 
         // Document download functions
         function downloadDocument(type) {
