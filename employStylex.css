@@ -1026,7 +1026,7 @@
             align-items: center;
             gap: 8px;
             padding: 12px 20px;
-            background: #6ea8ff;
+            background: #3f1b68;
             color: #ffffff;
             border: none;
             border-radius: 8px;
@@ -1039,7 +1039,7 @@
         }
 
         .download-btn:hover {
-            background: #5b9cff;
+            background: #412c8f;
             transform: translateY(-1px);
             box-shadow: 0 4px 8px rgba(110, 168, 255, 0.3);
         }

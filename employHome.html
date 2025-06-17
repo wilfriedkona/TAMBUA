@@ -2280,37 +2280,43 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Fonction pour filtrer les notes de frais
-        function filterExpenses(filter) {
-            // Mettre à jour les onglets actifs
-            document.querySelectorAll('.filter-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            const activeTab = document.querySelector(`[data-filter="${filter}"]`);
-            if (activeTab) {
-                activeTab.classList.add('active');
-            }
-            
-            currentFilter = filter;
-            
-            // Filtrer les éléments
-            const expenseItems = document.querySelectorAll('.expense-item');
-            expenseItems.forEach(item => {
-                const status = item.getAttribute('data-status');
-                
-                if (filter === 'all' || status === filter) {
-                    item.style.display = 'flex';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-            
-            // Réinitialiser la sélection si l'élément sélectionné n'est plus visible
-            const selectedItem = document.querySelector('.expense-item.selected');
-            if (selectedItem && selectedItem.style.display === 'none') {
-                resetExpenseSelection();
-            }
+        // Fonction corrigée pour filtrer les notes de frais
+function filterExpenses(filter) {
+    // ✅ Sélecteur spécifique à la section expenses
+    const expensesSection = document.querySelector('#expenses');
+    const filterTabs = expensesSection.querySelectorAll('.filter-tab');
+    
+    // Mettre à jour les onglets actifs dans la section expenses uniquement
+    filterTabs.forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Sélectionner l'onglet actif dans la section expenses
+    const activeTab = expensesSection.querySelector(`[data-filter="${filter}"]`);
+    if (activeTab) {
+        activeTab.classList.add('active');
+    }
+    
+    currentFilter = filter;
+    
+    // Filtrer les éléments
+    const expenseItems = document.querySelectorAll('#expensesList .expense-item');
+    expenseItems.forEach(item => {
+        const status = item.getAttribute('data-status');
+        
+        if (filter === 'all' || status === filter) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
         }
+    });
+    
+    // Réinitialiser la sélection si l'élément sélectionné n'est plus visible
+    const selectedItem = document.querySelector('#expensesList .expense-item.selected');
+    if (selectedItem && selectedItem.style.display === 'none') {
+        resetExpenseSelection();
+    }
+}
 
         // Fonction pour réinitialiser la sélection
         function resetExpenseSelection() {
