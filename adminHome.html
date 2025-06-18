@@ -347,6 +347,7 @@
 
             <!-- Dashboard Section -->
             <!-- Dashboard Section -->
+                <!-- Dashboard Section -->
 <section id="dashboard" class="page-section active">
     <div class="expenses-page-container">
         <!-- Zone principale du dashboard -->
@@ -367,7 +368,7 @@
             <div class="expense-details">
                 <div class="expense-details-content">
                     <!-- Statistics Cards -->
-                    <div class="dashboard-stats-grid">
+                    <div class="admin-dashboard-stats">
                         <div class="dashboard-stat-card" onclick="showPage('employees')">
                             <div class="expense-info-item">
                                 <div class="expense-info-label">Total Collaborateurs</div>
@@ -460,48 +461,9 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Calendar Section -->
-                            <div class="calendar-section-admin" style="margin-top: 30px;">
-                                <div class="expense-detail-header">
-                                    <h3>
-                                        <i class="fas fa-calendar-alt" style="color: #6ea8ff; margin-right: 0.5rem;"></i>
-                                        Calendrier des jours fériés
-                                    </h3>
-                                    <button class="btn btn-primary" onclick="goToTodayAdmin()">Aujourd'hui</button>
-                                </div>
-                                
-                                <!-- Calendar Navigation -->
-                                <div class="calendar-nav-dashboard">
-                                    <button class="btn btn-secondary" onclick="previousMonthAdmin()">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </button>
-                                    <h3 id="currentMonthYearAdmin"></h3>
-                                    <button class="btn btn-secondary" onclick="nextMonthAdmin()">
-                                        <i class="fas fa-chevron-right"></i>
-                                    </button>
-                                </div>
-                                
-                                <!-- Calendar Grid -->
-                                <div class="mini-calendar" id="adminCalendar">
-                                    <!-- Le calendrier sera généré par JavaScript -->
-                                </div>
-                                
-                                <!-- Légende -->
-                                <div class="calendar-legend">
-                                    <div class="legend-item">
-                                        <div class="legend-color holiday-color"></div>
-                                        <span>Jours fériés</span>
-                                    </div>
-                                    <div class="legend-item">
-                                        <div class="legend-color today-color"></div>
-                                        <span>Aujourd'hui</span>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         
-                        <!-- Right Column -->
+                        <!-- Right Column - Quick Actions -->
                         <div class="dashboard-leave-section">
                             <!-- Quick Actions -->
                             <div class="expense-detail-header">
@@ -548,65 +510,107 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
 
-                            <!-- New Recruits Section -->
-                            <div class="new-recruits-section" style="margin-top: 30px;">
-                                <div class="expense-detail-header">
-                                    <h3>
-                                        <i class="fas fa-user-plus" style="color: #8c75ff; margin-right: 0.5rem;"></i>
-                                        Nouveaux Recrutés
-                                    </h3>
-                                    <button class="btn btn-primary" onclick="showPage('employees')">Voir tous</button>
+                    <!-- Calendar and New Recruits Grid -->
+                    <div class="dashboard-content-grid" style="margin-top: 30px;">
+                        <!-- Calendar Section -->
+                        <div class="dashboard-calendar-section">
+                            <div class="expense-detail-header">
+                                <h3>
+                                    <i class="fas fa-calendar-alt" style="color: #6ea8ff; margin-right: 0.5rem;"></i>
+                                    Calendrier des jours fériés
+                                </h3>
+                                <button class="btn btn-primary" onclick="goToTodayAdmin()">Aujourd'hui</button>
+                            </div>
+                            
+                            <!-- Calendar Navigation -->
+                            <div class="calendar-nav-dashboard">
+                                <button class="btn btn-secondary" onclick="previousMonthAdmin()">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <h3 id="currentMonthYearAdmin"></h3>
+                                <button class="btn btn-secondary" onclick="nextMonthAdmin()">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Calendar Grid -->
+                            <div class="mini-calendar" id="adminCalendar">
+                                <!-- Le calendrier sera généré par JavaScript -->
+                            </div>
+                            
+                            <!-- Légende -->
+                            <div class="calendar-legend">
+                                <div class="legend-item">
+                                    <div class="legend-color holiday-color"></div>
+                                    <span>Jours fériés</span>
                                 </div>
-                                
-                                <div class="new-recruits-list">
-                                    <div class="recruit-item" onclick="openRecruitModal('rec1')">
-                                        <div class="recruit-avatar">AT</div>
-                                        <div class="recruit-info">
-                                            <div class="recruit-name">Amadou Traoré</div>
-                                            <div class="recruit-position">Développeur Backend</div>
-                                            <div class="recruit-date">Arrivé le 15 juin 2025</div>
-                                        </div>
-                                        <button class="recruit-view-btn">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </div>
+                                <div class="legend-item">
+                                    <div class="legend-color today-color"></div>
+                                    <span>Aujourd'hui</span>
+                                </div>
+                            </div>
+                        </div>
 
-                                    <div class="recruit-item" onclick="openRecruitModal('rec2')">
-                                        <div class="recruit-avatar">AK</div>
-                                        <div class="recruit-info">
-                                            <div class="recruit-name">Aïcha Kone</div>
-                                            <div class="recruit-position">Designer UX/UI</div>
-                                            <div class="recruit-date">Arrivé le 10 juin 2025</div>
-                                        </div>
-                                        <button class="recruit-view-btn">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
+                        <!-- New Recruits Section -->
+                        <div class="dashboard-leave-section">
+                            <div class="expense-detail-header">
+                                <h3>
+                                    <i class="fas fa-user-plus" style="color: #8c75ff; margin-right: 0.5rem;"></i>
+                                    Nouveaux Recrutés
+                                </h3>
+                                <button class="btn btn-primary" onclick="showPage('employees')">Voir tous</button>
+                            </div>
+                            
+                            <div class="new-recruits-list">
+                                <div class="recruit-item" onclick="openRecruitModal('rec1')">
+                                    <div class="recruit-avatar">AT</div>
+                                    <div class="recruit-info">
+                                        <div class="recruit-name">Amadou Traoré</div>
+                                        <div class="recruit-position">Développeur Backend</div>
+                                        <div class="recruit-date">Arrivé le 15 juin 2025</div>
                                     </div>
+                                    <button class="recruit-view-btn">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
 
-                                    <div class="recruit-item" onclick="openRecruitModal('rec3')">
-                                        <div class="recruit-avatar">MS</div>
-                                        <div class="recruit-info">
-                                            <div class="recruit-name">Moussa Sanogo</div>
-                                            <div class="recruit-position">Analyste Financier</div>
-                                            <div class="recruit-date">Arrivé le 8 juin 2025</div>
-                                        </div>
-                                        <button class="recruit-view-btn">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
+                                <div class="recruit-item" onclick="openRecruitModal('rec2')">
+                                    <div class="recruit-avatar">AK</div>
+                                    <div class="recruit-info">
+                                        <div class="recruit-name">Aïcha Kone</div>
+                                        <div class="recruit-position">Designer UX/UI</div>
+                                        <div class="recruit-date">Arrivé le 10 juin 2025</div>
                                     </div>
+                                    <button class="recruit-view-btn">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
 
-                                    <div class="recruit-item" onclick="openRecruitModal('rec4')">
-                                        <div class="recruit-avatar">FK</div>
-                                        <div class="recruit-info">
-                                            <div class="recruit-name">Fatoumata Keita</div>
-                                            <div class="recruit-position">Chef de Projet</div>
-                                            <div class="recruit-date">Arrivé le 5 juin 2025</div>
-                                        </div>
-                                        <button class="recruit-view-btn">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
+                                <div class="recruit-item" onclick="openRecruitModal('rec3')">
+                                    <div class="recruit-avatar">MS</div>
+                                    <div class="recruit-info">
+                                        <div class="recruit-name">Moussa Sanogo</div>
+                                        <div class="recruit-position">Analyste Financier</div>
+                                        <div class="recruit-date">Arrivé le 8 juin 2025</div>
                                     </div>
+                                    <button class="recruit-view-btn">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+
+                                <div class="recruit-item" onclick="openRecruitModal('rec4')">
+                                    <div class="recruit-avatar">FK</div>
+                                    <div class="recruit-info">
+                                        <div class="recruit-name">Fatoumata Keita</div>
+                                        <div class="recruit-position">Chef de Projet</div>
+                                        <div class="recruit-date">Arrivé le 5 juin 2025</div>
+                                    </div>
+                                    <button class="recruit-view-btn">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
