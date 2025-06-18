@@ -875,7 +875,7 @@
        /* Section Bulletin de Paie Styles */
         .payroll-page-container {
             display: flex;
-            height: calc(100vh - 50px);
+            height: calc(100vh - 30px);
             gap: 0;
             /* border-radius: 15px; */
             overflow: hidden;

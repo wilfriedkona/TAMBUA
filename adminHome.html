@@ -1205,6 +1205,139 @@
                     </form>
                 </div>
             </div>
+
+
+                 <!-- Payroll Section -->
+            <section id="payroll" class="page-section">
+                <div class="payroll-page-container">
+                    <!-- Sidebar des bulletins -->
+                    <div class="payroll-sidebar">
+                        <div class="payroll-sidebar-header">
+                            <h3>Mes bulletins de paie</h3>
+
+                                <!-- Filtres par année -->
+                                    <div class="filter-container">
+                                        <div class="filter-tabs">
+                                            <button class="filter-tab active" onclick="filterPayrollByYear('all')" data-filter="all">
+                                                <i class="fas fa-list"></i>
+                                                Tous
+                                            </button>
+                                            <button class="filter-tab" onclick="filterPayrollByYear('2025')" data-filter="2025">
+                                                <i class="fas fa-calendar"></i>
+                                                2025
+                                            </button>
+                                            <button class="filter-tab" onclick="filterPayrollByYear('2024')" data-filter="2024">
+                                                <i class="fas fa-calendar"></i>
+                                                2024
+                                            </button>
+                                        </div>
+                                    </div>
+
+                            <div class="search-container">
+                                <div class="search-input-wrapper">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" placeholder="Recherche" class="payroll-search" id="payrollSearch">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="payroll-list" id="payrollList">
+                            <div class="payroll-item" onclick="selectPayroll(this, '2025-06')" data-month="juin" data-year="2025">
+                                <div class="payroll-item-content">
+                                    <div class="payroll-month">Juin 2025</div>
+                                    <div class="payroll-date">Publié le 05/07/2025</div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            
+                            <div class="payroll-item" onclick="selectPayroll(this, '2025-05')" data-month="mai" data-year="2025">
+                                <div class="payroll-item-content">
+                                    <div class="payroll-month">Mai 2025</div>
+                                    <div class="payroll-date">Publié le 05/06/2025</div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            
+                            <div class="payroll-item" onclick="selectPayroll(this, '2025-04')" data-month="avril" data-year="2025">
+                                <div class="payroll-item-content">
+                                    <div class="payroll-month">Avril 2025</div>
+                                    <div class="payroll-date">Publié le 05/05/2025</div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            
+                            <div class="payroll-item" onclick="selectPayroll(this, '2025-03')" data-month="mars" data-year="2025">
+                                <div class="payroll-item-content">
+                                    <div class="payroll-month">Mars 2025</div>
+                                    <div class="payroll-date">Publié le 05/04/2025</div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            
+                            <div class="payroll-item" onclick="selectPayroll(this, '2025-02')" data-month="février" data-year="2025">
+                                <div class="payroll-item-content">
+                                    <div class="payroll-month">Février 2025</div>
+                                    <div class="payroll-date">Publié le 05/03/2025</div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            
+                            <div class="payroll-item" onclick="selectPayroll(this, '2025-01')" data-month="janvier" data-year="2025">
+                                <div class="payroll-item-content">
+                                    <div class="payroll-month">Janvier 2025</div>
+                                    <div class="payroll-date">Publié le 05/02/2025</div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+
+                            <div class="payroll-item" onclick="selectPayroll(this, '2024-12')" data-month="décembre" data-year="2024">
+                                <div class="payroll-item-content">
+                                    <div class="payroll-month">Décembre 2024</div>
+                                    <div class="payroll-date">Publié le 05/01/2025</div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+
+                            <div class="payroll-item" onclick="selectPayroll(this, '2024-11')" data-month="novembre" data-year="2024">
+                                <div class="payroll-item-content">
+                                    <div class="payroll-month">Novembre 2024</div>
+                                    <div class="payroll-date">Publié le 05/12/2024</div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Zone de prévisualisation -->
+                    <div class="payroll-preview">
+                        <div class="payroll-preview-header">
+                            <div class="preview-title">
+                                <h2 id="previewTitle">Prévisualisation du bulletin</h2>
+                                <p id="previewSubtitle">Sélectionnez un mois pour prévisualiser le bulletin</p>
+                            </div>
+                            <button class="download-btn" id="downloadBtn" style="display: none;" onclick="downloadCurrentPayroll()">
+                                <i class="fas fa-download"></i>
+                                Télécharger mon bulletin
+                            </button>
+                        </div>
+                        
+                        <!-- État vide -->
+                        <div class="empty-preview" id="emptyPreview">
+                            <div class="empty-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <h3>Aucun bulletin sélectionné</h3>
+                            <p>Sélectionnez un mois pour prévisualiser le bulletin</p>
+                        </div>
+                        
+                        <!-- Prévisualisation PDF -->
+                        <div class="pdf-preview" id="pdfPreview" style="display: none;">
+                            <iframe id="pdfFrame" src="" width="100%" height="100%" frameborder="0"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </main>
     </div>
 
@@ -1355,6 +1488,17 @@
             if (targetSection) {
                 targetSection.style.display = 'block';
                 targetSection.classList.add('active');
+                
+                // Initialiser les sections spécifiques
+                if (pageId === 'payroll') {
+                    setTimeout(() => {
+                        initPayrollSection();
+                    }, 100);
+                } else if (pageId === 'dashboard') {
+                    setTimeout(() => {
+                        initDashboardAdmin();
+                    }, 100);
+                }
                 
                 // Scroll vers le haut
                 window.scrollTo({
@@ -1831,24 +1975,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Admin Dashboard loaded successfully');
-            
-            // Setup navigation
-            setupNavigation();
-            
-            // Initialiser la recherche d'employés
-            initEmployeeSearch();
-            
-            // Vérifier l'URL au chargement
-            const hash = window.location.hash.substring(1);
-            if (hash && ['profile', 'dashboard', 'employees', 'payroll', 'leave', 'expenses', 'approvals', 'leave-approvals', 'expense-approvals', 'payroll-requests'].includes(hash)) {
-                showPage(hash);
-            } else {
-                showPage('profile');
-            }
-            
-            // Add smooth scrolling
-            document.documentElement.style.scrollBehavior = 'smooth';
+    console.log('Admin Dashboard loaded successfully');
+    
+    // Setup navigation
+    setupNavigation();
+    
+    // Initialiser la recherche d'employés
+    initEmployeeSearch();
+    
+    // Initialiser les fonctions de date/heure
+    updateDateTime();
+    setInterval(updateDateTime, 60000);
+    
+    // Vérifier l'URL au chargement
+    const hash = window.location.hash.substring(1);
+    if (hash && ['profile', 'dashboard', 'employees', 'payroll', 'leave', 'expenses', 'approvals', 'leave-approvals', 'expense-approvals', 'payroll-requests'].includes(hash)) {
+        showPage(hash);
+    } else {
+        showPage('profile');
+    }
+    
+    // Add smooth scrolling
+    document.documentElement.style.scrollBehavior = 'smooth';
             
             // Add animation styles
             const style = document.createElement('style');
@@ -2855,6 +3003,230 @@ document.addEventListener('click', (e) => {
         }
     }
 });
+
+
+// Variables globales pour la section bulletin de paie
+let currentSelectedPayroll = null;
+
+// Fonction pour sélectionner un bulletin de paie
+function selectPayroll(element, period) {
+    // Retirer la sélection de tous les éléments
+    document.querySelectorAll('.payroll-item').forEach(item => {
+        item.classList.remove('selected');
+    });
+    
+    // Sélectionner l'élément cliqué
+    element.classList.add('selected');
+    currentSelectedPayroll = period;
+    
+    // Mettre à jour l'en-tête
+    updatePreviewHeader(period);
+    
+    // Masquer l'état vide et afficher la prévisualisation
+    document.getElementById('emptyPreview').style.display = 'none';
+    document.getElementById('pdfPreview').style.display = 'block';
+    document.getElementById('downloadBtn').style.display = 'inline-flex';
+    
+    // Charger le PDF
+    loadPDFPreview(period);
+}
+
+// Fonction pour mettre à jour l'en-tête de prévisualisation
+function updatePreviewHeader(period) {
+    const [year, month] = period.split('-');
+    const monthNames = {
+        '01': 'Janvier', '02': 'Février', '03': 'Mars', '04': 'Avril',
+        '05': 'Mai', '06': 'Juin', '07': 'Juillet', '08': 'Août',
+        '09': 'Septembre', '10': 'Octobre', '11': 'Novembre', '12': 'Décembre'
+    };
+    
+    const monthName = monthNames[month];
+    const title = document.getElementById('previewTitle');
+    const subtitle = document.getElementById('previewSubtitle');
+    
+    title.textContent = `Bulletin de paie - ${monthName} ${year}`;
+    subtitle.textContent = `Prévisualisation du bulletin de paie`;
+}
+
+// Fonction pour charger la prévisualisation PDF
+function loadPDFPreview(period) {
+    const pdfFrame = document.getElementById('pdfFrame');
+    
+    // Afficher un message de chargement
+    pdfFrame.style.display = 'none';
+    
+    // Simuler le chargement
+    setTimeout(() => {
+        // Utiliser le PDF fourni
+        pdfFrame.src = 'docs/Bulletin de paie TAMBUA.pdf';
+        pdfFrame.style.display = 'block';
+    }, 500);
+}
+
+// Fonction pour télécharger le bulletin actuel
+function downloadCurrentPayroll() {
+    if (!currentSelectedPayroll) {
+        showNotification('Aucun bulletin sélectionné', 'error');
+        return;
+    }
+    
+    const [year, month] = currentSelectedPayroll.split('-');
+    const monthNames = {
+        '01': 'Janvier', '02': 'Février', '03': 'Mars', '04': 'Avril',
+        '05': 'Mai', '06': 'Juin', '07': 'Juillet', '08': 'Août',
+        '09': 'Septembre', '10': 'Octobre', '11': 'Novembre', '12': 'Décembre'
+    };
+    
+    const monthName = monthNames[month];
+    const fileName = `Bulletin_Paie_${monthName}_${year}_Lancine_Koulibaly.pdf`;
+    
+    showNotification(`Téléchargement de ${fileName} en cours...`, 'info');
+    
+    // Créer un lien de téléchargement
+    const link = document.createElement('a');
+    link.href = 'docs/Bulletin de paie TAMBUA.pdf';
+    link.download = fileName;
+    link.click();
+    
+    setTimeout(() => {
+        showNotification('Bulletin de paie téléchargé avec succès !', 'success');
+    }, 1000);
+}
+
+// Fonction de recherche dans les bulletins
+function initPayrollSearch() {
+    const searchInput = document.getElementById('payrollSearch');
+    
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const payrollItems = document.querySelectorAll('.payroll-item');
+        
+        payrollItems.forEach(item => {
+            const month = item.dataset.month;
+            const year = item.dataset.year;
+            const monthText = item.querySelector('.payroll-month').textContent.toLowerCase();
+            
+            if (monthText.includes(searchTerm) || 
+                month.includes(searchTerm) || 
+                year.includes(searchTerm)) {
+                item.style.display = 'flex';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+}
+
+// Variable globale pour le filtre d'année actuel
+let currentPayrollYearFilter = 'all';
+
+// Fonction pour filtrer les bulletins par année
+function filterPayrollByYear(year) {
+    // Mettre à jour les onglets actifs
+    document.querySelectorAll('.payroll-sidebar .filter-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    const activeTab = document.querySelector(`.payroll-sidebar [data-filter="${year}"]`);
+    if (activeTab) {
+        activeTab.classList.add('active');
+    }
+    
+    currentPayrollYearFilter = year;
+    
+    // Filtrer les éléments de bulletins
+    const payrollItems = document.querySelectorAll('.payroll-item');
+    payrollItems.forEach(item => {
+        const itemYear = item.getAttribute('data-year');
+        
+        if (year === 'all' || itemYear === year) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+    
+    // Réinitialiser la sélection si l'élément sélectionné n'est plus visible
+    const selectedItem = document.querySelector('.payroll-item.selected');
+    if (selectedItem && selectedItem.style.display === 'none') {
+        resetPayrollSelection();
+    }
+}
+
+// Fonction pour réinitialiser la sélection des bulletins
+function resetPayrollSelection() {
+    currentSelectedPayroll = null;
+    
+    // Retirer toutes les sélections
+    document.querySelectorAll('.payroll-item').forEach(item => {
+        item.classList.remove('selected');
+    });
+    
+    // Afficher l'état vide
+    document.getElementById('emptyPreview').style.display = 'flex';
+    document.getElementById('pdfPreview').style.display = 'none';
+    document.getElementById('downloadBtn').style.display = 'none';
+    
+    // Réinitialiser le titre
+    document.getElementById('previewTitle').textContent = 'Prévisualisation du bulletin';
+    document.getElementById('previewSubtitle').textContent = 'Sélectionnez un mois pour prévisualiser le bulletin';
+}
+
+// Mise à jour de la fonction de recherche pour tenir compte du filtre
+function initPayrollSearch() {
+    const searchInput = document.getElementById('payrollSearch');
+    
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const payrollItems = document.querySelectorAll('.payroll-item');
+        
+        payrollItems.forEach(item => {
+            const month = item.dataset.month;
+            const year = item.dataset.year;
+            const monthText = item.querySelector('.payroll-month').textContent.toLowerCase();
+            
+            // Vérifier à la fois le terme de recherche et le filtre d'année
+            const matchesSearch = monthText.includes(searchTerm) || 
+                                month.includes(searchTerm) || 
+                                year.includes(searchTerm);
+            
+            const matchesYearFilter = currentPayrollYearFilter === 'all' || 
+                                    year === currentPayrollYearFilter;
+            
+            if (matchesSearch && matchesYearFilter) {
+                item.style.display = 'flex';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+}
+
+// Initialisation de la section bulletin de paie
+function initPayrollSection() {
+    // Initialiser la recherche
+    initPayrollSearch();
+     // Appliquer le filtre par défaut
+    filterPayrollByYear('all');
+    
+    // Réinitialiser l'état
+    resetPayrollSelection();
+
+    console.log('Section bulletin de paie initialisée avec filtres');
+    // Réinitialiser l'état
+    currentSelectedPayroll = null;
+    document.getElementById('emptyPreview').style.display = 'flex';
+    document.getElementById('pdfPreview').style.display = 'none';
+    document.getElementById('downloadBtn').style.display = 'none';
+    
+    // Réinitialiser le titre
+    document.getElementById('previewTitle').textContent = 'Prévisualisation du bulletin';
+    document.getElementById('previewSubtitle').textContent = 'Sélectionnez un mois pour prévisualiser le bulletin';
+    
+    console.log('Section bulletin de paie initialisée');
+}
+
+
     </script>
 </body>
 </html>
