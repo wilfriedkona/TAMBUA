@@ -62,7 +62,7 @@
 
                 <!-- Menu déroulant Demandes à valider -->
                 <li class="nav-item dropdown-nav">
-                    <a href="#" class="nav-link" data-page="approvals">
+                    <a href="#" class="nav-link dropdown-toggle" onclick="toggleDropdownMenu(event)">
                         <i class="fas fa-check-circle"></i>
                         <span>Demandes à valider</span>
                         <i class="fas fa-chevron-down dropdown-arrow"></i>
@@ -345,19 +345,321 @@
                 </div>
             </section>
 
-            <!-- Autres sections seront ajoutées ici plus tard -->
+            <!-- Dashboard Section -->
             <section id="dashboard" class="page-section">
                 <div class="expenses-page-container">
                     <div class="dashboard-main-area">
                         <div class="expenses-preview-header">
                             <div class="preview-title">
                                 <h2>Tableau de bord Administrateur</h2>
-                                <p>Vue d'ensemble des activités RH</p>
+                                <p>Vue d'ensemble des activités RH de TAMBUA</p>
                             </div>
+                            <button class="add-expense-btn" onclick="generateReport()">
+                                <i class="fas fa-chart-bar"></i>
+                                Générer rapport
+                            </button>
                         </div>
+                        
                         <div class="expense-details">
                             <div class="expense-details-content">
-                                <p style="text-align: center; color: #6b7280; margin-top: 100px;">Section en cours de développement...</p>
+                                <!-- Statistics Cards -->
+                                <div class="dashboard-stats-grid">
+                                    <div class="dashboard-stat-card">
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Total Employés</div>
+                                            <div class="expense-info-value" style="font-size: 32px; color: #3f1b68;">127</div>
+                                            <div style="color: #059669; font-size: 14px; margin-top: 8px;">
+                                                <i class="fas fa-arrow-up"></i> +5 ce mois
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="dashboard-stat-card">
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Demandes en attente</div>
+                                            <div class="expense-info-value" style="font-size: 32px; color: #fb7253;">23</div>
+                                            <div style="color: #6b7280; font-size: 14px; margin-top: 8px;">
+                                                <i class="fas fa-clock"></i> À traiter
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="dashboard-stat-card">
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Congés ce mois</div>
+                                            <div class="expense-info-value" style="font-size: 32px; color: #6ea8ff;">45</div>
+                                            <div style="color: #6b7280; font-size: 14px; margin-top: 8px;">
+                                                <i class="fas fa-calendar"></i> Jours pris
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="dashboard-stat-card">
+                                        <div class="expense-info-item">
+                                            <div class="expense-info-label">Budget RH</div>
+                                            <div class="expense-info-value" style="font-size: 32px; color: #8c75ff;">85%</div>
+                                            <div style="color: #6b7280; font-size: 14px; margin-top: 8px;">
+                                                <i class="fas fa-euro-sign"></i> Utilisé
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Content Grid -->
+                                <div class="dashboard-content-grid">
+                                    <!-- Left Column - Recent Activities -->
+                                    <div class="dashboard-calendar-section">
+                                        <div class="expense-detail-header">
+                                            <h3>
+                                                <i class="fas fa-history" style="color: #6ea8ff; margin-right: 0.5rem;"></i>
+                                                Activités récentes
+                                            </h3>
+                                            <button class="btn btn-primary" onclick="showAllActivities()">Voir tout</button>
+                                        </div>
+                                        
+                                        <div class="dashboard-leave-list">
+                                            <div class="dashboard-leave-item" style="cursor: default;">
+                                                <div class="expense-info-item">
+                                                    <div class="leave-item-header">
+                                                        <div class="expense-info-label">Nouvelle demande de congé</div>
+                                                        <span class="status-badge status-pending-badge">Nouveau</span>
+                                                    </div>
+                                                    <div class="expense-info-value">Marie Koné - 5 jours en juillet</div>
+                                                    <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">Il y a 2 heures</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="dashboard-leave-item" style="cursor: default;">
+                                                <div class="expense-info-item">
+                                                    <div class="leave-item-header">
+                                                        <div class="expense-info-label">Note de frais validée</div>
+                                                        <span class="status-badge status-approved-badge">Traité</span>
+                                                    </div>
+                                                    <div class="expense-info-value">Jean Dupont - Transport 25,000 FCFA</div>
+                                                    <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">Il y a 4 heures</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="dashboard-leave-item" style="cursor: default;">
+                                                <div class="expense-info-item">
+                                                    <div class="leave-item-header">
+                                                        <div class="expense-info-label">Nouvel employé</div>
+                                                        <span class="status-badge status-approved-badge">Ajouté</span>
+                                                    </div>
+                                                    <div class="expense-info-value">Amadou Traoré - Développeur Backend</div>
+                                                    <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">Hier</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="dashboard-leave-item" style="cursor: default;">
+                                                <div class="expense-info-item">
+                                                    <div class="leave-item-header">
+                                                        <div class="expense-info-label">Bulletin de paie généré</div>
+                                                        <span class="status-badge status-approved-badge">Terminé</span>
+                                                    </div>
+                                                    <div class="expense-info-value">Bulletins de juin 2025 - 127 employés</div>
+                                                    <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">Il y a 2 jours</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Right Column - Quick Actions -->
+                                    <div class="dashboard-leave-section">
+                                        <div class="expense-detail-header">
+                                            <h3>Actions rapides</h3>
+                                        </div>
+                                        
+                                        <div class="dashboard-leave-list">
+                                            <div class="dashboard-leave-item" onclick="showPage('leave-approvals')" style="cursor: pointer;">
+                                                <div class="expense-info-item">
+                                                    <div class="leave-item-header">
+                                                        <div class="expense-info-label">
+                                                            <i class="fas fa-calendar-check" style="margin-right: 8px; color: #fb7253;"></i>
+                                                            Valider les congés
+                                                        </div>
+                                                        <span class="status-badge" style="background: #fb7253; color: white;">8</span>
+                                                    </div>
+                                                    <div class="expense-info-value">8 demandes de congés en attente</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="dashboard-leave-item" onclick="showPage('expense-approvals')" style="cursor: pointer;">
+                                                <div class="expense-info-item">
+                                                    <div class="leave-item-header">
+                                                        <div class="expense-info-label">
+                                                            <i class="fas fa-file-invoice" style="margin-right: 8px; color: #6ea8ff;"></i>
+                                                            Valider les notes de frais
+                                                        </div>
+                                                        <span class="status-badge" style="background: #6ea8ff; color: white;">15</span>
+                                                    </div>
+                                                    <div class="expense-info-value">15 notes de frais à traiter</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="dashboard-leave-item" onclick="showPage('employees')" style="cursor: pointer;">
+                                                <div class="expense-info-item">
+                                                    <div class="leave-item-header">
+                                                        <div class="expense-info-label">
+                                                            <i class="fas fa-users" style="margin-right: 8px; color: #8c75ff;"></i>
+                                                            Gérer les employés
+                                                        </div>
+                                                        <span class="status-badge" style="background: #8c75ff; color: white;">127</span>
+                                                    </div>
+                                                    <div class="expense-info-value">Consulter la liste des collaborateurs</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="dashboard-leave-item" onclick="showPage('payroll-requests')" style="cursor: pointer;">
+                                                <div class="expense-info-item">
+                                                    <div class="leave-item-header">
+                                                        <div class="expense-info-label">
+                                                            <i class="fas fa-file-signature" style="margin-right: 8px; color: #059669;"></i>
+                                                            Demandes de paie
+                                                        </div>
+                                                        <span class="status-badge" style="background: #059669; color: white;">Nouveau</span>
+                                                    </div>
+                                                    <div class="expense-info-value">Traiter les demandes spéciales</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Employees Section -->
+            <section id="employees" class="page-section">
+                <div class="expenses-page-container">
+                    <div class="dashboard-main-area">
+                        <div class="expenses-preview-header">
+                            <div class="preview-title">
+                                <h2>Mes Collaborateurs</h2>
+                                <p>Gestion des employés de TAMBUA</p>
+                            </div>
+                            <button class="add-expense-btn" onclick="openAddEmployeeModal()">
+                                <i class="fas fa-user-plus"></i>
+                                Ajouter un employé
+                            </button>
+                        </div>
+                        
+                        <div class="expense-details">
+                            <div class="expense-details-content">
+                                <!-- Search and Filters -->
+                                <div style="margin-bottom: 30px;">
+                                    <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+                                        <div style="flex: 1; min-width: 300px;">
+                                            <div class="search-input-wrapper">
+                                                <i class="fas fa-search"></i>
+                                                <input type="text" placeholder="Rechercher un employé..." class="payroll-search" id="employeeSearch">
+                                            </div>
+                                        </div>
+                                        <div class="filter-container">
+                                            <div class="filter-tabs">
+                                                <button class="filter-tab active" onclick="filterEmployees('all')" data-filter="all">
+                                                    <i class="fas fa-users"></i>
+                                                    Tous
+                                                </button>
+                                                <button class="filter-tab" onclick="filterEmployees('IT')" data-filter="IT">
+                                                    <i class="fas fa-laptop-code"></i>
+                                                    IT
+                                                </button>
+                                                <button class="filter-tab" onclick="filterEmployees('RH')" data-filter="RH">
+                                                    <i class="fas fa-user-tie"></i>
+                                                    RH
+                                                </button>
+                                                <button class="filter-tab" onclick="filterEmployees('Finance')" data-filter="Finance">
+                                                    <i class="fas fa-calculator"></i>
+                                                    Finance
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Employees Grid -->
+                                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;" id="employeesGrid">
+                                    <!-- Employee Card 1 -->
+                                    <div class="document-item-card employee-card" data-department="IT" onclick="viewEmployeeDetails('emp1')">
+                                        <div class="profile-avatar-large" style="width: 60px; height: 60px; font-size: 18px;">KK</div>
+                                        <div class="document-info" style="flex: 1;">
+                                            <div class="expense-info-label" style="font-size: 16px; font-weight: 600; color: #1f2937;">KONAN Kassi</div>
+                                            <div class="expense-info-value" style="color: #6b7280;">Développeur Frontend</div>
+                                            <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">IT • EMP-2023-045</div>
+                                        </div>
+                                        <div class="document-action">
+                                            <span class="status-badge status-approved-badge" style="font-size: 10px;">Actif</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Employee Card 2 -->
+                                    <div class="document-item-card employee-card" data-department="IT" onclick="viewEmployeeDetails('emp2')">
+                                        <div class="profile-avatar-large" style="width: 60px; height: 60px; font-size: 18px;">AT</div>
+                                        <div class="document-info" style="flex: 1;">
+                                            <div class="expense-info-label" style="font-size: 16px; font-weight: 600; color: #1f2937;">Amadou Traoré</div>
+                                            <div class="expense-info-value" style="color: #6b7280;">Développeur Backend</div>
+                                            <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">IT • EMP-2025-128</div>
+                                        </div>
+                                        <div class="document-action">
+                                            <span class="status-badge status-approved-badge" style="font-size: 10px;">Actif</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Employee Card 3 -->
+                                    <div class="document-item-card employee-card" data-department="RH" onclick="viewEmployeeDetails('emp3')">
+                                        <div class="profile-avatar-large" style="width: 60px; height: 60px; font-size: 18px;">MK</div>
+                                        <div class="document-info" style="flex: 1;">
+                                            <div class="expense-info-label" style="font-size: 16px; font-weight: 600; color: #1f2937;">Marie Koné</div>
+                                            <div class="expense-info-value" style="color: #6b7280;">Assistante RH</div>
+                                            <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">RH • EMP-2022-032</div>
+                                        </div>
+                                        <div class="document-action">
+                                            <span class="status-badge status-approved-badge" style="font-size: 10px;">Actif</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Employee Card 4 -->
+                                    <div class="document-item-card employee-card" data-department="Finance" onclick="viewEmployeeDetails('emp4')">
+                                        <div class="profile-avatar-large" style="width: 60px; height: 60px; font-size: 18px;">AB</div>
+                                        <div class="document-info" style="flex: 1;">
+                                            <div class="expense-info-label" style="font-size: 16px; font-weight: 600; color: #1f2937;">Awa Bamba</div>
+                                            <div class="expense-info-value" style="color: #6b7280;">Comptable</div>
+                                            <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">Finance • EMP-2021-018</div>
+                                        </div>
+                                        <div class="document-action">
+                                            <span class="status-badge status-approved-badge" style="font-size: 10px;">Actif</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Employee Card 5 -->
+                                    <div class="document-item-card employee-card" data-department="IT" onclick="viewEmployeeDetails('emp5')">
+                                        <div class="profile-avatar-large" style="width: 60px; height: 60px; font-size: 18px;">IS</div>
+                                        <div class="document-info" style="flex: 1;">
+                                            <div class="expense-info-label" style="font-size: 16px; font-weight: 600; color: #1f2937;">Ibrahim Sanogo</div>
+                                            <div class="expense-info-value" style="color: #6b7280;">DevOps Engineer</div>
+                                            <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">IT • EMP-2023-067</div>
+                                        </div>
+                                        <div class="document-action">
+                                            <span class="status-badge status-approved-badge" style="font-size: 10px;">Actif</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Employee Card 6 -->
+                                    <div class="document-item-card employee-card" data-department="Finance" onclick="viewEmployeeDetails('emp6')">
+                                        <div class="profile-avatar-large" style="width: 60px; height: 60px; font-size: 18px;">FD</div>
+                                        <div class="document-info" style="flex: 1;">
+                                            <div class="expense-info-label" style="font-size: 16px; font-weight: 600; color: #1f2937;">Fatou Diallo</div>
+                                            <div class="expense-info-value" style="color: #6b7280;">Contrôleur de Gestion</div>
+                                            <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">Finance • EMP-2020-009</div>
+                                        </div>
+                                        <div class="document-action">
+                                            <span class="status-badge status-pending-badge" style="font-size: 10px;">Congé</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -453,24 +755,52 @@
                 });
             });
 
-            // Gestion du menu déroulant
+            // Gestion du menu déroulant au clic
             const dropdownNav = document.querySelector('.dropdown-nav');
             if (dropdownNav) {
-                dropdownNav.addEventListener('mouseenter', () => {
-                    const submenu = dropdownNav.querySelector('.nav-submenu');
-                    const arrow = dropdownNav.querySelector('.dropdown-arrow');
-                    if (submenu) submenu.style.display = 'block';
-                    if (arrow) arrow.style.transform = 'rotate(180deg)';
-                });
-
-                dropdownNav.addEventListener('mouseleave', () => {
-                    const submenu = dropdownNav.querySelector('.nav-submenu');
-                    const arrow = dropdownNav.querySelector('.dropdown-arrow');
-                    if (submenu) submenu.style.display = 'none';
-                    if (arrow) arrow.style.transform = 'rotate(0deg)';
-                });
+                // Supprimer les anciens event listeners de survol s'ils existent
+                dropdownNav.removeEventListener('mouseenter', () => {});
+                dropdownNav.removeEventListener('mouseleave', () => {});
             }
         }
+
+        // Fonction pour basculer le menu déroulant
+        function toggleDropdownMenu(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            const dropdownNav = event.currentTarget.closest('.dropdown-nav');
+            const submenu = dropdownNav.querySelector('.nav-submenu');
+            const arrow = dropdownNav.querySelector('.dropdown-arrow');
+            
+            const isOpen = submenu.classList.contains('open');
+            
+            if (isOpen) {
+                // Fermer le menu
+                submenu.classList.remove('open');
+                arrow.style.transform = 'rotate(0deg)';
+                dropdownNav.classList.remove('dropdown-active');
+            } else {
+                // Ouvrir le menu
+                submenu.classList.add('open');
+                arrow.style.transform = 'rotate(180deg)';
+                dropdownNav.classList.add('dropdown-active');
+            }
+        }
+
+        // Fermer le menu déroulant si on clique ailleurs
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown-nav')) {
+                const openMenus = document.querySelectorAll('.nav-submenu.open');
+                const arrows = document.querySelectorAll('.dropdown-nav .dropdown-arrow');
+                const dropdownNavs = document.querySelectorAll('.dropdown-nav');
+                
+                openMenus.forEach(menu => menu.classList.remove('open'));
+                arrows.forEach(arrow => arrow.style.transform = 'rotate(0deg)');
+                dropdownNavs.forEach(nav => nav.classList.remove('dropdown-active'));
+            }
+        });
+        
 
         // Toggle dropdown utilisateur
         function toggleDropdown() {
@@ -520,6 +850,86 @@
             }
         }
 
+        // Fonctions pour le dashboard
+        function generateReport() {
+            showNotification('Génération du rapport en cours...', 'info');
+            setTimeout(() => {
+                showNotification('Rapport généré avec succès !', 'success');
+            }, 2000);
+        }
+
+        function showAllActivities() {
+            showNotification('Affichage de toutes les activités...', 'info');
+        }
+
+        // Fonctions pour la gestion des employés
+        function filterEmployees(department) {
+            // Mettre à jour les onglets actifs
+            document.querySelectorAll('#employees .filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            const activeTab = document.querySelector(`#employees [data-filter="${department}"]`);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+            
+            // Filtrer les cartes d'employés
+            const employeeCards = document.querySelectorAll('.employee-card');
+            employeeCards.forEach(card => {
+                const cardDepartment = card.getAttribute('data-department');
+                
+                if (department === 'all' || cardDepartment === department) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function openAddEmployeeModal() {
+            showNotification('Fonctionnalité d\'ajout d\'employé en cours de développement...', 'info');
+        }
+
+        function viewEmployeeDetails(empId) {
+            const employees = {
+                'emp1': 'KONAN Kassi',
+                'emp2': 'Amadou Traoré', 
+                'emp3': 'Marie Koné',
+                'emp4': 'Awa Bamba',
+                'emp5': 'Ibrahim Sanogo',
+                'emp6': 'Fatou Diallo'
+            };
+            
+            const employeeName = employees[empId];
+            if (employeeName) {
+                showNotification(`Affichage du profil de ${employeeName}...`, 'info');
+            }
+        }
+
+        // Fonction de recherche d'employés
+        function initEmployeeSearch() {
+            const searchInput = document.getElementById('employeeSearch');
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    const employeeCards = document.querySelectorAll('.employee-card');
+                    
+                    employeeCards.forEach(card => {
+                        const name = card.querySelector('.expense-info-label').textContent.toLowerCase();
+                        const position = card.querySelector('.expense-info-value').textContent.toLowerCase();
+                        const department = card.getAttribute('data-department').toLowerCase();
+                        
+                        if (name.includes(searchTerm) || position.includes(searchTerm) || department.includes(searchTerm)) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            }
+        }
+
         // Système de notification
         function showNotification(message, type = 'info') {
             const notification = document.createElement('div');
@@ -555,6 +965,9 @@
             
             // Setup navigation
             setupNavigation();
+            
+            // Initialiser la recherche d'employés
+            initEmployeeSearch();
             
             // Vérifier l'URL au chargement
             const hash = window.location.hash.substring(1);
@@ -592,22 +1005,31 @@
                     }
                 }
 
-                /* Styles pour le menu déroulant */
+                /* Styles pour le menu déroulant - VERSION CLIC */
                 .dropdown-nav {
                     position: relative;
                 }
 
+                .dropdown-toggle {
+                    cursor: pointer;
+                    user-select: none;
+                }
+
                 .nav-submenu {
-                    display: none;
-                    position: absolute;
-                    left: 100%;
-                    top: 0;
-                    background: #f9f8f6;
+                    display: block;
+                    max-height: 0;
+                    overflow: hidden;
+                    background: rgba(249, 248, 246, 0.95);
                     border-radius: 7px;
-                    min-width: 200px;
-                    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-                    z-index: 1000;
-                    margin-left: 10px;
+                    margin: 8px 0 0 20px;
+                    transition: max-height 0.3s ease, opacity 0.3s ease;
+                    opacity: 0;
+                    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+                }
+
+                .nav-submenu.open {
+                    max-height: 200px;
+                    opacity: 1;
                 }
 
                 .nav-subitem {
@@ -617,38 +1039,60 @@
                 .nav-sublink {
                     display: flex;
                     align-items: center;
-                    padding: 10px 20px;
+                    padding: 12px 25px;
                     color: #3f1b68;
                     text-decoration: none;
-                    border-radius: 7px;
+                    border-radius: 5px;
                     transition: all 0.3s ease;
                     font-size: 14px;
+                    margin: 4px 8px;
                 }
 
                 .nav-sublink:hover,
                 .nav-sublink.active {
                     background-color: #6ea8ff;
                     color: #ffffff;
+                    transform: translateX(10px);
                 }
 
                 .nav-sublink i {
-                    margin-right: 10px;
+                    margin-right: 12px;
                     width: 16px;
                     text-align: center;
+                    font-size: 13px;
                 }
 
                 .dropdown-arrow {
                     margin-left: auto;
                     transition: transform 0.3s ease;
+                    font-size: 12px;
+                }
+
+                .dropdown-nav.dropdown-active .nav-link {
+                    background-color: rgba(249, 248, 246, 0.8);
+                }
+
+                /* Animation smooth pour l'ouverture/fermeture */
+                .nav-submenu {
+                    transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                                opacity 0.3s ease,
+                                margin 0.3s ease;
                 }
 
                 /* Mobile responsive pour le submenu */
                 @media (max-width: 768px) {
                     .nav-submenu {
-                        position: static;
-                        margin-left: 0;
-                        margin-top: 10px;
-                        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+                        margin: 8px 0 0 15px;
+                        box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.1);
+                    }
+                    
+                    .nav-sublink {
+                        padding: 10px 20px;
+                        font-size: 13px;
+                    }
+                    
+                    .nav-sublink:hover {
+                        transform: translateX(5px);
                     }
                 }
             `;
