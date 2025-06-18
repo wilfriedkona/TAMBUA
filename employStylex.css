@@ -2824,3 +2824,98 @@
 .new-recruits-list::-webkit-scrollbar-thumb:hover {
     background: #94a3b8;
 }
+
+
+/* Styles pour le modal employé */
+.employee-modal-content {
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 0; /* Suppression du border-radius */
+}
+
+.employee-profile-header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.employee-profile-info h3 {
+    margin: 0 0 8px 0;
+    color: #1f2937;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.employee-profile-info p {
+    margin: 0 0 4px 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.employee-info-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f9fafb;
+    border-radius: 8px;
+}
+
+.employee-info-section h4 {
+    margin: 0 0 20px 0;
+    color: #1f2937;
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 2px solid #6ea8ff;
+    padding-bottom: 8px;
+}
+
+.employee-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.btn-danger {
+    background: #fb7253;
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background: #f7512c;
+}
+
+.btn-success {
+    background: #059669;
+    color: white;
+    border: none;
+}
+
+.btn-success:hover {
+    background: #047857;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .employee-info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .employee-profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .modal-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
