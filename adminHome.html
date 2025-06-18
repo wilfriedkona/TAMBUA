@@ -1208,6 +1208,110 @@
         </main>
     </div>
 
+    <!-- Modal Ajouter Employé -->
+    <div class="modal" id="addEmployeeModal">
+        <div class="modal-content employee-modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Ajouter un Nouvel Employé</h3>
+                <button class="close-btn" onclick="closeAddEmployeeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="addEmployeeForm" onsubmit="submitNewEmployee(event)">
+                <div class="employee-modal-body">
+                    <!-- Photo de profil -->
+                    <div class="employee-profile-header">
+                        <div class="photo-upload-section">
+                            <div class="profile-avatar-large" id="newEmployeeAvatar" style="width: 100px; height: 100px; font-size: 32px; background-image: url('images/employ2.jpg'); background-size: cover; background-position: center; color: transparent;">
+                                XX
+                            </div>
+                            <div class="photo-upload-controls">
+                                <button type="button" class="btn" onclick="triggerPhotoUpload()">
+                                    <i class="fas fa-camera"></i>
+                                    Changer la photo
+                                </button>
+                                <input type="file" id="employeePhotoInput" accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
+                                <p style="font-size: 12px; color: #6b7280; margin-top: 8px;">JPG, PNG max 5MB</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Informations personnelles -->
+                    <div class="employee-info-section">
+                        <h4>Informations Personnelles</h4>
+                        <div class="employee-info-grid">
+                            <div class="form-group">
+                                <label class="form-label">Nom Complet *</label>
+                                <input type="text" class="form-control" id="newEmployeeName" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email *</label>
+                                <input type="email" class="form-control" id="newEmployeeEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Téléphone *</label>
+                                <input type="tel" class="form-control" id="newEmployeePhone" required placeholder="+225 07 XX XX XX XX">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Poste *</label>
+                                <input type="text" class="form-control" id="newEmployeePosition" required placeholder="Ex: Développeur Frontend">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Département *</label>
+                                <select class="form-control" id="newEmployeeDepartment" required>
+                                    <option value="">Sélectionner un département...</option>
+                                    <option value="IT">IT</option>
+                                    <option value="RH">RH</option>
+                                    <option value="Finance">Finance</option>
+                                    <option value="Direction">Direction</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Date d'embauche *</label>
+                                <input type="date" class="form-control" id="newEmployeeHireDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Salaire (FCFA) *</label>
+                                <input type="number" class="form-control" id="newEmployeeSalary" required placeholder="Ex: 750000">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Statut</label>
+                                <select class="form-control" id="newEmployeeStatus">
+                                    <option value="Actif" selected>Actif</option>
+                                    <option value="Congé">En congé</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Informations bancaires -->
+                    <div class="employee-info-section">
+                        <h4>Informations Bancaires</h4>
+                        <div class="employee-info-grid">
+                            <div class="form-group">
+                                <label class="form-label">Numéro de compte *</label>
+                                <input type="text" class="form-control" id="newEmployeeBankAccount" required placeholder="Ex: 1234567890123">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Nom de la banque</label>
+                                <input type="text" class="form-control" id="newEmployeeBankName" value="TAMBUA BANK CI">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-cancel" onclick="closeAddEmployeeModal()">Annuler</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i>
+                        Ajouter l'Employé
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
         // Fonction pour basculer le menu mobile
         function toggleMobileMenu() {
@@ -1440,9 +1544,222 @@
             });
         }
 
-        function openAddEmployeeModal() {
-            showNotification('Fonctionnalité d\'ajout d\'employé en cours de développement...', 'info');
+        let newEmployeePhotoUrl = 'images/employ2.jpg'; // Photo par défaut
+let employeeCounter = 21; // Compteur pour les nouveaux IDs
+
+// Fonction pour ouvrir le modal d'ajout d'employé
+function openAddEmployeeModal() {
+    // Réinitialiser le formulaire
+    document.getElementById('addEmployeeForm').reset();
+    
+    // Remettre la photo par défaut
+    newEmployeePhotoUrl = 'images/employ2.jpg';
+    const avatar = document.getElementById('newEmployeeAvatar');
+    avatar.style.backgroundImage = `url('${newEmployeePhotoUrl}')`;
+    avatar.textContent = 'XX';
+    avatar.style.color = 'transparent';
+    
+    // Définir la date d'aujourd'hui par défaut
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('newEmployeeHireDate').value = today;
+    
+    // Ouvrir le modal
+    document.getElementById('addEmployeeModal').classList.add('show');
+}
+
+// Fonction pour fermer le modal d'ajout d'employé
+function closeAddEmployeeModal() {
+    document.getElementById('addEmployeeModal').classList.remove('show');
+    document.getElementById('addEmployeeForm').reset();
+}
+
+// Fonction pour déclencher l'upload de photo
+function triggerPhotoUpload() {
+    document.getElementById('employeePhotoInput').click();
+}
+
+// Fonction pour gérer l'upload de photo
+function handlePhotoUpload(event) {
+    const file = event.target.files[0];
+    if (file) {
+        // Vérifier la taille du fichier (5MB max)
+        if (file.size > 5 * 1024 * 1024) {
+            showNotification('La taille du fichier ne doit pas dépasser 5MB', 'error');
+            return;
         }
+        
+        // Vérifier le type de fichier
+        if (!file.type.startsWith('image/')) {
+            showNotification('Veuillez sélectionner une image valide', 'error');
+            return;
+        }
+        
+        // Créer une URL pour prévisualiser l'image
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            newEmployeePhotoUrl = e.target.result;
+            const avatar = document.getElementById('newEmployeeAvatar');
+            avatar.style.backgroundImage = `url('${newEmployeePhotoUrl}')`;
+            avatar.style.color = 'transparent';
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+// Fonction pour générer un ID d'employé unique
+function generateEmployeeId() {
+    const currentYear = new Date().getFullYear();
+    const id = String(employeeCounter).padStart(3, '0');
+    return `EMP-${currentYear}-${id}`;
+}
+
+// Fonction pour générer les initiales à partir du nom
+function generateInitials(fullName) {
+    return fullName
+        .split(' ')
+        .map(name => name.charAt(0).toUpperCase())
+        .join('')
+        .substring(0, 2);
+}
+
+// Fonction pour soumettre le nouvel employé
+function submitNewEmployee(event) {
+    event.preventDefault();
+    
+    // Récupérer les valeurs du formulaire
+    const name = document.getElementById('newEmployeeName').value.trim();
+    const email = document.getElementById('newEmployeeEmail').value.trim();
+    const phone = document.getElementById('newEmployeePhone').value.trim();
+    const position = document.getElementById('newEmployeePosition').value.trim();
+    const department = document.getElementById('newEmployeeDepartment').value;
+    const hireDate = document.getElementById('newEmployeeHireDate').value;
+    const salary = document.getElementById('newEmployeeSalary').value;
+    const status = document.getElementById('newEmployeeStatus').value;
+    const bankAccount = document.getElementById('newEmployeeBankAccount').value.trim();
+    const bankName = document.getElementById('newEmployeeBankName').value.trim();
+    
+    // Valider les données
+    if (!name || !email || !phone || !position || !department || !hireDate || !salary || !bankAccount) {
+        showNotification('Veuillez remplir tous les champs obligatoires', 'error');
+        return;
+    }
+    
+    // Générer un nouvel ID d'employé
+    const newEmployeeId = `emp${employeeCounter}`;
+    const employeeIdCode = generateEmployeeId();
+    
+    // Créer l'objet employé
+    const newEmployee = {
+        name: name,
+        position: position,
+        department: department,
+        id: employeeIdCode,
+        email: email,
+        phone: phone,
+        hireDate: hireDate,
+        salary: `${parseInt(salary).toLocaleString()} FCFA`,
+        bankAccount: bankAccount,
+        bankName: bankName,
+        status: status,
+        photoUrl: newEmployeePhotoUrl
+    };
+    
+    // Ajouter l'employé aux données
+    employeesData[newEmployeeId] = newEmployee;
+    
+    // Créer et ajouter la carte d'employé
+    addEmployeeCard(newEmployeeId, newEmployee);
+    
+    // Incrémenter le compteur
+    employeeCounter++;
+    
+    // Afficher une notification de succès
+    showNotification(`${name} a été ajouté avec succès !`, 'success');
+    
+    // Fermer le modal
+    closeAddEmployeeModal();
+}
+
+// Fonction pour ajouter une carte d'employé à l'interface
+function addEmployeeCard(empId, employee) {
+    const initials = generateInitials(employee.name);
+    const statusClass = employee.status === 'Actif' ? 'status-approved-badge' : 'status-pending-badge';
+    
+    const cardHtml = `
+        <div class="document-item-card employee-card" data-department="${employee.department}" onclick="viewEmployeeDetails('${empId}')">
+            <div class="profile-avatar-large" style="width: 60px; height: 60px; font-size: 18px; background-image: url('${employee.photoUrl}'); background-size: cover; background-position: center; color: transparent;">${initials}</div>
+            <div class="document-info" style="flex: 1;">
+                <div class="expense-info-label" style="font-size: 16px; font-weight: 600; color: #1f2937;">${employee.name}</div>
+                <div class="expense-info-value" style="color: #6b7280;">${employee.position}</div>
+                <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">${employee.department} • ${employee.id}</div>
+            </div>
+            <div class="document-action">
+                <span class="status-badge ${statusClass}" style="font-size: 10px;">${employee.status}</span>
+            </div>
+        </div>
+    `;
+    
+    // Ajouter la carte à la grille
+    const employeesGrid = document.getElementById('employeesGrid');
+    employeesGrid.insertAdjacentHTML('beforeend', cardHtml);
+}
+
+// Fonction pour valider l'email
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// Fonction pour valider le téléphone
+function validatePhone(phone) {
+    const phoneRegex = /^\+225\s\d{2}\s\d{2}\s\d{2}\s\d{2}\s\d{2}$/;
+    return phoneRegex.test(phone);
+}
+
+// Ajouter validation en temps réel
+document.addEventListener('DOMContentLoaded', function() {
+    // Validation email
+    const emailInput = document.getElementById('newEmployeeEmail');
+    if (emailInput) {
+        emailInput.addEventListener('blur', function() {
+            if (this.value && !validateEmail(this.value)) {
+                showNotification('Format d\'email invalide', 'error');
+                this.focus();
+            }
+        });
+    }
+    
+    // Auto-génération de l'email basé sur le nom
+    const nameInput = document.getElementById('newEmployeeName');
+    if (nameInput) {
+        nameInput.addEventListener('blur', function() {
+            const email = document.getElementById('newEmployeeEmail');
+            if (this.value && !email.value) {
+                const emailSuggestion = this.value
+                    .toLowerCase()
+                    .replace(/\s+/g, '.')
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '') + '@tambua.com';
+                email.value = emailSuggestion;
+            }
+        });
+    }
+    
+    // Formater le numéro de téléphone
+    const phoneInput = document.getElementById('newEmployeePhone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            if (value.startsWith('225')) {
+                value = value.substring(3);
+            }
+            if (value.length > 0) {
+                value = '+225 ' + value.replace(/(\d{2})(?=\d)/g, '$1 ');
+            }
+            this.value = value;
+        });
+    }
+});
 
         function viewEmployeeDetails(empId) {
             const employees = {
@@ -2527,10 +2844,7 @@ function updateEmployeeCard(empId) {
     }
 }
 
-// Fonction pour ouvrir le modal d'ajout d'employé
-function openAddEmployeeModal() {
-    showNotification('Fonctionnalité d\'ajout d\'employé en cours de développement...', 'info');
-}
+
 
 // Fermer les modaux en cliquant à l'extérieur
 document.addEventListener('click', (e) => {

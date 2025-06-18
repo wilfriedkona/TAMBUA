@@ -2836,11 +2836,13 @@
 
 .employee-profile-header {
     display: flex;
+    justify-content: center;  /* Centre horizontalement */
     align-items: center;
     gap: 24px;
     margin-bottom: 30px;
     padding-bottom: 20px;
     border-bottom: 1px solid #e5e7eb;
+    
 }
 
 .employee-profile-info h3 {
@@ -2917,5 +2919,90 @@
     .modal-actions .btn {
         width: 100%;
         justify-content: center;
+    }
+}
+
+
+/* Styles pour l'upload de photo */
+.photo-upload-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.photo-upload-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.photo-upload-controls .btn {
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+/* Styles pour le formulaire d'ajout */
+.employee-info-grid .form-group {
+    margin-bottom: 0;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #374151;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    background: #ffffff;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #6ea8ff;
+    box-shadow: 0 0 0 3px rgba(110, 168, 255, 0.1);
+}
+
+.form-control:required {
+    border-left: 3px solid #6ea8ff;
+}
+
+/* Animation pour la nouvelle carte */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.employee-card:last-child {
+    animation: slideInUp 0.5s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .photo-upload-section {
+        margin-bottom: 20px;
+    }
+    
+    .employee-info-grid {
+        grid-template-columns: 1fr;
     }
 }
