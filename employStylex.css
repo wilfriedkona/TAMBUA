@@ -191,6 +191,13 @@
             margin-top: 225px; /* Décalage de 5px vers le bas */
         }
 
+        /* Dropdown utilisateur Admin*/
+        .userx-dropdownx {
+            position: relative;
+            margin-left: 50px; /* Décalage de 5px vers la droite */
+            margin-top: 5px; /* Décalage de 5px vers le bas */
+        }
+
         .user-btn {
             display: flex;
             align-items: center;
@@ -235,6 +242,7 @@
             transform-origin: bottom right;
             transition: transform 0.2s ease;
         }
+
 
         .dropdown-menu.show {
             display: block;
@@ -1632,7 +1640,7 @@
 
         .expense-info-item {
             padding: 16px;
-            background: #f9fafb;
+            background: #e7e8f377;
             border-radius: 8px;
             border-left: 3px solid #6ea8ff;
         }
