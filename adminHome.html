@@ -777,6 +777,10 @@
                                                     <i class="fas fa-calculator"></i>
                                                     Finance
                                                 </button>
+                                                <button class="filter-tab" onclick="filterEmployees('Congé')" data-filter="Congé">
+                                                    <i class="fas fa-calendar-times"></i>
+                                                    En congé
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -799,7 +803,7 @@
 
                                     <!-- Employee Card 2 -->
                                     <div class="document-item-card employee-card" data-department="IT" onclick="viewEmployeeDetails('emp2')">
-                                        <div class="profile-avatar-large" style="width: 60px; height: 60px; font-size: 18px; background-image: url('images/employ2.jpg'); background-size: cover; background-position: center; color: transparent;">AT</div>
+                                        <div class="profile-avatar-large" style="width: 60px; height: 60px; font-size: 18px; background-image: url('images/employ1.jpg'); background-size: cover; background-position: center; color: transparent;">AT</div>
                                         <div class="document-info" style="flex: 1;">
                                             <div class="expense-info-label" style="font-size: 16px; font-weight: 600; color: #1f2937;">Amadou Traoré</div>
                                             <div class="expense-info-value" style="color: #6b7280;">Développeur Backend</div>
@@ -1399,13 +1403,13 @@
         }
 
         // Fonctions pour la gestion des employés
-        function filterEmployees(department) {
+        function filterEmployees(filter) {
             // Mettre à jour les onglets actifs
             document.querySelectorAll('#employees .filter-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
             
-            const activeTab = document.querySelector(`#employees [data-filter="${department}"]`);
+            const activeTab = document.querySelector(`#employees [data-filter="${filter}"]`);
             if (activeTab) {
                 activeTab.classList.add('active');
             }
@@ -1414,8 +1418,21 @@
             const employeeCards = document.querySelectorAll('.employee-card');
             employeeCards.forEach(card => {
                 const cardDepartment = card.getAttribute('data-department');
+                const statusBadge = card.querySelector('.status-badge');
+                const isOnLeave = statusBadge && statusBadge.textContent.trim() === 'Congé';
                 
-                if (department === 'all' || cardDepartment === department) {
+                let shouldShow = false;
+                
+                if (filter === 'all') {
+                    shouldShow = true;
+                } else if (filter === 'Congé') {
+                    shouldShow = isOnLeave;
+                } else {
+                    // Filtrer par département (IT, RH, Finance)
+                    shouldShow = cardDepartment === filter;
+                }
+                
+                if (shouldShow) {
                     card.style.display = 'flex';
                 } else {
                     card.style.display = 'none';
