@@ -346,280 +346,276 @@
             </section>
 
             <!-- Dashboard Section -->
-            <section id="dashboard" class="page-section">
-                <div class="expenses-page-container">
-                    <div class="dashboard-main-area">
-                        <div class="expenses-preview-header">
-                            <div class="preview-title">
-                                <h2>Tableau de bord Administrateur</h2>
-                                <p>Vue d'ensemble des activités RH de TAMBUA</p>
+            <!-- Dashboard Section -->
+<section id="dashboard" class="page-section active">
+    <div class="expenses-page-container">
+        <!-- Zone principale du dashboard -->
+        <div class="dashboard-main-area">
+            <!-- Header du dashboard -->
+            <div class="expenses-preview-header">
+                <div class="preview-title">
+                    <h2>Tableau de bord Administrateur</h2>
+                    <p>Vue d'ensemble des activités RH de TAMBUA</p>
+                </div>
+                <button class="add-expense-btn" onclick="openReportModal()">
+                    <i class="fas fa-chart-bar"></i>
+                    Générer rapport
+                </button>
+            </div>
+            
+            <!-- Contenu principal -->
+            <div class="expense-details">
+                <div class="expense-details-content">
+                    <!-- Statistics Cards -->
+                    <div class="dashboard-stats-grid">
+                        <div class="dashboard-stat-card" onclick="showPage('employees')">
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Total Collaborateurs</div>
+                                <div class="expense-info-value">127 employés actifs</div>
+                                <button class="dashboard-link-btn" onclick="showPage('employees')">
+                                    <i class="fas fa-arrow-right"></i>
+                                    Voir tous les collaborateurs
+                                </button>
                             </div>
-                            <button class="add-expense-btn" onclick="openReportModal()">
-                                <i class="fas fa-chart-bar"></i>
-                                Générer rapport
-                            </button>
                         </div>
-                        
-                        <div class="expense-details">
-                            <div class="expense-details-content">
-                                <!-- Statistics Cards -->
-                                <div class="admin-dashboard-stats">
-                                    <div class="admin-stat-card" onclick="showPage('employees')">
-                                        <div class="admin-stat-icon">
-                                            <i class="fas fa-users"></i>
-                                        </div>
-                                        <div class="admin-stat-content">
-                                            <div class="admin-stat-number">127</div>
-                                            <div class="admin-stat-label">Total Collaborateurs</div>
-                                            <div class="admin-stat-change positive">
-                                                <i class="fas fa-arrow-up"></i> +5 ce mois
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="admin-stat-card" onclick="showPage('payroll')">
-                                        <div class="admin-stat-icon payroll">
-                                            <i class="fas fa-euro-sign"></i>
-                                        </div>
-                                        <div class="admin-stat-content">
-                                            <div class="admin-stat-number">2.8M €</div>
-                                            <div class="admin-stat-label">Masse Salariale</div>
-                                            <div class="admin-stat-change neutral">
-                                                <i class="fas fa-calendar"></i> Juin 2025
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="dashboard-stat-card" onclick="showPage('payroll')">
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Masse Salariale</div>
+                                <div class="expense-info-value">1,400,000,000 FCFA en Juin 2025</div>
+                                <button class="dashboard-link-btn" onclick="showPage('payroll')">
+                                    <i class="fas fa-arrow-right"></i>
+                                    Voir les bulletins de paie
+                                </button>
+                            </div>
+                        </div>
 
-                                    <div class="admin-stat-card" onclick="showPage('leave-approvals')">
-                                        <div class="admin-stat-icon leave">
-                                            <i class="fas fa-calendar-check"></i>
-                                        </div>
-                                        <div class="admin-stat-content">
-                                            <div class="admin-stat-number">8</div>
-                                            <div class="admin-stat-label">Congés en Attente</div>
-                                            <div class="admin-stat-change warning">
-                                                <i class="fas fa-clock"></i> À valider
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="dashboard-stat-card" onclick="showPage('leave-approvals')">
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Congés en Attente</div>
+                                <div class="expense-info-value">8 demandes de congés à valider</div>
+                                <button class="dashboard-link-btn" onclick="showPage('leave-approvals')">
+                                    <i class="fas fa-arrow-right"></i>
+                                    Valider les demandes
+                                </button>
+                            </div>
+                        </div>
 
-                                    <div class="admin-stat-card" onclick="showPage('expense-approvals')">
-                                        <div class="admin-stat-icon expense">
-                                            <i class="fas fa-file-invoice"></i>
+                        <div class="dashboard-stat-card" onclick="showPage('expense-approvals')">
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Notes de Frais en Attente</div>
+                                <div class="expense-info-value">15 notes de frais à traiter</div>
+                                <button class="dashboard-link-btn" onclick="showPage('expense-approvals')">
+                                    <i class="fas fa-arrow-right"></i>
+                                    Traiter les demandes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Content Grid -->
+                    <div class="dashboard-content-grid">
+                        <!-- Left Column - Recent Activities -->
+                        <div class="dashboard-calendar-section">
+                            <!-- Recent Activities -->
+                            <div class="expense-detail-header">
+                                <h3>
+                                    <i class="fas fa-history" style="color: #6ea8ff; margin-right: 0.5rem;"></i>
+                                    Activités récentes
+                                </h3>
+                                <button class="btn btn-primary" onclick="showAllActivities()">Voir tout</button>
+                            </div>
+                            
+                            <div class="dashboard-leave-list recent-activities">
+                                <div class="dashboard-leave-item">
+                                    <div class="expense-info-item">
+                                        <div class="leave-item-header">
+                                            <div class="expense-info-label">Nouvelle demande de congé</div>
+                                            <span class="status-badge status-pending-badge">Nouveau</span>
                                         </div>
-                                        <div class="admin-stat-content">
-                                            <div class="admin-stat-number">15</div>
-                                            <div class="admin-stat-label">Notes de Frais en Attente</div>
-                                            <div class="admin-stat-change warning">
-                                                <i class="fas fa-hourglass-half"></i> À traiter
-                                            </div>
-                                        </div>
+                                        <div class="expense-info-value">Marie Koné - 5 jours en juillet</div>
+                                        <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">Il y a 2 heures</div>
                                     </div>
                                 </div>
                                 
-                                <!-- Content Grid -->
-                                <div class="dashboard-content-grid">
-                                    <!-- Left Column - Recent Activities & Calendar -->
-                                    <div class="dashboard-calendar-section">
-                                        <!-- Recent Activities -->
-                                        <div class="expense-detail-header">
-                                            <h3>
-                                                <i class="fas fa-history" style="color: #6ea8ff; margin-right: 0.5rem;"></i>
-                                                Activités récentes
-                                            </h3>
-                                            <button class="btn btn-primary" onclick="showAllActivities()">Voir tout</button>
+                                <div class="dashboard-leave-item">
+                                    <div class="expense-info-item">
+                                        <div class="leave-item-header">
+                                            <div class="expense-info-label">Note de frais validée</div>
+                                            <span class="status-badge status-approved-badge">Traité</span>
                                         </div>
-                                        
-                                        <div class="dashboard-leave-list recent-activities">
-                                            <div class="dashboard-leave-item">
-                                                <div class="expense-info-item">
-                                                    <div class="leave-item-header">
-                                                        <div class="expense-info-label">Nouvelle demande de congé</div>
-                                                        <span class="status-badge status-pending-badge">Nouveau</span>
-                                                    </div>
-                                                    <div class="expense-info-value">Marie Koné - 5 jours en juillet</div>
-                                                    <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">Il y a 2 heures</div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="dashboard-leave-item">
-                                                <div class="expense-info-item">
-                                                    <div class="leave-item-header">
-                                                        <div class="expense-info-label">Note de frais validée</div>
-                                                        <span class="status-badge status-approved-badge">Traité</span>
-                                                    </div>
-                                                    <div class="expense-info-value">KONAN Kassi - Transport 25,000 FCFA</div>
-                                                    <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">Il y a 4 heures</div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="dashboard-leave-item">
-                                                <div class="expense-info-item">
-                                                    <div class="leave-item-header">
-                                                        <div class="expense-info-label">Nouvel employé</div>
-                                                        <span class="status-badge status-approved-badge">Ajouté</span>
-                                                    </div>
-                                                    <div class="expense-info-value">Amadou Traoré - Développeur Backend</div>
-                                                    <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">Hier</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Calendar Section -->
-                                        <div class="calendar-section-admin" style="margin-top: 30px;">
-                                            <div class="expense-detail-header">
-                                                <h3>
-                                                    <i class="fas fa-calendar-alt" style="color: #6ea8ff; margin-right: 0.5rem;"></i>
-                                                    Calendrier des jours fériés
-                                                </h3>
-                                                <button class="btn btn-primary" onclick="goToTodayAdmin()">Aujourd'hui</button>
-                                            </div>
-                                            
-                                            <!-- Calendar Navigation -->
-                                            <div class="calendar-nav-dashboard">
-                                                <button class="btn btn-secondary" onclick="previousMonthAdmin()">
-                                                    <i class="fas fa-chevron-left"></i>
-                                                </button>
-                                                <h3 id="currentMonthYearAdmin"></h3>
-                                                <button class="btn btn-secondary" onclick="nextMonthAdmin()">
-                                                    <i class="fas fa-chevron-right"></i>
-                                                </button>
-                                            </div>
-                                            
-                                            <!-- Calendar Grid -->
-                                            <div class="mini-calendar" id="adminCalendar">
-                                                <!-- Le calendrier sera généré par JavaScript -->
-                                            </div>
-                                            
-                                            <!-- Légende -->
-                                            <div class="calendar-legend">
-                                                <div class="legend-item">
-                                                    <div class="legend-color holiday-color"></div>
-                                                    <span>Jours fériés</span>
-                                                </div>
-                                                <div class="legend-item">
-                                                    <div class="legend-color today-color"></div>
-                                                    <span>Aujourd'hui</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <div class="expense-info-value">KONAN Kassi - Transport 25,000 FCFA</div>
+                                        <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">Il y a 4 heures</div>
                                     </div>
-                                    
-                                    <!-- Right Column - Quick Actions & New Recruits -->
-                                    <div class="dashboard-leave-section">
-                                        <!-- Quick Actions -->
-                                        <div class="expense-detail-header">
-                                            <h3>Actions rapides</h3>
+                                </div>
+                                
+                                <div class="dashboard-leave-item">
+                                    <div class="expense-info-item">
+                                        <div class="leave-item-header">
+                                            <div class="expense-info-label">Nouvel employé</div>
+                                            <span class="status-badge status-approved-badge">Ajouté</span>
                                         </div>
-                                        
-                                        <div class="dashboard-leave-list quick-actions">
-                                            <div class="dashboard-leave-item" onclick="showPage('leave-approvals')">
-                                                <div class="expense-info-item">
-                                                    <div class="leave-item-header">
-                                                        <div class="expense-info-label">
-                                                            <i class="fas fa-calendar-check" style="margin-right: 8px; color: #fb7253;"></i>
-                                                            Valider les congés
-                                                        </div>
-                                                        <span class="status-badge" style="background: #fb7253; color: white;">8</span>
-                                                    </div>
-                                                    <div class="expense-info-value">8 demandes de congés en attente</div>
-                                                </div>
+                                        <div class="expense-info-value">Amadou Traoré - Développeur Backend</div>
+                                        <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">Hier</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Calendar Section -->
+                            <div class="calendar-section-admin" style="margin-top: 30px;">
+                                <div class="expense-detail-header">
+                                    <h3>
+                                        <i class="fas fa-calendar-alt" style="color: #6ea8ff; margin-right: 0.5rem;"></i>
+                                        Calendrier des jours fériés
+                                    </h3>
+                                    <button class="btn btn-primary" onclick="goToTodayAdmin()">Aujourd'hui</button>
+                                </div>
+                                
+                                <!-- Calendar Navigation -->
+                                <div class="calendar-nav-dashboard">
+                                    <button class="btn btn-secondary" onclick="previousMonthAdmin()">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <h3 id="currentMonthYearAdmin"></h3>
+                                    <button class="btn btn-secondary" onclick="nextMonthAdmin()">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                                
+                                <!-- Calendar Grid -->
+                                <div class="mini-calendar" id="adminCalendar">
+                                    <!-- Le calendrier sera généré par JavaScript -->
+                                </div>
+                                
+                                <!-- Légende -->
+                                <div class="calendar-legend">
+                                    <div class="legend-item">
+                                        <div class="legend-color holiday-color"></div>
+                                        <span>Jours fériés</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color today-color"></div>
+                                        <span>Aujourd'hui</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Column -->
+                        <div class="dashboard-leave-section">
+                            <!-- Quick Actions -->
+                            <div class="expense-detail-header">
+                                <h3>Actions rapides</h3>
+                            </div>
+                            
+                            <div class="dashboard-leave-list quick-actions">
+                                <div class="dashboard-leave-item" onclick="showPage('leave-approvals')">
+                                    <div class="expense-info-item">
+                                        <div class="leave-item-header">
+                                            <div class="expense-info-label">
+                                                <i class="fas fa-calendar-check" style="margin-right: 8px; color: #fb7253;"></i>
+                                                Valider les congés
                                             </div>
-                                            
-                                            <div class="dashboard-leave-item" onclick="showPage('expense-approvals')">
-                                                <div class="expense-info-item">
-                                                    <div class="leave-item-header">
-                                                        <div class="expense-info-label">
-                                                            <i class="fas fa-file-invoice" style="margin-right: 8px; color: #6ea8ff;"></i>
-                                                            Valider les notes de frais
-                                                        </div>
-                                                        <span class="status-badge" style="background: #6ea8ff; color: white;">15</span>
-                                                    </div>
-                                                    <div class="expense-info-value">15 notes de frais à traiter</div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="dashboard-leave-item" onclick="showPage('payroll-requests')">
-                                                <div class="expense-info-item">
-                                                    <div class="leave-item-header">
-                                                        <div class="expense-info-label">
-                                                            <i class="fas fa-file-signature" style="margin-right: 8px; color: #059669;"></i>
-                                                            Demandes de paie
-                                                        </div>
-                                                        <span class="status-badge" style="background: #059669; color: white;">3</span>
-                                                    </div>
-                                                    <div class="expense-info-value">Traiter les demandes spéciales</div>
-                                                </div>
-                                            </div>
+                                            <span class="status-badge" style="background: #fb7253; color: white;">8</span>
                                         </div>
-
-                                        <!-- New Recruits Section -->
-                                        <div class="new-recruits-section" style="margin-top: 30px;">
-                                            <div class="expense-detail-header">
-                                                <h3>
-                                                    <i class="fas fa-user-plus" style="color: #8c75ff; margin-right: 0.5rem;"></i>
-                                                    Nouveaux Recrutés
-                                                </h3>
-                                                <button class="btn btn-primary" onclick="showPage('employees')">Voir tous</button>
+                                        <div class="expense-info-value">8 demandes de congés en attente</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="dashboard-leave-item" onclick="showPage('expense-approvals')">
+                                    <div class="expense-info-item">
+                                        <div class="leave-item-header">
+                                            <div class="expense-info-label">
+                                                <i class="fas fa-file-invoice" style="margin-right: 8px; color: #6ea8ff;"></i>
+                                                Valider les notes de frais
                                             </div>
-                                            
-                                            <div class="new-recruits-list">
-                                                <div class="recruit-item" onclick="openRecruitModal('rec1')">
-                                                    <div class="recruit-avatar">AT</div>
-                                                    <div class="recruit-info">
-                                                        <div class="recruit-name">Amadou Traoré</div>
-                                                        <div class="recruit-position">Développeur Backend</div>
-                                                        <div class="recruit-date">Arrivé le 15 juin 2025</div>
-                                                    </div>
-                                                    <button class="recruit-view-btn">
-                                                        <i class="fas fa-eye"></i>
-                                                    </button>
-                                                </div>
-
-                                                <div class="recruit-item" onclick="openRecruitModal('rec2')">
-                                                    <div class="recruit-avatar">AK</div>
-                                                    <div class="recruit-info">
-                                                        <div class="recruit-name">Aïcha Kone</div>
-                                                        <div class="recruit-position">Designer UX/UI</div>
-                                                        <div class="recruit-date">Arrivé le 10 juin 2025</div>
-                                                    </div>
-                                                    <button class="recruit-view-btn">
-                                                        <i class="fas fa-eye"></i>
-                                                    </button>
-                                                </div>
-
-                                                <div class="recruit-item" onclick="openRecruitModal('rec3')">
-                                                    <div class="recruit-avatar">MS</div>
-                                                    <div class="recruit-info">
-                                                        <div class="recruit-name">Moussa Sanogo</div>
-                                                        <div class="recruit-position">Analyste Financier</div>
-                                                        <div class="recruit-date">Arrivé le 8 juin 2025</div>
-                                                    </div>
-                                                    <button class="recruit-view-btn">
-                                                        <i class="fas fa-eye"></i>
-                                                    </button>
-                                                </div>
-
-                                                <div class="recruit-item" onclick="openRecruitModal('rec4')">
-                                                    <div class="recruit-avatar">FK</div>
-                                                    <div class="recruit-info">
-                                                        <div class="recruit-name">Fatoumata Keita</div>
-                                                        <div class="recruit-position">Chef de Projet</div>
-                                                        <div class="recruit-date">Arrivé le 5 juin 2025</div>
-                                                    </div>
-                                                    <button class="recruit-view-btn">
-                                                        <i class="fas fa-eye"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
+                                            <span class="status-badge" style="background: #6ea8ff; color: white;">15</span>
                                         </div>
+                                        <div class="expense-info-value">15 notes de frais à traiter</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="dashboard-leave-item" onclick="showPage('payroll-requests')">
+                                    <div class="expense-info-item">
+                                        <div class="leave-item-header">
+                                            <div class="expense-info-label">
+                                                <i class="fas fa-file-signature" style="margin-right: 8px; color: #059669;"></i>
+                                                Demandes de paie
+                                            </div>
+                                            <span class="status-badge" style="background: #059669; color: white;">3</span>
+                                        </div>
+                                        <div class="expense-info-value">Traiter les demandes spéciales</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- New Recruits Section -->
+                            <div class="new-recruits-section" style="margin-top: 30px;">
+                                <div class="expense-detail-header">
+                                    <h3>
+                                        <i class="fas fa-user-plus" style="color: #8c75ff; margin-right: 0.5rem;"></i>
+                                        Nouveaux Recrutés
+                                    </h3>
+                                    <button class="btn btn-primary" onclick="showPage('employees')">Voir tous</button>
+                                </div>
+                                
+                                <div class="new-recruits-list">
+                                    <div class="recruit-item" onclick="openRecruitModal('rec1')">
+                                        <div class="recruit-avatar">AT</div>
+                                        <div class="recruit-info">
+                                            <div class="recruit-name">Amadou Traoré</div>
+                                            <div class="recruit-position">Développeur Backend</div>
+                                            <div class="recruit-date">Arrivé le 15 juin 2025</div>
+                                        </div>
+                                        <button class="recruit-view-btn">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="recruit-item" onclick="openRecruitModal('rec2')">
+                                        <div class="recruit-avatar">AK</div>
+                                        <div class="recruit-info">
+                                            <div class="recruit-name">Aïcha Kone</div>
+                                            <div class="recruit-position">Designer UX/UI</div>
+                                            <div class="recruit-date">Arrivé le 10 juin 2025</div>
+                                        </div>
+                                        <button class="recruit-view-btn">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="recruit-item" onclick="openRecruitModal('rec3')">
+                                        <div class="recruit-avatar">MS</div>
+                                        <div class="recruit-info">
+                                            <div class="recruit-name">Moussa Sanogo</div>
+                                            <div class="recruit-position">Analyste Financier</div>
+                                            <div class="recruit-date">Arrivé le 8 juin 2025</div>
+                                        </div>
+                                        <button class="recruit-view-btn">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="recruit-item" onclick="openRecruitModal('rec4')">
+                                        <div class="recruit-avatar">FK</div>
+                                        <div class="recruit-info">
+                                            <div class="recruit-name">Fatoumata Keita</div>
+                                            <div class="recruit-position">Chef de Projet</div>
+                                            <div class="recruit-date">Arrivé le 5 juin 2025</div>
+                                        </div>
+                                        <button class="recruit-view-btn">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </div>
+</section>
 
             <!-- Modal Rapport -->
             <div class="modal" id="reportModal">
