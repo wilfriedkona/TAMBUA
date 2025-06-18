@@ -3,827 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TAMBUA RH - Dashboard Admin</title>
+    <title>TAMBUA RH - Espace Administrateur</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        /* Variables CSS pour une maintenance facile des couleurs */
-        :root {
-            --primary-color: #6ea8ff;
-            --secondary-color: #3f1b68;
-            --accent-color: #fb7253;
-            --light-bg: #f9f8f6;
-            --white: #ffffff;
-            --text-dark: #2c3e50;
-            --text-light: #3f1b68;
-            --success: #3f1b68;
-            --warning: #fb7253;
-            --danger: #fb7253;
-            --border-color: #777777;
-            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Reset des styles par défaut */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            /* border-radius: 30px; */
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Poppins, Verdana, sans-serif;
-            background-color: var( --light-bg);
-            color: var(--text-dark);
-            
-        }
-
-        /* Container principal avec Flexbox */
-        .dashboard-container {
-            display: flex;
-            min-height: 100vh;
-            margin: 10px;
-            border-radius: 20px;
-            overflow: hidden;                /* Cache les débordements */
-            box-shadow: var(--shadow);
-        }
-
-        /* Sidebar Navigation */
-        .sidebar {
-            width: 280px;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-color));
-            padding: 20px 0;
-            position: fixed;
-            /* height: 100vh; */
-            overflow-y: auto;
-            transition: transform 0.3s ease;
-            z-index: 1000;
-
-            border-radius: 25px;
-
-            border-top-left-radius: 20px;     /* Coin supérieur gauche */
-            border-bottom-left-radius: 20px;  /* Coin inférieur gauche */
-            height: calc(100vh - 20px);       /* Ajustement hauteur */
-        }
-
-        .logo {
-        background-image: url('images/logo-TAMBUA.png');
-        background-repeat: no-repeat;
-        background-size: contain;
-        width: 180px;
-        height: 70px;
-        display: inline-block;
-        transform: translate(38px, 30px); /* Déplace de 5cm à droite et 3cm vers le haut */
-    }
-
-            .logo span {
-                display: none; /* Masque le texte */
-            }
-
-            .logo i {
-                display: none; /* Masque l'icône si inutile */
-            }
-
-        .nav-menu {
-            list-style: none;
-        }
-
-        .nav-item {
-            margin: 60px 20px;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            padding: 15px 30px;
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            background-color: #f9f8f637;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            background-color: #f9f8f6;
-            color: var(--secondary-color);
-            transform: translateX(50px);
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-link i {
-            margin-right: 15px;
-            width: 20px;
-            text-align: center;
-        }
-
-        .nav-item h3 {
-           color: rgba(255, 255, 255, 0.278);
-        }
-
-        /* Main Content Area */
-        .main-content {
-            flex: 1;
-            margin-left: 280px;
-            padding: 20px;
-            transition: margin-left 0.3s ease;
-
-            background: var(--light-bg);
-            border-top-right-radius: 20px;    /* Coin supérieur droit */
-            border-bottom-right-radius: 20px; /* Coin inférieur droit */
-            min-height: calc(100vh - 20px);   /* Ajustement hauteur */
-            
-        }
-
-        /* Header avec navbar */
-        .header {
-            background: var(--white);
-            padding: 15px 30px;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: var(--light-bg);
-            padding: 10px 15px;
-            border-radius: 25px;
-            border: 1px solid var(--border-color);
-            width: 300px;
-        }
-
-        .search-box input {
-            border: none;
-            background: none;
-            outline: none;
-            margin-left: 10px;
-            width: 100%;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .notification-badge {
-            position: relative;
-            color: var(--text-light);
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .badge {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: var(--accent-color);
-            color: var(--white);
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            font-size: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Dropdown utilisateur */
-        .user-dropdown {
-            position: relative;
-        }
-
-        .user-btn {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 8px 12px;
-            border-radius: 25px;
-            transition: background-color 0.3s ease;
-        }
-
-        .user-btn:hover {
-            background-color: var(--light-bg);
-        }
-
-        .user-avatar {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background: var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-weight: bold;
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: var(--white);
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            min-width: 200px;
-            display: none;
-            z-index: 1000;
-        }
-
-        .dropdown-menu.show {
-            display: block;
-        }
-
-        .dropdown-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 20px;
-            color: var(--text-dark);
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-
-        .dropdown-item:hover {
-            background-color: var(--light-bg);
-        }
-
-        .dropdown-item i {
-            margin-right: 10px;
-            width: 16px;
-        }
-
-        /* Cards statistiques */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: var(--white);
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .stat-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .stat-title {
-            color: var(--text-light);
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .stat-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-        }
-
-        .stat-value {
-            font-size: 32px;
-            font-weight: bold;
-            color: var(--text-dark);
-            margin-bottom: 5px;
-        }
-
-        .stat-change {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 12px;
-        }
-
-        .change-positive {
-            color: var(--success);
-        }
-
-        .change-negative {
-            color: var(--danger);
-        }
-
-        /* Content Grid */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        /* Tables */
-        .table-container {
-            background: var(--white);
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: var(--shadow);
-        }
-
-        .table-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .table-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-
-        .btn {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background: var(--accent-color);
-            color: var(--white);
-        }
-
-        .btn-primary:hover {
-            background: #e55a3c;
-            transform: translateY(-2px);
-        }
-
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .table th,
-        .table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-            
-        }
-
-        .table th {
-            font-weight: 600;
-            color: var(--text-dark);
-            background-color: var(--light-bg);
-        }
-
-        .table tbody tr:hover {
-            background-color: var(--light-bg);
-        }
-
-        .status-badge {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .status-active {
-            background: rgba(40, 167, 69, 0.1);
-            color: var(--success);
-        }
-
-        .status-pending {
-            background: rgba(255, 193, 7, 0.1);
-            color: var(--warning);
-        }
-
-        .status-inactive {
-            background: rgba(220, 53, 69, 0.1);
-            color: var(--danger);
-        }
-
-        /* Action buttons */
-        .action-btn {
-            padding: 6px 10px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            margin: 0 2px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-edit {
-            background: rgba(110, 168, 255, 0.1);
-            color: var(--primary-color);
-        }
-
-        .btn-delete {
-            background: rgba(220, 53, 69, 0.1);
-            color: var(--danger);
-        }
-
-        .btn-view {
-            background: rgba(40, 167, 69, 0.1);
-            color: var(--success);
-        }
-
-        .action-btn:hover {
-            transform: scale(1.1);
-        }
-
-        /* Modals */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-content {
-            background-color: var(--white);
-            margin: 5% auto;
-            padding: 30px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-        }
-
-        .close {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--text-light);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-            color: var(--text-dark);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 14px;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        /* Section spécifique pour chaque page */
-        .section {
-            display: none;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        /* Menu Burger */
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: var(--text-dark);
-            cursor: pointer;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .mobile-menu-toggle:hover {
-            background-color: var(--light-bg);
-        }
-
-        .mobile-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .mobile-overlay.show {
-            display: block;
-            opacity: 1;
-        }
-
-        /* Filtres */
-        .filter-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 8px 16px;
-            border: 2px solid var(--border-color);
-            border-radius: 25px;
-            background: var(--white);
-            color: var(--text-dark);
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .filter-btn:hover {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-        }
-
-        .filter-btn.active {
-            background: var(--primary-color);
-            color: var(--white);
-            border-color: var(--primary-color);
-        }
-
-        .filter-btn.pending {
-            border-color: var(--warning);
-            color: var(--warning);
-        }
-
-        .filter-btn.pending.active {
-            background: var(--warning);
-            color: var(--white);
-        }
-
-        .filter-btn.approved {
-            border-color: var(--success);
-            color: var(--success);
-        }
-
-        .filter-btn.approved.active {
-            background: var(--success);
-            color: var(--white);
-        }
-
-        .filter-btn.rejected {
-            border-color: var(--danger);
-            color: var(--danger);
-        }
-
-        .filter-btn.rejected.active {
-            background: var(--danger);
-            color: var(--white);
-        }
-
-        .filter-btn.paid {
-            border-color: var(--success);
-            color: var(--success);
-        }
-
-        .filter-btn.paid.active {
-            background: var(--success);
-            color: var(--white);
-        }
-
-        .filter-btn.unpaid {
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-        }
-
-        .filter-btn.unpaid.active {
-            background: var(--accent-color);
-            color: var(--white);
-        }
-
-        /* Amélioration du scroll des modals */
-        .modal {
-            overflow-y: auto;
-            padding: 20px;
-        }
-
-        .modal-content {
-            max-height: 90vh;
-            overflow-y: auto;
-            margin: 2% auto;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .mobile-menu-toggle {
-                display: block;
-            }
-
-            .sidebar {
-                transform: translateX(-100%);
-            }
-
-            .sidebar.open {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                margin-left: 0;
-                padding: 15px;
-            }
-
-            .header {
-                padding: 15px 20px;
-                flex-direction: column;
-                gap: 15px;
-                align-items: stretch;
-            }
-
-            .header-actions {
-                justify-content: space-between;
-                width: 100%;
-            }
-
-            .search-box {
-                width: 100%;
-                order: 2;
-            }
-
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .stat-card {
-                padding: 20px;
-            }
-
-            .table-container {
-                padding: 15px;
-                overflow-x: auto;
-            }
-
-            .table {
-                min-width: 600px;
-            }
-
-            .modal {
-                padding: 10px;
-            }
-
-            .modal-content {
-                width: 95%;
-                max-width: none;
-                margin: 5% auto;
-                padding: 20px;
-            }
-
-            .form-group {
-                margin-bottom: 15px;
-            }
-
-            .filter-buttons {
-                justify-content: center;
-            }
-
-            .filter-btn {
-                font-size: 12px;
-                padding: 6px 12px;
-            }
-
-            /* Ajuster les grilles du formulaire sur mobile */
-            .modal-content [style*="grid-template-columns: 1fr 1fr"] {
-                display: block !important;
-            }
-
-            .modal-content [style*="grid-template-columns: 1fr 1fr"] > * {
-                margin-bottom: 15px;
-            }
-
-            /* Responsive pour les actions buttons */
-            .action-btn {
-                padding: 8px 10px;
-                margin: 2px;
-            }
-
-            .btn {
-                font-size: 13px;
-                padding: 8px 12px;
-            }
-
-            /* Ajuster la navbar utilisateur sur mobile */
-            .user-dropdown .user-btn {
-                padding: 6px 10px;
-            }
-
-            .user-avatar {
-                width: 30px;
-                height: 30px;
-                font-size: 12px;
-            }
-
-            .employees-count {
-                font-size: 12px;
-            }
-
-            /* Améliorer l'affichage des badges de statut */
-            .status-badge {
-                font-size: 11px;
-                padding: 3px 8px;
-            }
-
-            /* Responsive pour le profil utilisateur */
-            .modal-content [style*="display: flex; align-items: center"] {
-                flex-direction: column !important;
-                text-align: center !important;
-            }
-
-            .modal-content [style*="display: flex; align-items: center"] > div:first-child {
-                margin-right: 0 !important;
-                margin-bottom: 15px !important;
-            }
-
-            .modal-content [style*="display: grid; grid-template-columns: 1fr 1fr"] {
-                grid-template-columns: 1fr !important;
-                gap: 15px !important;
-            }
-
-            .modal-content [style*="display: grid; grid-template-columns: 1fr 1fr 1fr"] {
-                grid-template-columns: 1fr !important;
-                gap: 15px !important;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header {
-                padding: 10px 15px;
-            }
-
-            .main-content {
-                padding: 10px;
-            }
-
-            .stat-card {
-                padding: 15px;
-            }
-
-            .stat-value {
-                font-size: 24px;
-            }
-
-            .table-container {
-                padding: 10px;
-            }
-
-            .modal-content {
-                padding: 15px;
-            }
-
-            /* .logo {
-                font-size: 16px;
-                padding: 15px;
-            } */
-        }
-    </style>
+    <link rel="stylesheet" href="employStylex.css">
 </head>
 <body>
     <div class="dashboard-container">
@@ -832,554 +14,356 @@
         
         <!-- Sidebar Navigation -->
         <nav class="sidebar" id="sidebar">
-            <!-- <div class="logo">
-                <i class=""></i> TAMBUA RH
-            </div> -->
             <div class="logo">
-    <!-- Le texte reste pour le référencement mais est masqué -->
                 <span>TAMBUA RH</span>
             </div>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active" data-section="dashboard">
+                    <a href="#" class="nav-link active" data-page="profile">
+                        <i class="fas fa-user"></i>
+                        <span>Profil</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="dashboard">
                         <i class="fas fa-chart-line"></i>
-                        <span>Dashboard</span>
+                        <span>Tableau de bord</span>
                     </a>
                 </li>
+
                 <li class="nav-item">
-                    <a href="#" class="nav-link" data-section="employees">
+                    <a href="#" class="nav-link" data-page="employees">
                         <i class="fas fa-users"></i>
-                        <span>Employés</span>
+                        <span>Mes collaborateurs</span>
                     </a>
                 </li>
+
                 <li class="nav-item">
-                    <a href="#" class="nav-link" data-section="leaves">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span>Congés</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-section="payroll">
+                    <a href="#" class="nav-link" data-page="payroll">
                         <i class="fas fa-money-check-alt"></i>
-                        <span>Paie</span>
+                        <span>Bulletins de paie</span>
                     </a>
                 </li>
-                <li class="nav-item"><h3>_______________________________</h3></li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="leave">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Mes Congés</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="expenses">
+                        <i class="fas fa-receipt"></i>
+                        <span>Note de frais</span>
+                    </a>
+                </li>
+
+                <!-- Menu déroulant Demandes à valider -->
+                <li class="nav-item dropdown-nav">
+                    <a href="#" class="nav-link" data-page="approvals">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Demandes à valider</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="nav-submenu">
+                        <li class="nav-subitem">
+                            <a href="#" class="nav-sublink" data-page="leave-approvals">
+                                <i class="fas fa-calendar-minus"></i>
+                                <span>Absences</span>
+                            </a>
+                        </li>
+                        <li class="nav-subitem">
+                            <a href="#" class="nav-sublink" data-page="expense-approvals">
+                                <i class="fas fa-file-invoice"></i>
+                                <span>Notes de frais</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="payroll-requests">
+                        <i class="fas fa-file-signature"></i>
+                        <span>Demande de Paie</span>
+                    </a>
+                </li>
             </ul>
+
+            <div class="header-actions">
+                <div class="user-dropdown">
+                    <button class="user-btn" onclick="toggleDropdown()">
+                        <div class="user-avatar">LK</div>
+                        <span>Lanciné Koulibaly</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu" id="userDropdown">
+                        <a href="#" class="dropdown-item" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Déconnexion
+                        </a>
+                    </div>
+                </div>
+            </div>
         </nav>
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Header -->
-            <header class="header">
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Rechercher...">
+            <!-- Profile Section -->
+            <section id="profile" class="page-section active">
+                <!-- Header -->
+                <header class="header">
+                    <div class="header-titles">
+                        <h2>Bonjour Lanciné Koulibaly 👋🏽</h2>
+                        <h5>Nous sommes le Mardi 17 juin 2025</h5>
                     </div>
-                </div>
-                <div class="header-actions">
-                    <div class="notification-badge">
-                        <i class="fas fa-bell"></i>
-                        <span class="badge">3</span>
-                    </div>
-                    <div class="notification-badge">
-                        <i class="fas fa-envelope"></i>
-                        <span class="badge">5</span>
-                    </div>
-                    <span class="employees-count">12 employés à payer</span>
-                    <div class="user-dropdown">
-                        <button class="user-btn" onclick="toggleDropdown()">
-                            <div class="user-avatar">WK</div>
-                            <span>Wilfried KONAN</span>
-                            <i class="fas fa-chevron-down"></i>
+
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                            <i class="fas fa-bars"></i>
                         </button>
-                        <div class="dropdown-menu" id="userDropdown">
-                            <a href="#" class="dropdown-item" onclick="openUserProfileModal()">
-                                <i class="fas fa-user"></i>
-                                Mon Profil
-                            </a>
-                            <a href="#" class="dropdown-item" onclick="logout()">
-                                <i class="fas fa-sign-out-alt"></i>
-                                Déconnexion
-                            </a>
-                        </div>
                     </div>
-                </div>
-            </header>
+                </header>
 
-            <!-- Dashboard Section -->
-            <section id="dashboard" class="section active">
-                <h1>Dashboard Overview</h1>
-                
-                <!-- Statistics Cards -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-title">Total Employés</div>
-                            <div class="stat-icon" style="background: var(--primary-color);">
-                                <i class="fas fa-users"></i>
+                <div class="expenses-page-container">
+                    <!-- Zone principale du profil -->
+                    <div class="dashboard-main-area">
+                        <!-- Header du profil -->
+                        <div class="expenses-preview-header">
+                            <div class="preview-title">
+                                <h2>Mon Profil Administrateur</h2>
+                                <p>Gérez vos informations personnelles et professionnelles</p>
                             </div>
+                            <button class="add-expense-btn" onclick="saveProfileChanges()">
+                                <i class="fas fa-save"></i>
+                                Sauvegarder les modifications
+                            </button>
                         </div>
-                        <div class="stat-value">126</div>
-                        <div class="stat-change change-positive">
-                            <i class="fas fa-arrow-up"></i>
-                            <span>+8.2%</span>
-                        </div>
-                    </div>
+                        
+                        <!-- Contenu principal -->
+                        <div class="expense-details">
+                            <div class="expense-details-content">
+                                
+                                <!-- Profile Header Cards -->
+                                <div class="profile-header-grid">
+                                    <!-- Personal Information Header -->
+                                    <div class="profile-header-card">
+                                        <div class="expense-detail-header">
+                                            <h3>Informations Générales</h3>
+                                        </div>
+                                        <div class="profile-avatar-section">
+                                            <div class="profile-avatar-large">LK</div>
+                                            <div class="profile-basic-info">
+                                                <div class="expensex-infox-itemx">
+                                                    <div class="expense-info-label">Nom Complet</div>
+                                                    <div class="expense-info-value">Lanciné Koulibaly</div>
+                                                </div>
+                                                <div class="expensex-infox-itemx">
+                                                    <div class="expense-info-label">Poste</div>
+                                                    <div class="expense-info-value">Directeur des Ressources Humaines</div>
+                                                </div>
+                                                <div class="expensex-infox-itemx">
+                                                    <div class="expense-info-label">Département</div>
+                                                    <div class="expense-info-value">Direction RH</div>
+                                                </div>
+                                                <div class="expensex-infox-itemx">
+                                                    <div class="expense-info-label">Date d'embauche</div>
+                                                    <div class="expense-info-value">10 Janvier 2020</div>
+                                                </div>
+                                                <div class="expensex-infox-itemx">
+                                                    <div class="expense-info-label">Email</div>
+                                                    <div class="expense-info-value">lancine.koulibaly@tambua.com</div>
+                                                </div>
+                                                <div class="expensex-infox-itemx">
+                                                    <div class="expense-info-label">ID Employé</div>
+                                                    <div class="expense-info-value">ADM-2020-001</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-title">Congés en attente</div>
-                            <div class="stat-icon" style="background: var(--warning);">
-                                <i class="fas fa-calendar-check"></i>
-                            </div>
-                        </div>
-                        <div class="stat-value">8</div>
-                        <div class="stat-change change-negative">
-                            <i class="fas fa-arrow-down"></i>
-                            <span>-2.1%</span>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-title">Masse Salariale</div>
-                            <div class="stat-icon" style="background: var(--success);">
-                                <i class="fas fa-euro-sign"></i>
-                            </div>
-                        </div>
-                        <div class="stat-value">€45,200</div>
-                        <div class="stat-change change-positive">
-                            <i class="fas fa-arrow-up"></i>
-                            <span>+3.5%</span>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-title">Nouveaux candidats</div>
-                            <div class="stat-icon" style="background: var(--accent-color);">
-                                <i class="fas fa-user-plus"></i>
-                            </div>
-                        </div>
-                        <div class="stat-value">23</div>
-                        <div class="stat-change change-positive">
-                            <i class="fas fa-arrow-up"></i>
-                            <span>+12.3%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recent Activities -->
-                <div class="content-grid">
-                    <div class="table-container">
-                        <div class="table-header">
-                            <h3 class="table-title">Employés Récents</h3>
-                            <a href="#" class="btn btn-primary">
-                                <i class="fas fa-plus"></i>
-                                Ajouter
-                            </a>
-                        </div>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Nom</th>
-                                    <th>Poste</th>
-                                    <th>Statut</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Marie Martin</td>
-                                    <td>Développeuse</td>
-                                    <td><span class="status-badge status-active">Actif</span></td>
-                                    <td>
-                                        <button class="action-btn btn-view"><i class="fas fa-eye"></i></button>
-                                        <button class="action-btn btn-edit"><i class="fas fa-edit"></i></button>
-                                        <button class="action-btn btn-delete"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Pierre Durand</td>
-                                    <td>Designer</td>
-                                    <td><span class="status-badge status-active">Actif</span></td>
-                                    <td>
-                                        <button class="action-btn btn-view"><i class="fas fa-eye"></i></button>
-                                        <button class="action-btn btn-edit"><i class="fas fa-edit"></i></button>
-                                        <button class="action-btn btn-delete"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Sophie Bernard</td>
-                                    <td>Manager</td>
-                                    <td><span class="status-badge status-pending">En attente</span></td>
-                                    <td>
-                                        <button class="action-btn btn-view"><i class="fas fa-eye"></i></button>
-                                        <button class="action-btn btn-edit"><i class="fas fa-edit"></i></button>
-                                        <button class="action-btn btn-delete"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="table-container">
-                        <div class="table-header">
-                            <h3 class="table-title">Demandes de Congés</h3>
-                        </div>
-                        <div style="space-y: 15px;">
-                            <div style="border-left: 4px solid var(--warning); padding-left: 15px; margin-bottom: 15px;">
-                                <div style="font-weight: 500;">Lisa Moreau</div>
-                                <div style="color: var(--text-light); font-size: 12px;">Congés payés - 5 jours</div>
-                                <div style="margin-top: 8px;">
-                                    <button class="btn" style="background: var(--success); color: white; margin-right: 8px; padding: 4px 12px; font-size: 12px;">Accepter</button>
-                                    <button class="btn" style="background: var(--danger); color: white; padding: 4px 12px; font-size: 12px;">Refuser</button>
+                                    <!-- Bank Information -->
+                                    <div class="profile-header-card">
+                                        <div class="expense-detail-header">
+                                            <h3>Détail du compte bancaire</h3>
+                                        </div>
+                                        <div class="bank-details-grid">
+                                            <div class="expensex-infox-itemx">
+                                                <div class="expense-info-label">Nom du titulaire du compte</div>
+                                                <input type="text" class="profile-form-control" value="Lanciné Koulibaly" style="margin-top: 4px;">
+                                            </div>
+                                            <div class="expensex-infox-itemx">
+                                                <div class="expense-info-label">Numéro de compte</div>
+                                                <input type="text" class="profile-form-control" value="9876543210123" style="margin-top: 4px;">
+                                            </div>
+                                            <div class="expensex-infox-itemx">
+                                                <div class="expense-info-label">Nom de banque</div>
+                                                <input type="text" class="profile-form-control" value="TAMBUA BANK, CI" style="margin-top: 4px;">
+                                            </div>
+                                            <div class="expensex-infox-itemx">
+                                                <div class="expense-info-label">Code d'identifiant bancaire</div>
+                                                <input type="text" class="profile-form-control" value="654321" style="margin-top: 4px;">
+                                            </div>
+                                            <div class="expensex-infox-itemx">
+                                                <div class="expense-info-label">Emplacement de la succursale</div>
+                                                <input type="text" class="profile-form-control" value="Abidjan - Cocody" style="margin-top: 4px;">
+                                            </div>
+                                            <div class="expensex-infox-itemx">
+                                                <div class="expense-info-label">ID de contribuable</div>
+                                                <input type="text" class="profile-form-control" value="98765" style="margin-top: 4px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Content Grid -->
+                                <div class="dashboard-content-grid">
+                                    <!-- Left Column - Personal Information Form -->
+                                    <div class="profile-form-section">
+                                        <div class="expense-detail-header">
+                                            <h3>Informations Personnelles</h3>
+                                        </div>
+                                        
+                                        <form class="profile-form">
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Nom Complet</div>
+                                                <input type="text" class="profile-form-control" value="Lanciné Koulibaly">
+                                            </div>
+                                            
+                                            <div class="profile-form-grid">
+                                                <div class="expense-info-item">
+                                                    <div class="expense-info-label">Téléphone</div>
+                                                    <input type="tel" class="profile-form-control" value="+225 07 12 34 56 78">
+                                                </div>
+                                                <div class="expense-info-item">
+                                                    <div class="expense-info-label">Date de Naissance</div>
+                                                    <input type="date" class="profile-form-control" value="1985-03-20">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Adresse</div>
+                                                <textarea class="profile-form-control" rows="3">Riviera Golf, Rue des Jardins, Abidjan, Côte d'Ivoire</textarea>
+                                            </div>
+                                            
+                                            <div class="profile-form-grid">
+                                                <div class="expense-info-item">
+                                                    <div class="expense-info-label">Situation Familiale</div>
+                                                    <select class="profile-form-control">
+                                                        <option>Célibataire</option>
+                                                        <option selected>Marié(e)</option>
+                                                        <option>Divorcé(e)</option>
+                                                        <option>Veuf(ve)</option>
+                                                    </select>
+                                                </div>
+                                                <div class="expense-info-item">
+                                                    <div class="expense-info-label">Nombre d'enfants</div>
+                                                    <input type="number" class="profile-form-control" value="3" min="0">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    
+                                    <!-- Right Column - Documents -->
+                                    <div class="profile-documents-section">
+                                        <div class="expense-detail-header">
+                                            <h3>Documents Administrateur</h3>
+                                        </div>
+                                        
+                                        <div class="documents-list">
+                                            <div class="document-item-card" onclick="downloadDocument('id')">
+                                                <div class="document-icon">
+                                                    <i class="fas fa-id-card"></i>
+                                                </div>
+                                                <div class="document-info">
+                                                    <div class="expense-info-label">Carte d'Identité</div>
+                                                    <div class="expense-info-value">Document d'identité officiel</div>
+                                                </div>
+                                                <div class="document-action">
+                                                    <i class="fas fa-download"></i>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="document-item-card" onclick="downloadDocument('contract')">
+                                                <div class="document-icon">
+                                                    <i class="fas fa-file-contract"></i>
+                                                </div>
+                                                <div class="document-info">
+                                                    <div class="expense-info-label">Contrat de Travail</div>
+                                                    <div class="expense-info-value">CDI - Directeur RH</div>
+                                                </div>
+                                                <div class="document-action">
+                                                    <i class="fas fa-download"></i>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="document-item-card" onclick="downloadDocument('delegation')">
+                                                <div class="document-icon">
+                                                    <i class="fas fa-users-cog"></i>
+                                                </div>
+                                                <div class="document-info">
+                                                    <div class="expense-info-label">Délégation de Pouvoir</div>
+                                                    <div class="expense-info-value">Pouvoirs administratifs</div>
+                                                </div>
+                                                <div class="document-action">
+                                                    <i class="fas fa-download"></i>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="document-item-card" onclick="downloadDocument('work-certificate')">
+                                                <div class="document-icon">
+                                                    <i class="fas fa-certificate"></i>
+                                                </div>
+                                                <div class="document-info">
+                                                    <div class="expense-info-label">Certificat de Travail</div>
+                                                    <div class="expense-info-value">Certificat d'emploi actuel</div>
+                                                </div>
+                                                <div class="document-action">
+                                                    <i class="fas fa-download"></i>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="document-item-card" onclick="downloadDocument('career')">
+                                                <div class="document-icon">
+                                                    <i class="fas fa-file-alt"></i>
+                                                </div>
+                                                <div class="document-info">
+                                                    <div class="expense-info-label">Relevé de Carrière</div>
+                                                    <div class="expense-info-value">Historique complet</div>
+                                                </div>
+                                                <div class="document-action">
+                                                    <i class="fas fa-download"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div style="border-left: 4px solid var(--warning); padding-left: 15px; margin-bottom: 15px;">
-                                <div style="font-weight: 500;">Antoine Petit</div>
-                                <div style="color: var(--text-light); font-size: 12px;">Congé maladie - 2 jours</div>
-                                <div style="margin-top: 8px;">
-                                    <button class="btn" style="background: var(--success); color: white; margin-right: 8px; padding: 4px 12px; font-size: 12px;">Accepter</button>
-                                    <button class="btn" style="background: var(--danger); color: white; padding: 4px 12px; font-size: 12px;">Refuser</button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Employees Section -->
-            <section id="employees" class="section">
-                <div class="table-container">
-                    <div class="table-header">
-                        <h2 class="table-title">Gestion des Employés</h2>
-                        <button class="btn btn-primary" onclick="openAddEmployeeModal()">
-                            <i class="fas fa-plus"></i>
-                            Ajouter un employé
-                        </button>
-                    </div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nom</th>
-                                <th>Email</th>
-                                <th>Poste</th>
-                                <th>Rôle</th>
-                                <th>Salaire</th>
-                                <th>Statut</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="employeesTable">
-                            <!-- Les données seront ajoutées dynamiquement -->
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- Leaves Section -->
-            <section id="leaves" class="section">
-                <div class="table-container">
-                    <div class="table-header">
-                        <h2 class="table-title">Gestion des Congés</h2>
-                    </div>
-                    
-                    <!-- Filtres pour les congés -->
-                    <div class="filter-buttons">
-                        <button class="filter-btn active" onclick="filterLeaves('all')">
-                            <i class="fas fa-list"></i>
-                            Tous
-                        </button>
-                        <button class="filter-btn pending" onclick="filterLeaves('En attente')">
-                            <i class="fas fa-clock"></i>
-                            En attente
-                        </button>
-                        <button class="filter-btn approved" onclick="filterLeaves('Approuvé')">
-                            <i class="fas fa-check"></i>
-                            Approuvé
-                        </button>
-                        <button class="filter-btn rejected" onclick="filterLeaves('Rejeté')">
-                            <i class="fas fa-times"></i>
-                            Rejeté
-                        </button>
-                    </div>
-
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Employé</th>
-                                <th>Type de congé</th>
-                                <th>Date début</th>
-                                <th>Date fin</th>
-                                <th>Durée</th>
-                                <th>Statut</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="leavesTable">
-                            <!-- Les données seront ajoutées dynamiquement -->
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- Payroll Section -->
-            <section id="payroll" class="section">
-                <div class="stats-grid" style="margin-bottom: 30px;">
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-title">Masse Salariale Totale</div>
-                            <div class="stat-icon" style="background: var(--primary-color);">
-                                <i class="fas fa-euro-sign"></i>
+            <!-- Autres sections seront ajoutées ici plus tard -->
+            <section id="dashboard" class="page-section">
+                <div class="expenses-page-container">
+                    <div class="dashboard-main-area">
+                        <div class="expenses-preview-header">
+                            <div class="preview-title">
+                                <h2>Tableau de bord Administrateur</h2>
+                                <p>Vue d'ensemble des activités RH</p>
                             </div>
                         </div>
-                        <div class="stat-value">€52,400</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-title">Employés à Payer</div>
-                            <div class="stat-icon" style="background: var(--accent-color);">
-                                <i class="fas fa-users"></i>
+                        <div class="expense-details">
+                            <div class="expense-details-content">
+                                <p style="text-align: center; color: #6b7280; margin-top: 100px;">Section en cours de développement...</p>
                             </div>
                         </div>
-                        <div class="stat-value">12</div>
                     </div>
-                </div>
-
-                <div class="table-container">
-                    <div class="table-header">
-                        <h2 class="table-title">Gestion de la Paie</h2>
-                        <button class="btn btn-primary">
-                            <i class="fas fa-download"></i>
-                            Générer les fiches de paie
-                        </button>
-                    </div>
-                    
-                    <!-- Filtres pour la paie -->
-                    <div class="filter-buttons">
-                        <button class="filter-btn active" onclick="filterPayroll('all')">
-                            <i class="fas fa-list"></i>
-                            Tous
-                        </button>
-                        <button class="filter-btn unpaid" onclick="filterPayroll('À payer')">
-                            <i class="fas fa-clock"></i>
-                            À payer
-                        </button>
-                        <button class="filter-btn paid" onclick="filterPayroll('Payé')">
-                            <i class="fas fa-check"></i>
-                            Payé
-                        </button>
-                    </div>
-
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Employé</th>
-                                <th>Salaire de base</th>
-                                <th>Heures sup.</th>
-                                <th>Primes</th>
-                                <th>Déductions</th>
-                                <th>Net à payer</th>
-                                <th>Statut</th>
-                            </tr>
-                        </thead>
-                        <tbody id="payrollTable">
-                            <!-- Les données seront ajoutées dynamiquement -->
-                        </tbody>
-                    </table>
                 </div>
             </section>
         </main>
-    </div>
-
-    <!-- Modal Add Employee -->
-    <div id="addEmployeeModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('addEmployeeModal')">&times;</span>
-            <h2>Ajouter un nouvel employé</h2>
-            <form id="addEmployeeForm">
-                <div class="form-group">
-                    <label class="form-label">Nom complet</label>
-                    <input type="text" class="form-control" id="employeeName" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control" id="employeeEmail" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Poste</label>
-                    <input type="text" class="form-control" id="employeePosition" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Rôle</label>
-                    <select class="form-control" id="employeeRole" required>
-                        <option value="">Sélectionner un rôle</option>
-                        <option value="Employé">Employé</option>
-                        <option value="Manager">Manager</option>
-                        <option value="Admin">Admin</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Salaire (€)</label>
-                    <input type="number" class="form-control" id="employeeSalary" required>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">
-                    <i class="fas fa-plus"></i>
-                    Ajouter l'employé
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal Edit Employee -->
-    <div id="editEmployeeModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('editEmployeeModal')">&times;</span>
-            <h2>Modifier l'employé</h2>
-            <form id="editEmployeeForm">
-                <input type="hidden" id="editEmployeeId">
-                <div class="form-group">
-                    <label class="form-label">Nom complet</label>
-                    <input type="text" class="form-control" id="editEmployeeName" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control" id="editEmployeeEmail" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Poste</label>
-                    <input type="text" class="form-control" id="editEmployeePosition" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Rôle</label>
-                    <select class="form-control" id="editEmployeeRole" required>
-                        <option value="Employé">Employé</option>
-                        <option value="Manager">Manager</option>
-                        <option value="Admin">Admin</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Salaire (€)</label>
-                    <input type="number" class="form-control" id="editEmployeeSalary" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Statut</label>
-                    <select class="form-control" id="editEmployeeStatus" required>
-                        <option value="Actif">Actif</option>
-                        <option value="Inactif">Inactif</option>
-                        <option value="En attente">En attente</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">
-                    <i class="fas fa-save"></i>
-                    Sauvegarder
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal View Employee Profile -->
-    <div id="viewEmployeeModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('viewEmployeeModal')">&times;</span>
-            <h2>Profil de l'employé</h2>
-            <div id="employeeProfile">
-                <!-- Le contenu sera rempli dynamiquement -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal User Profile -->
-    <div id="userProfileModal" class="modal">
-        <div class="modal-content" style="max-width: 600px;">
-            <span class="close" onclick="closeModal('userProfileModal')">&times;</span>
-            <h2>Mon Profil Administrateur</h2>
-            <div id="userProfileContent">
-                <!-- Le contenu sera rempli dynamiquement -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal View Leave Details -->
-    <div id="viewLeaveModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('viewLeaveModal')">&times;</span>
-            <h2>Détails de la demande de congé</h2>
-            <div id="leaveDetails">
-                <!-- Le contenu sera rempli dynamiquement -->
-            </div>
-        </div>
-    </div>
-    <div id="editUserProfileModal" class="modal">
-        <div class="modal-content" style="max-width: 600px;">
-            <span class="close" onclick="closeModal('editUserProfileModal')">&times;</span>
-            <h2>Modifier Mon Profil</h2>
-            <form id="editUserProfileForm">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-                    <div class="form-group">
-                        <label class="form-label">Prénom</label>
-                        <input type="text" class="form-control" id="userFirstName" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Nom</label>
-                        <input type="text" class="form-control" id="userLastName" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Email professionnel</label>
-                    <input type="email" class="form-control" id="userEmail" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Téléphone</label>
-                    <input type="tel" class="form-control" id="userPhone" required>
-                </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-                    <div class="form-group">
-                        <label class="form-label">Poste</label>
-                        <input type="text" class="form-control" id="userPosition" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Département</label>
-                        <input type="text" class="form-control" id="userDepartment" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Adresse</label>
-                    <input type="text" class="form-control" id="userAddress" required>
-                </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-                    <div class="form-group">
-                        <label class="form-label">Ville</label>
-                        <input type="text" class="form-control" id="userCity" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Code postal</label>
-                        <input type="text" class="form-control" id="userPostalCode" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Bio / Description</label>
-                    <textarea class="form-control" id="userBio" rows="3" placeholder="Décrivez votre rôle et vos responsabilités..."></textarea>
-                </div>
-                <div style="display: flex; gap: 10px; justify-content: flex-end;">
-                    <button type="button" class="btn" style="background: var(--text-light); color: white;" onclick="closeModal('editUserProfileModal')">
-                        <i class="fas fa-times"></i>
-                        Annuler
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save"></i>
-                        Sauvegarder
-                    </button>
-                </div>
-            </form>
-        </div>
     </div>
 
     <script>
@@ -1391,20 +375,12 @@
             sidebar.classList.toggle('open');
             overlay.classList.toggle('show');
             
-            // Gérer l'affichage de l'overlay
             if (sidebar.classList.contains('open')) {
                 overlay.style.display = 'block';
                 setTimeout(() => overlay.style.opacity = '1', 10);
             } else {
                 overlay.style.opacity = '0';
                 setTimeout(() => overlay.style.display = 'none', 300);
-            }
-        }
-
-         // Logout function
-        function logout() {
-            if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
-                window.location.href = 'index.html';
             }
         }
 
@@ -1418,510 +394,85 @@
             setTimeout(() => overlay.style.display = 'none', 300);
         }
 
-        // Fermer le menu mobile si on clique sur un lien
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 768) {
-                    closeMobileMenu();
-                }
-            });
-        });
-
-        // Données simulées de l'utilisateur connecté (Admin)
-        let currentUser = {
-            id: 'admin_001',
-            firstName: 'Wilfried',
-            lastName: 'KONAN',
-            email: 'wilfried.konan@tambua.com',
-            phone: '+225 07 12 34 56 78',
-            position: 'Directeur des Ressources Humaines',
-            department: 'Direction Générale',
-            role: 'Super Admin',
-            address: '123 Boulevard de la République',
-            city: 'Abidjan',
-            postalCode: '00225',
-            bio: 'Directeur des Ressources Humaines avec plus de 10 ans d\'expérience dans la gestion d\'équipes et le développement organisationnel. Passionné par l\'innovation RH et la transformation digitale.',
-            dateJoined: '2020-01-15',
-            avatar: 'WK',
-            permissions: ['all'], // Super admin a tous les droits
-            lastLogin: new Date().toISOString(),
-            employeeId: 'EMP001'
-        };
-
-        // Données simulées pour les employés
-        let employees = [
-            {
-                id: 1,
-                name: "Marie Martin",
-                email: "marie.martin@tambua.com",
-                position: "Développeuse Full Stack",
-                role: "Employé",
-                salary: 4500,
-                status: "Actif",
-                dateJoined: "2023-01-15"
-            },
-            {
-                id: 2,
-                name: "Pierre Durand",
-                email: "pierre.durand@tambua.com",
-                position: "Designer UI/UX",
-                role: "Employé",
-                salary: 4200,
-                status: "Actif",
-                dateJoined: "2023-03-20"
-            },
-            {
-                id: 3,
-                name: "Sophie Bernard",
-                email: "sophie.bernard@tambua.com",
-                position: "Manager Projet",
-                role: "Manager",
-                salary: 5500,
-                status: "En attente",
-                dateJoined: "2023-02-10"
-            },
-            {
-                id: 4,
-                name: "Lucas Petit",
-                email: "lucas.petit@tambua.com",
-                position: "Développeur Backend",
-                role: "Employé",
-                salary: 4800,
-                status: "Actif",
-                dateJoined: "2022-11-05"
-            },
-            {
-                id: 5,
-                name: "Emma Dubois",
-                email: "emma.dubois@tambua.com",
-                position: "Responsable RH",
-                role: "Admin",
-                salary: 5200,
-                status: "Actif",
-                dateJoined: "2022-09-12"
-            }
-        ];
-
-        // Données simulées pour les congés avec plus de détails
-        let leaves = [
-            {
-                id: 1,
-                employeeName: "Marie Martin",
-                employeeId: "EMP002",
-                type: "Congés payés",
-                startDate: "2025-07-15",
-                endDate: "2025-07-30",
-                duration: "15 jours",
-                status: "En attente",
-                reason: "Vacances d'été en famille",
-                requestDate: "2025-06-01",
-                replacementEmployee: "Pierre Durand",
-                comment: "Demande pour les vacances scolaires d'été. Tous les projets en cours seront transférés à Pierre Durand.",
-                attachments: ["certificat_medical.pdf"]
-            },
-            {
-                id: 2,
-                employeeName: "Pierre Durand",
-                employeeId: "EMP003",
-                type: "Congé maladie",
-                startDate: "2025-06-10",
-                endDate: "2025-06-12",
-                duration: "3 jours",
-                status: "Approuvé",
-                reason: "Grippe saisonnière",
-                requestDate: "2025-06-09",
-                replacementEmployee: "Sophie Bernard",
-                comment: "Certificat médical fourni. Repos nécessaire pour éviter la contamination.",
-                attachments: ["certificat_medical.pdf"],
-                approvedBy: "Wilfried KONAN",
-                approvedDate: "2025-06-09"
-            },
-            {
-                id: 3,
-                employeeName: "Sophie Bernard",
-                employeeId: "EMP004",
-                type: "Congé maternité",
-                startDate: "2025-08-01",
-                endDate: "2025-12-01",
-                duration: "4 mois",
-                status: "En attente",
-                reason: "Congé maternité légal",
-                requestDate: "2025-05-15",
-                replacementEmployee: "Nouvelle recrue à embaucher",
-                comment: "Congé maternité de 16 semaines selon la législation. Recherche d'un remplaçant temporaire en cours.",
-                attachments: ["certificat_grossesse.pdf", "demande_conge_maternite.pdf"]
-            },
-            {
-                id: 4,
-                employeeName: "Lucas Petit",
-                employeeId: "EMP005",
-                type: "Congés payés",
-                startDate: "2025-06-20",
-                endDate: "2025-06-25",
-                duration: "5 jours",
-                status: "Approuvé",
-                reason: "Week-end prolongé",
-                requestDate: "2025-05-20",
-                replacementEmployee: "Marie Martin",
-                comment: "Congé pour un week-end prolongé. Projets en cours mis à jour.",
-                attachments: [],
-                approvedBy: "Wilfried KONAN",
-                approvedDate: "2025-05-22"
-            },
-            {
-                id: 5,
-                employeeName: "Emma Dubois",
-                employeeId: "EMP006",
-                type: "Congé sans solde",
-                startDate: "2025-09-01",
-                endDate: "2025-09-30",
-                duration: "30 jours",
-                status: "Rejeté",
-                reason: "Voyage personnel prolongé",
-                requestDate: "2025-05-10",
-                replacementEmployee: "Non spécifié",
-                comment: "Demande de congé sans solde pour voyage personnel. Période trop chargée pour l'équipe.",
-                attachments: [],
-                rejectedBy: "Wilfried KONAN",
-                rejectedDate: "2025-05-12",
-                rejectionReason: "Période critique pour l'équipe, impossible de libérer le poste pour un mois complet."
-            }
-        ];
-
-        // Variables pour le filtrage
-        let currentLeaveFilter = 'all';
-        let currentPayrollFilter = 'all';
-
-        // Données simulées pour la paie
-        let payroll = [
-            {
-                employeeName: "Marie Martin",
-                baseSalary: 4500,
-                overtime: 200,
-                bonuses: 300,
-                deductions: 180,
-                netPay: 4820,
-                status: "À payer"
-            },
-            {
-                employeeName: "Pierre Durand",
-                baseSalary: 4200,
-                overtime: 150,
-                bonuses: 250,
-                deductions: 165,
-                netPay: 4435,
-                status: "Payé"
-            },
-            {
-                employeeName: "Sophie Bernard",
-                baseSalary: 5500,
-                overtime: 0,
-                bonuses: 500,
-                deductions: 220,
-                netPay: 5780,
-                status: "À payer"
-            },
-            {
-                employeeName: "Lucas Petit",
-                baseSalary: 4800,
-                overtime: 180,
-                bonuses: 200,
-                deductions: 192,
-                netPay: 4988,
-                status: "À payer"
-            },
-            {
-                employeeName: "Emma Dubois",
-                baseSalary: 5200,
-                overtime: 100,
-                bonuses: 400,
-                deductions: 208,
-                netPay: 5492,
-                status: "Payé"
-            }
-        ];
-
-        // Variable pour stocker l'ID du prochain employé
-        let nextEmployeeId = 6;
-
-        // Fonction pour basculer entre les sections (navigation)
-        function showSection(sectionId) {
+        // Navigation entre les pages
+        function showPage(pageId) {
+            console.log('Switching to page:', pageId);
+            
             // Masquer toutes les sections
-            document.querySelectorAll('.section').forEach(section => {
+            document.querySelectorAll('.page-section').forEach(section => {
                 section.classList.remove('active');
+                section.style.display = 'none';
             });
             
             // Afficher la section demandée
-            document.getElementById(sectionId).classList.add('active');
+            const targetSection = document.getElementById(pageId);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+                targetSection.classList.add('active');
+                
+                // Scroll vers le haut
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                
+                console.log('Page switched successfully to:', pageId);
+            } else {
+                console.error(`Section with ID "${pageId}" not found`);
+            }
             
             // Mettre à jour la navigation active
-            document.querySelectorAll('.nav-link').forEach(link => {
+            document.querySelectorAll('.nav-link, .nav-sublink').forEach(link => {
                 link.classList.remove('active');
             });
             
-            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+            const activeLink = document.querySelector(`[data-page="${pageId}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+            
+            // Mettre à jour l'URL
+            history.pushState(null, null, `#${pageId}`);
+            
+            // Fermer le menu mobile si ouvert
+            if (window.innerWidth <= 768) {
+                closeMobileMenu();
+            }
         }
 
         // Gestionnaire d'événements pour la navigation
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const sectionId = link.getAttribute('data-section');
-                showSection(sectionId);
-                
-                // Charger les données selon la section
-                switch(sectionId) {
-                    case 'employees':
-                        loadEmployees();
-                        break;
-                    case 'leaves':
-                        loadLeaves();
-                        break;
-                    case 'payroll':
-                        loadPayroll();
-                        break;
-                }
-            });
-        });
-
-        // Fonction pour ouvrir le modal de profil utilisateur
-        function openUserProfileModal() {
-            displayUserProfile();
-            document.getElementById('userProfileModal').style.display = 'block';
-        }
-
-        // Fonction pour afficher le profil utilisateur
-        function displayUserProfile() {
-            const profileContent = `
-                <div style="display: flex; align-items: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 15px; color: white;">
-                    <div style="width: 100px; height: 100px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: bold; margin: 0 auto 15px;">
-                        ${currentUser.avatar}
-                    </div>
-                    <div style="flex: 1;">
-                        <h2 style="margin: 0 0 8px 0; font-size: 28px;">${currentUser.firstName} ${currentUser.lastName}</h2>
-                        <p style="margin: 0 0 5px 0; font-size: 16px; opacity: 0.9;">${currentUser.position}</p>
-                        <p style="margin: 0; font-size: 14px; opacity: 0.8;">${currentUser.department}</p>
-                        <div style="margin-top: 15px;">
-                            <span style="background: rgba(255, 255, 255, 0.2); padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 500;">
-                                <i class="fas fa-shield-alt"></i> ${currentUser.role}
-                            </span>
-                        </div>
-                    </div>
-                    <button class="btn" style="background: rgba(255, 255, 255, 0.2); color: white; border: 1px solid rgba(255, 255, 255, 0.3);" onclick="openEditUserProfileModal()">
-                        <i class="fas fa-edit"></i>
-                        Modifier
-                    </button>
-                </div>
-
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 25px;">
-                    <div style="background: var(--light-bg); padding: 20px; border-radius: 12px;">
-                        <h4 style="margin-bottom: 15px; color: var(--text-dark); display: flex; align-items: center;">
-                            <i class="fas fa-envelope" style="margin-right: 10px; color: var(--primary-color);"></i>
-                            Contact
-                        </h4>
-                        <div style="margin-bottom: 12px;">
-                            <strong>Email:</strong><br>
-                            <span style="color: var(--text-light);">${currentUser.email}</span>
-                        </div>
-                        <div>
-                            <strong>Téléphone:</strong><br>
-                            <span style="color: var(--text-light);">${currentUser.phone}</span>
-                        </div>
-                    </div>
-
-                    <div style="background: var(--light-bg); padding: 20px; border-radius: 12px;">
-                        <h4 style="margin-bottom: 15px; color: var(--text-dark); display: flex; align-items: center;">
-                            <i class="fas fa-map-marker-alt" style="margin-right: 10px; color: var(--accent-color);"></i>
-                            Adresse
-                        </h4>
-                        <div style="margin-bottom: 8px;">
-                            <span style="color: var(--text-light);">${currentUser.address}</span>
-                        </div>
-                        <div>
-                            <span style="color: var(--text-light);">${currentUser.city}, ${currentUser.postalCode}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="background: var(--light-bg); padding: 20px; border-radius: 12px; margin-bottom: 25px;">
-                    <h4 style="margin-bottom: 15px; color: var(--text-dark); display: flex; align-items: center;">
-                        <i class="fas fa-user-tie" style="margin-right: 10px; color: var(--success);"></i>
-                        Informations Professionnelles
-                    </h4>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
-                        <div>
-                            <strong>ID Employé:</strong><br>
-                            <span style="color: var(--text-light);">${currentUser.employeeId}</span>
-                        </div>
-                        <div>
-                            <strong>Date d'embauche:</strong><br>
-                            <span style="color: var(--text-light);">${formatDate(currentUser.dateJoined)}</span>
-                        </div>
-                        <div>
-                            <strong>Dernière connexion:</strong><br>
-                            <span style="color: var(--text-light);">${formatDateTime(currentUser.lastLogin)}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="background: var(--light-bg); padding: 20px; border-radius: 12px;">
-                    <h4 style="margin-bottom: 15px; color: var(--text-dark); display: flex; align-items: center;">
-                        <i class="fas fa-info-circle" style="margin-right: 10px; color: var(--warning);"></i>
-                        À propos
-                    </h4>
-                    <p style="color: var(--text-light); line-height: 1.6; margin: 0;">
-                        ${currentUser.bio}
-                    </p>
-                </div>
-
-                <div style="background: linear-gradient(135deg, rgba(110, 168, 255, 0.1), rgba(63, 27, 104, 0.1)); padding: 20px; border-radius: 12px; margin-top: 25px; border: 1px solid var(--border-color);">
-                    <h4 style="margin-bottom: 15px; color: var(--text-dark); display: flex; align-items: center;">
-                        <i class="fas fa-key" style="margin-right: 10px; color: var(--secondary-color);"></i>
-                        Permissions & Accès
-                    </h4>
-                    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                        <span style="background: var(--success); color: white; padding: 6px 12px; border-radius: 20px; font-size: 12px;">
-                            <i class="fas fa-users"></i> Gestion des employés
-                        </span>
-                        <span style="background: var(--primary-color); color: white; padding: 6px 12px; border-radius: 20px; font-size: 12px;">
-                            <i class="fas fa-calendar-alt"></i> Gestion des congés
-                        </span>
-                        <span style="background: var(--accent-color); color: white; padding: 6px 12px; border-radius: 20px; font-size: 12px;">
-                            <i class="fas fa-money-check-alt"></i> Gestion de la paie
-                        </span>
-                        <span style="background: var(--warning); color: white; padding: 6px 12px; border-radius: 20px; font-size: 12px;">
-                            <i class="fas fa-chart-bar"></i> Rapports & Analytics
-                        </span>
-                        <span style="background: var(--secondary-color); color: white; padding: 6px 12px; border-radius: 20px; font-size: 12px;">
-                            <i class="fas fa-cog"></i> Administration système
-                        </span>
-                    </div>
-                </div>
-            `;
-            
-            document.getElementById('userProfileContent').innerHTML = profileContent;
-        }
-
-        // Fonction pour ouvrir le modal d'édition du profil utilisateur
-        function openEditUserProfileModal() {
-            // Fermer le modal de visualisation
-            closeModal('userProfileModal');
-            
-            // Pré-remplir le formulaire avec les données actuelles
-            document.getElementById('userFirstName').value = currentUser.firstName;
-            document.getElementById('userLastName').value = currentUser.lastName;
-            document.getElementById('userEmail').value = currentUser.email;
-            document.getElementById('userPhone').value = currentUser.phone;
-            document.getElementById('userPosition').value = currentUser.position;
-            document.getElementById('userDepartment').value = currentUser.department;
-            document.getElementById('userAddress').value = currentUser.address;
-            document.getElementById('userCity').value = currentUser.city;
-            document.getElementById('userPostalCode').value = currentUser.postalCode;
-            document.getElementById('userBio').value = currentUser.bio;
-            
-            // Ouvrir le modal d'édition
-            document.getElementById('editUserProfileModal').style.display = 'block';
-        }
-
-        // Gestion du formulaire de modification du profil utilisateur
-        document.getElementById('editUserProfileForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Mettre à jour les données de l'utilisateur
-            currentUser.firstName = document.getElementById('userFirstName').value;
-            currentUser.lastName = document.getElementById('userLastName').value;
-            currentUser.email = document.getElementById('userEmail').value;
-            currentUser.phone = document.getElementById('userPhone').value;
-            currentUser.position = document.getElementById('userPosition').value;
-            currentUser.department = document.getElementById('userDepartment').value;
-            currentUser.address = document.getElementById('userAddress').value;
-            currentUser.city = document.getElementById('userCity').value;
-            currentUser.postalCode = document.getElementById('userPostalCode').value;
-            currentUser.bio = document.getElementById('userBio').value;
-            
-            // Mettre à jour l'avatar si nécessaire
-            currentUser.avatar = (currentUser.firstName[0] + currentUser.lastName[0]).toUpperCase();
-            
-            // Mettre à jour l'affichage dans la navbar
-            document.querySelector('.user-btn span').textContent = `${currentUser.firstName} ${currentUser.lastName}`;
-            document.querySelector('.user-avatar').textContent = currentUser.avatar;
-            
-            // Fermer le modal
-            closeModal('editUserProfileModal');
-            
-            // Afficher une notification de succès
-            showNotification('Profil mis à jour avec succès !', 'success');
-            
-            // Optionnel: rouvrir le modal de visualisation pour voir les changements
-            setTimeout(() => {
-                openUserProfileModal();
-            }, 500);
-        });
-
-        // Fonction utilitaire pour formater la date et l'heure
-        function formatDateTime(dateString) {
-            const options = { 
-                year: 'numeric', 
-                month: '2-digit', 
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit'
-            };
-            return new Date(dateString).toLocaleDateString('fr-FR', options);
-        }
-
-        // Fonction pour afficher des notifications
-        function showNotification(message, type = 'info') {
-            // Créer l'élément notification
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                padding: 15px 20px;
-                border-radius: 8px;
-                color: white;
-                font-weight: 500;
-                z-index: 9999;
-                transform: translateX(100%);
-                transition: transform 0.3s ease;
-                max-width: 300px;
-                box-shadow: var(--shadow);
-            `;
-            
-            // Définir la couleur selon le type
-            switch(type) {
-                case 'success':
-                    notification.style.background = 'var(--success)';
-                    break;
-                case 'error':
-                    notification.style.background = 'var(--danger)';
-                    break;
-                case 'warning':
-                    notification.style.background = 'var(--warning)';
-                    break;
-                default:
-                    notification.style.background = 'var(--primary-color)';
-            }
-            
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            
-            // Animer l'entrée
-            setTimeout(() => {
-                notification.style.transform = 'translateX(0)';
-            }, 100);
-            
-            // Retirer automatiquement après 3 secondes
-            setTimeout(() => {
-                notification.style.transform = 'translateX(100%)';
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
+        function setupNavigation() {
+            document.querySelectorAll('.nav-link[data-page], .nav-sublink[data-page]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = link.getAttribute('data-page');
+                    console.log('Nav link clicked:', pageId);
+                    if (pageId) {
+                        showPage(pageId);
                     }
-                }, 300);
-            }, 3000);
+                });
+            });
+
+            // Gestion du menu déroulant
+            const dropdownNav = document.querySelector('.dropdown-nav');
+            if (dropdownNav) {
+                dropdownNav.addEventListener('mouseenter', () => {
+                    const submenu = dropdownNav.querySelector('.nav-submenu');
+                    const arrow = dropdownNav.querySelector('.dropdown-arrow');
+                    if (submenu) submenu.style.display = 'block';
+                    if (arrow) arrow.style.transform = 'rotate(180deg)';
+                });
+
+                dropdownNav.addEventListener('mouseleave', () => {
+                    const submenu = dropdownNav.querySelector('.nav-submenu');
+                    const arrow = dropdownNav.querySelector('.dropdown-arrow');
+                    if (submenu) submenu.style.display = 'none';
+                    if (arrow) arrow.style.transform = 'rotate(0deg)';
+                });
+            }
         }
+
+        // Toggle dropdown utilisateur
         function toggleDropdown() {
             const dropdown = document.getElementById('userDropdown');
             dropdown.classList.toggle('show');
@@ -1929,326 +480,191 @@
 
         // Fermer le dropdown si on clique ailleurs
         window.addEventListener('click', (e) => {
-            // Fermer dropdown utilisateur
             if (!e.target.matches('.user-btn') && !e.target.closest('.user-btn')) {
                 const dropdown = document.getElementById('userDropdown');
-                if (dropdown.classList.contains('show')) {
+                if (dropdown && dropdown.classList.contains('show')) {
                     dropdown.classList.remove('show');
                 }
             }
-            
-            // Fermer menu mobile si on clique sur l'overlay
-            if (e.target.classList.contains('mobile-overlay')) {
-                closeMobileMenu();
-            }
         });
 
-        // Fonctions de gestion des modals
-        function openAddEmployeeModal() {
-            document.getElementById('addEmployeeModal').style.display = 'block';
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        // Fermer les modals en cliquant à l'extérieur
-        window.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal')) {
-                e.target.style.display = 'none';
-            }
-        });
-
-        // Fonction pour charger la liste des employés
-        function loadEmployees() {
-            const tableBody = document.getElementById('employeesTable');
-            tableBody.innerHTML = '';
-            
-            employees.forEach(employee => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${employee.id}</td>
-                    <td>${employee.name}</td>
-                    <td>${employee.email}</td>
-                    <td>${employee.position}</td>
-                    <td><span class="status-badge status-${employee.role.toLowerCase()}">${employee.role}</span></td>
-                    <td>€${employee.salary}</td>
-                    <td><span class="status-badge status-${getStatusClass(employee.status)}">${employee.status}</span></td>
-                    <td>
-                        <button class="action-btn btn-view" onclick="viewEmployee(${employee.id})">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="action-btn btn-edit" onclick="editEmployee(${employee.id})">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="action-btn btn-delete" onclick="deleteEmployee(${employee.id})">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
-
-        // Fonction pour charger la liste des congés avec filtrage
-        function loadLeaves() {
-            const tableBody = document.getElementById('leavesTable');
-            tableBody.innerHTML = '';
-            
-            // Filtrer les congés selon le filtre actuel
-            let filteredLeaves = leaves;
-            if (currentLeaveFilter !== 'all') {
-                filteredLeaves = leaves.filter(leave => leave.status === currentLeaveFilter);
-            }
-            
-            filteredLeaves.forEach(leave => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${leave.employeeName}</td>
-                    <td>${leave.type}</td>
-                    <td>${formatDate(leave.startDate)}</td>
-                    <td>${formatDate(leave.endDate)}</td>
-                    <td>${leave.duration}</td>
-                    <td><span class="status-badge status-${getStatusClass(leave.status)}">${leave.status}</span></td>
-                    <td>
-                        <button class="action-btn btn-view" onclick="viewLeaveDetails(${leave.id})" title="Voir les détails">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        ${leave.status === 'En attente' ? `
-                            <button class="action-btn" style="background: var(--success); color: white;" onclick="approveLeave(${leave.id})" title="Approuver">
-                                <i class="fas fa-check"></i>
-                            </button>
-                            <button class="action-btn" style="background: var(--danger); color: white;" onclick="rejectLeave(${leave.id})" title="Rejeter">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        ` : `
-                            <span style="color: var(--text-light); font-size: 12px;">Traité</span>
-                        `}
-                    </td>
-                `;
-                tableBody.appendChild(row);
-            });
-
-            // Afficher un message si aucun résultat
-            if (filteredLeaves.length === 0) {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td colspan="7" style="text-align: center; color: var(--text-light); padding: 40px;">
-                        <i class="fas fa-search" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
-                        Aucune demande de congé trouvée pour le filtre "${currentLeaveFilter === 'all' ? 'Tous' : currentLeaveFilter}"
-                    </td>
-                `;
-                tableBody.appendChild(row);
+        // Logout function
+        function logout() {
+            if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+                window.location.href = 'index.html';
             }
         }
 
-        // Fonction pour charger les données de paie avec filtrage
-        function loadPayroll() {
-            const tableBody = document.getElementById('payrollTable');
-            tableBody.innerHTML = '';
-            
-            // Filtrer la paie selon le filtre actuel
-            let filteredPayroll = payroll;
-            if (currentPayrollFilter !== 'all') {
-                filteredPayroll = payroll.filter(pay => pay.status === currentPayrollFilter);
-            }
-            
-            filteredPayroll.forEach(pay => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${pay.employeeName}</td>
-                    <td>€${pay.baseSalary}</td>
-                    <td>€${pay.overtime}</td>
-                    <td>€${pay.bonuses}</td>
-                    <td>€${pay.deductions}</td>
-                    <td><strong>€${pay.netPay}</strong></td>
-                    <td><span class="status-badge status-${pay.status === 'Payé' ? 'active' : 'pending'}">${pay.status}</span></td>
-                `;
-                tableBody.appendChild(row);
-            });
-
-            // Afficher un message si aucun résultat
-            if (filteredPayroll.length === 0) {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td colspan="7" style="text-align: center; color: var(--text-light); padding: 40px;">
-                        <i class="fas fa-search" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
-                        Aucune donnée de paie trouvée pour le filtre "${currentPayrollFilter === 'all' ? 'Tous' : currentPayrollFilter}"
-                    </td>
-                `;
-                tableBody.appendChild(row);
-            }
+        // Fonction pour sauvegarder les modifications du profil
+        function saveProfileChanges() {
+            showNotification('Modifications sauvegardées avec succès !', 'success');
         }
 
-        // Fonction utilitaire pour obtenir la classe CSS du statut
-        function getStatusClass(status) {
-            switch(status.toLowerCase()) {
-                case 'actif':
-                case 'approuvé':
-                case 'payé':
-                    return 'active';
-                case 'en attente':
-                case 'à payer':
-                    return 'pending';
-                case 'inactif':
-                case 'rejeté':
-                    return 'inactive';
-                default:
-                    return 'pending';
-            }
-        }
-
-        // Fonction pour formater les dates
-        function formatDate(dateString) {
-            const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-            return new Date(dateString).toLocaleDateString('fr-FR', options);
-        }
-
-        // Gestion du formulaire d'ajout d'employé
-        document.getElementById('addEmployeeForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const newEmployee = {
-                id: nextEmployeeId++,
-                name: document.getElementById('employeeName').value,
-                email: document.getElementById('employeeEmail').value,
-                position: document.getElementById('employeePosition').value,
-                role: document.getElementById('employeeRole').value,
-                salary: parseInt(document.getElementById('employeeSalary').value),
-                status: 'Actif',
-                dateJoined: new Date().toISOString().split('T')[0]
+        // Document download functions
+        function downloadDocument(type) {
+            const documents = {
+                'id': 'Carte_Identité_Lancine_Koulibaly.pdf',
+                'contract': 'Contrat_Travail_Lancine_Koulibaly.pdf',
+                'delegation': 'Delegation_Pouvoir_Lancine_Koulibaly.pdf',
+                'work-certificate': 'Certificat_Travail_Lancine_Koulibaly.pdf',
+                'career': 'Relevé_Carrière_Lancine_Koulibaly.pdf'
             };
             
-            employees.push(newEmployee);
-            loadEmployees();
-            closeModal('addEmployeeModal');
+            const fileName = documents[type];
+            if (fileName) {
+                showNotification(`Téléchargement de ${fileName} en cours...`, 'info');
+                
+                setTimeout(() => {
+                    showNotification('Téléchargement terminé !', 'success');
+                }, 2000);
+            }
+        }
+
+        // Système de notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#3f1b68' : type === 'error' ? '#fb7253' : '#6ea8ff'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+                z-index: 10000;
+                animation: slideInRight 0.3s ease;
+                max-width: 300px;
+                font-weight: 500;
+                font-family: 'Poppins', sans-serif;
+            `;
+            notification.textContent = message;
             
-            // Réinitialiser le formulaire
-            document.getElementById('addEmployeeForm').reset();
+            document.body.appendChild(notification);
             
-            // Afficher une notification (simulation)
-            alert('Employé ajouté avec succès !');
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Admin Dashboard loaded successfully');
+            
+            // Setup navigation
+            setupNavigation();
+            
+            // Vérifier l'URL au chargement
+            const hash = window.location.hash.substring(1);
+            if (hash && ['profile', 'dashboard', 'employees', 'payroll', 'leave', 'expenses', 'approvals', 'leave-approvals', 'expense-approvals', 'payroll-requests'].includes(hash)) {
+                showPage(hash);
+            } else {
+                showPage('profile');
+            }
+            
+            // Add smooth scrolling
+            document.documentElement.style.scrollBehavior = 'smooth';
+            
+            // Add animation styles
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideInRight {
+                    from {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+                
+                @keyframes slideOutRight {
+                    from {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                    to {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                }
+
+                /* Styles pour le menu déroulant */
+                .dropdown-nav {
+                    position: relative;
+                }
+
+                .nav-submenu {
+                    display: none;
+                    position: absolute;
+                    left: 100%;
+                    top: 0;
+                    background: #f9f8f6;
+                    border-radius: 7px;
+                    min-width: 200px;
+                    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+                    z-index: 1000;
+                    margin-left: 10px;
+                }
+
+                .nav-subitem {
+                    list-style: none;
+                }
+
+                .nav-sublink {
+                    display: flex;
+                    align-items: center;
+                    padding: 10px 20px;
+                    color: #3f1b68;
+                    text-decoration: none;
+                    border-radius: 7px;
+                    transition: all 0.3s ease;
+                    font-size: 14px;
+                }
+
+                .nav-sublink:hover,
+                .nav-sublink.active {
+                    background-color: #6ea8ff;
+                    color: #ffffff;
+                }
+
+                .nav-sublink i {
+                    margin-right: 10px;
+                    width: 16px;
+                    text-align: center;
+                }
+
+                .dropdown-arrow {
+                    margin-left: auto;
+                    transition: transform 0.3s ease;
+                }
+
+                /* Mobile responsive pour le submenu */
+                @media (max-width: 768px) {
+                    .nav-submenu {
+                        position: static;
+                        margin-left: 0;
+                        margin-top: 10px;
+                        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            console.log('🚀 TAMBUA RH Admin Dashboard fully initialized!');
         });
 
-        // Fonction pour modifier un employé
-        function editEmployee(id) {
-            const employee = employees.find(emp => emp.id === id);
-            if (employee) {
-                document.getElementById('editEmployeeId').value = employee.id;
-                document.getElementById('editEmployeeName').value = employee.name;
-                document.getElementById('editEmployeeEmail').value = employee.email;
-                document.getElementById('editEmployeePosition').value = employee.position;
-                document.getElementById('editEmployeeRole').value = employee.role;
-                document.getElementById('editEmployeeSalary').value = employee.salary;
-                document.getElementById('editEmployeeStatus').value = employee.status;
-                
-                document.getElementById('editEmployeeModal').style.display = 'block';
+        // Gérer le bouton retour/avant du navigateur
+        window.addEventListener('popstate', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                showPage(hash);
+            } else {
+                showPage('profile');
             }
-        }
-
-        // Gestion du formulaire de modification d'employé
-        document.getElementById('editEmployeeForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const id = parseInt(document.getElementById('editEmployeeId').value);
-            const employeeIndex = employees.findIndex(emp => emp.id === id);
-            
-            if (employeeIndex !== -1) {
-                employees[employeeIndex] = {
-                    ...employees[employeeIndex],
-                    name: document.getElementById('editEmployeeName').value,
-                    email: document.getElementById('editEmployeeEmail').value,
-                    position: document.getElementById('editEmployeePosition').value,
-                    role: document.getElementById('editEmployeeRole').value,
-                    salary: parseInt(document.getElementById('editEmployeeSalary').value),
-                    status: document.getElementById('editEmployeeStatus').value
-                };
-                
-                loadEmployees();
-                closeModal('editEmployeeModal');
-                alert('Employé modifié avec succès !');
-            }
-        });
-
-        // Fonction pour voir le profil d'un employé
-        function viewEmployee(id) {
-            const employee = employees.find(emp => emp.id === id);
-            if (employee) {
-                const profileContent = `
-                    <div style="text-align: center; margin-bottom: 20px;">
-                        <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin: 0 auto 15px;">
-                            ${employee.name.split(' ').map(n => n[0]).join('')}
-                        </div>
-                        <h3>${employee.name}</h3>
-                        <p style="color: var(--text-light);">${employee.position}</p>
-                    </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                        <div>
-                            <strong>Email:</strong><br>
-                            <span style="color: var(--text-light);">${employee.email}</span>
-                        </div>
-                        <div>
-                            <strong>Rôle:</strong><br>
-                            <span style="color: var(--text-light);">${employee.role}</span>
-                        </div>
-                        <div>
-                            <strong>Salaire:</strong><br>
-                            <span style="color: var(--text-light);">€${employee.salary}/mois</span>
-                        </div>
-                        <div>
-                            <strong>Date d'embauche:</strong><br>
-                            <span style="color: var(--text-light);">${formatDate(employee.dateJoined)}</span>
-                        </div>
-                        <div>
-                            <strong>Statut:</strong><br>
-                            <span class="status-badge status-${getStatusClass(employee.status)}">${employee.status}</span>
-                        </div>
-                        <div>
-                            <strong>ID Employé:</strong><br>
-                            <span style="color: var(--text-light);">#${employee.id.toString().padStart(4, '0')}</span>
-                        </div>
-                    </div>
-                `;
-                
-                document.getElementById('employeeProfile').innerHTML = profileContent;
-                document.getElementById('viewEmployeeModal').style.display = 'block';
-            }
-        }
-
-        // Fonction pour supprimer un employé
-        function deleteEmployee(id) {
-            if (confirm('Êtes-vous sûr de vouloir supprimer cet employé ?')) {
-                employees = employees.filter(emp => emp.id !== id);
-                loadEmployees();
-                alert('Employé supprimé avec succès !');
-            }
-        }
-
-        // Fonction pour approuver un congé
-        function approveLeave(id) {
-            const leaveIndex = leaves.findIndex(leave => leave.id === id);
-            if (leaveIndex !== -1) {
-                leaves[leaveIndex].status = 'Approuvé';
-                loadLeaves();
-                alert('Congé approuvé !');
-            }
-        }
-
-        // Fonction pour rejeter un congé
-        function rejectLeave(id) {
-            const leaveIndex = leaves.findIndex(leave => leave.id === id);
-            if (leaveIndex !== -1) {
-                leaves[leaveIndex].status = 'Rejeté';
-                loadLeaves();
-                alert('Congé rejeté !');
-            }
-        }
-
-        // Initialisation au chargement de la page
-        document.addEventListener('DOMContentLoaded', () => {
-            loadEmployees();
-            loadLeaves();
-            loadPayroll();
         });
     </script>
 </body>
