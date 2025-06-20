@@ -3006,3 +3006,312 @@
         grid-template-columns: 1fr;
     }
 }
+
+
+/* Styles spécifiques pour la section leave-approvals */
+.leave-approvals-main {
+    transition: width 0.3s ease, margin-right 0.3s ease;
+}
+
+.leave-approvals-main.panel-open {
+    width: calc(100% - 500px);
+    margin-right: 500px;
+}
+
+.leave-requests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.leave-request-card {
+    background: white;
+    border: 2px solid var(--border-color);
+    border-radius: 15px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.leave-request-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-color: #6ea8ff;
+}
+
+.leave-request-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.employee-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.employee-details {
+    flex: 1;
+}
+
+.employee-name {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+.employee-position {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.leave-request-content {
+    space-y: 8px;
+}
+
+.leave-type {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    color: #3f1b68;
+    margin-bottom: 8px;
+}
+
+.leave-type i {
+    width: 16px;
+    text-align: center;
+    color: #6ea8ff;
+}
+
+.leave-duration {
+    color: #1f2937;
+    margin-bottom: 6px;
+}
+
+.leave-reason {
+    color: #6b7280;
+    font-style: italic;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.leave-submit-date {
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+/* Panel de détails */
+.leave-details-panel {
+    position: fixed;
+    top: 0;
+    right: -500px;
+    width: 500px;
+    height: 100vh;
+    background: white;
+    border-left: 2px solid var(--border-color);
+    transition: right 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.leave-details-panel.open {
+    right: 0;
+}
+
+.leave-details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 2px solid var(--border-color);
+    background: var(--light-bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.leave-details-header h3 {
+    margin: 0;
+    color: #3f1b68;
+}
+
+.leave-details-content {
+    padding: 20px;
+}
+
+/* Styles pour les boutons de décision */
+.decision-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 8px;
+}
+
+.decision-option {
+    flex: 1;
+    cursor: pointer;
+}
+
+.decision-option input[type="radio"] {
+    display: none;
+}
+
+.decision-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    color: #6b7280;
+}
+
+.decision-option input[type="radio"]:checked + .decision-label.approve {
+    background: #3f1b68;
+    border-color: #3f1b68;
+    color: white;
+}
+
+.decision-option input[type="radio"]:checked + .decision-label.reject {
+    background: #fd7253;
+    border-color: #fd7253;
+    color: white;
+}
+
+.decision-label:hover {
+    border-color: #6ea8ff;
+}
+
+/* Styles pour la confirmation de suppression */
+.delete-confirmation {
+    text-align: center;
+    padding: 20px;
+}
+
+.warning-icon {
+    color: #fd7253;
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.delete-confirmation h4 {
+    color: #1f2937;
+    margin-bottom: 10px;
+}
+
+.delete-confirmation p {
+    color: #6b7280;
+    margin-bottom: 0;
+}
+
+.decision-employee-info {
+    background: var(--light-bg);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 2px solid var(--border-color);
+}
+
+/* Actions dans le panel de détails */
+.leave-details-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid var(--border-color);
+}
+
+.leave-details-actions .btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-approve {
+    background: #3f1b68;
+    color: white;
+}
+
+.btn-approve:hover {
+    background: #2d1250;
+}
+
+.btn-reject {
+    background: #fd7253;
+    color: white;
+}
+
+.btn-reject:hover {
+    background: #fc5a35;
+}
+
+.btn-delete {
+    background: #d9d9d9;
+    color: #666;
+}
+
+.btn-delete:hover {
+    background: #c5c5c5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .leave-requests-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .leave-details-panel {
+        width: 100%;
+        right: -100%;
+    }
+    
+    .leave-approvals-main.panel-open {
+        width: 0;
+        margin-right: 100%;
+        overflow: hidden;
+    }
+    
+    .decision-buttons {
+        flex-direction: column;
+    }
+    
+    .leave-details-actions {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .leave-request-card {
+        padding: 15px;
+    }
+    
+    .employee-info {
+        gap: 8px;
+    }
+    
+    .profile-avatar-large {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 14px !important;
+    }
+    
+    .leave-details-content {
+        padding: 15px;
+    }
+}
