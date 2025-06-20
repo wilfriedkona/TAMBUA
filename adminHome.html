@@ -1338,8 +1338,563 @@
                 </div>
             </section>
 
+
+            <!-- Section Mes Congés - À ajouter dans adminHome.html -->
+<section id="leave" class="page-section">
+    <div class="expenses-page-container">
+        <!-- Sidebar des demandes de congé -->
+        <div class="expenses-sidebar">
+            <div class="expenses-sidebar-header">
+                <h3>Mes demandes de congé</h3>
+                
+                <!-- Filtres -->
+                <div class="filter-container">
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" onclick="filterLeaves('all')" data-filter="all">
+                            <i class="fas fa-list"></i>
+                            Toutes
+                        </button>
+                        <button class="filter-tab" onclick="filterLeaves('pending')" data-filter="pending">
+                            <i class="fas fa-clock"></i>
+                            En attente
+                        </button>
+                        <button class="filter-tab" onclick="filterLeaves('approved')" data-filter="approved">
+                            <i class="fas fa-check-circle"></i>
+                            Approuvé
+                        </button>
+                        <button class="filter-tab" onclick="filterLeaves('rejected')" data-filter="rejected">
+                            <i class="fas fa-times-circle"></i>
+                            Refusé
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="expenses-list" id="leavesList">
+                <div class="expense-item" onclick="selectLeave(this, 1)" data-status="pending" data-id="1">
+                    <div class="expense-item-content">
+                        <div class="expense-title">Congés Annuels</div>
+                        <div class="expense-amount">5 jours</div>
+                        <div class="expense-date">Du 15 au 19 Juillet 2025</div>
+                    </div>
+                    <div class="expense-status">
+                        <i class="fas fa-clock status-pending"></i>
+                    </div>
+                </div>
+                
+                <div class="expense-item" onclick="selectLeave(this, 2)" data-status="approved" data-id="2">
+                    <div class="expense-item-content">
+                        <div class="expense-title">Congé Maladie</div>
+                        <div class="expense-amount">1 jour</div>
+                        <div class="expense-date">Le 02 Juin 2025</div>
+                    </div>
+                    <div class="expense-status">
+                        <i class="fas fa-check-circle status-approved"></i>
+                    </div>
+                </div>
+                
+                <div class="expense-item" onclick="selectLeave(this, 3)" data-status="approved" data-id="3">
+                    <div class="expense-item-content">
+                        <div class="expense-title">Formation</div>
+                        <div class="expense-amount">1 jour</div>
+                        <div class="expense-date">Le 28 Mai 2025</div>
+                    </div>
+                    <div class="expense-status">
+                        <i class="fas fa-check-circle status-approved"></i>
+                    </div>
+                </div>
+                
+                <div class="expense-item" onclick="selectLeave(this, 4)" data-status="rejected" data-id="4">
+                    <div class="expense-item-content">
+                        <div class="expense-title">Congé Personnel</div>
+                        <div class="expense-amount">3 jours</div>
+                        <div class="expense-date">Du 20 au 22 Mai 2025</div>
+                    </div>
+                    <div class="expense-status">
+                        <i class="fas fa-times-circle status-rejected"></i>
+                    </div>
+                </div>
+                
+                <div class="expense-item" onclick="selectLeave(this, 5)" data-status="pending" data-id="5">
+                    <div class="expense-item-content">
+                        <div class="expense-title">Congé Familial</div>
+                        <div class="expense-amount">2 jours</div>
+                        <div class="expense-date">Du 10 au 11 Juin 2025</div>
+                    </div>
+                    <div class="expense-status">
+                        <i class="fas fa-clock status-pending"></i>
+                    </div>
+                </div>
+                
+                <div class="expense-item" onclick="selectLeave(this, 6)" data-status="approved" data-id="6">
+                    <div class="expense-item-content">
+                        <div class="expense-title">Formation</div>
+                        <div class="expense-amount">1 jour</div>
+                        <div class="expense-date">Le 15 Avril 2025</div>
+                    </div>
+                    <div class="expense-status">
+                        <i class="fas fa-check-circle status-approved"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Zone de détails -->
+        <div class="expenses-preview">
+            <div class="expenses-preview-header">
+                <div class="preview-title">
+                    <h2 id="leavePreviewTitle">Détails de la demande de congé</h2>
+                    <p id="leavePreviewSubtitle">Sélectionnez une demande pour voir les détails</p>
+                </div>
+                <button class="add-expense-btn" onclick="openLeaveModal()">
+                    <i class="fas fa-plus"></i>
+                    Ajouter une nouvelle demande
+                </button>
+            </div>
+            
+            <!-- État vide -->
+            <div class="empty-expense-preview" id="emptyLeavePreview">
+                <div class="empty-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3>Aucune demande sélectionnée</h3>
+                <p>Sélectionnez une demande de congé pour voir les détails</p>
+            </div>
+            
+            <!-- Détails de la demande -->
+            <div class="expense-details" id="leaveDetails" style="display: none;">
+                <div class="expense-details-content">
+                    <!-- Détail demande 1 -->
+                    <div class="expense-detail-item" id="leaveDetail1">
+                        <div class="expense-detail-header">
+                            <h3>Congés Annuels</h3>
+                            <span class="status-badge status-pending-badge">
+                                <i class="fas fa-clock"></i>
+                                En attente
+                            </span>
+                        </div>
+                        
+                        <div class="expense-info-grid">
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Type de congé</div>
+                                <div class="expense-info-value">Congés Annuels</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Durée</div>
+                                <div class="expense-info-value">5 jours</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Date de début</div>
+                                <div class="expense-info-value">15 Juillet 2025</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Date de fin</div>
+                                <div class="expense-info-value">19 Juillet 2025</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Date de soumission</div>
+                                <div class="expense-info-value">12 Juin 2025</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Statut</div>
+                                <div class="expense-info-value">
+                                    <span class="status-badge status-pending-badge">En attente</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="expense-description">
+                            <div class="expense-info-label">Commentaire</div>
+                            <div class="expense-info-value">Vacances d'été en famille. Voyage prévu à l'étranger du 15 au 19 juillet.</div>
+                        </div>
+                        
+                        <!-- Mini calendrier pour la période de congé -->
+                        <div class="leave-calendar-container">
+                            <div class="expense-info-label">Période de congé</div>
+                            <div class="mini-calendar" id="miniCalendar1">
+                                <!-- Le calendrier sera généré par JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="expense-actions">
+                            <button class="btn-cancel-expense" onclick="cancelLeave(1)">
+                                <i class="fas fa-times"></i>
+                                Annuler cette demande
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Détail demande 2 -->
+                    <div class="expense-detail-item" id="leaveDetail2" style="display: none;">
+                        <div class="expense-detail-header">
+                            <h3>Congé Maladie</h3>
+                            <span class="status-badge status-approved-badge">
+                                <i class="fas fa-check-circle"></i>
+                                Approuvé
+                            </span>
+                        </div>
+                        
+                        <div class="expense-info-grid">
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Type de congé</div>
+                                <div class="expense-info-value">Congé Maladie</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Durée</div>
+                                <div class="expense-info-value">1 jour</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Date</div>
+                                <div class="expense-info-value">02 Juin 2025</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Date de soumission</div>
+                                <div class="expense-info-value">02 Juin 2025</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Statut</div>
+                                <div class="expense-info-value">
+                                    <span class="status-badge status-approved-badge">Approuvé</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="expense-description">
+                            <div class="expense-info-label">Commentaire</div>
+                            <div class="expense-info-value">Visite médicale urgente. Certificat médical fourni.</div>
+                        </div>
+                        
+                        <!-- Mini calendrier -->
+                        <div class="leave-calendar-container">
+                            <div class="expense-info-label">Période de congé</div>
+                            <div class="mini-calendar" id="miniCalendar2">
+                                <!-- Le calendrier sera généré par JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="expense-actions" style="display: none;">
+                            <button class="btn-cancel-expense" onclick="cancelLeave(2)">
+                                <i class="fas fa-times"></i>
+                                Annuler cette demande
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Détail demande 3 -->
+                    <div class="expense-detail-item" id="leaveDetail3" style="display: none;">
+                        <div class="expense-detail-header">
+                            <h3>Formation</h3>
+                            <span class="status-badge status-approved-badge">
+                                <i class="fas fa-check-circle"></i>
+                                Approuvé
+                            </span>
+                        </div>
+                        
+                        <div class="expense-info-grid">
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Type de congé</div>
+                                <div class="expense-info-value">Formation</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Durée</div>
+                                <div class="expense-info-value">1 jour</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Date</div>
+                                <div class="expense-info-value">28 Mai 2025</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Date de soumission</div>
+                                <div class="expense-info-value">20 Mai 2025</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Statut</div>
+                                <div class="expense-info-value">
+                                    <span class="status-badge status-approved-badge">Approuvé</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="expense-description">
+                            <div class="expense-info-label">Commentaire</div>
+                            <div class="expense-info-value">Journée de récupération suite aux heures supplémentaires.</div>
+                        </div>
+                        
+                        <!-- Mini calendrier -->
+                        <div class="leave-calendar-container">
+                            <div class="expense-info-label">Période de congé</div>
+                            <div class="mini-calendar" id="miniCalendar3">
+                                <!-- Le calendrier sera généré par JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="expense-actions" style="display: none;">
+                            <button class="btn-cancel-expense" onclick="cancelLeave(3)">
+                                <i class="fas fa-times"></i>
+                                Annuler cette demande
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Détail demande 4 -->
+                    <div class="expense-detail-item" id="leaveDetail4" style="display: none;">
+                        <div class="expense-detail-header">
+                            <h3>Congé Personnel</h3>
+                            <span class="status-badge status-rejected-badge">
+                                <i class="fas fa-times-circle"></i>
+                                Refusé
+                            </span>
+                        </div>
+                        
+                        <div class="expense-info-grid">
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Type de congé</div>
+                                <div class="expense-info-value">Congé Personnel</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Durée</div>
+                                <div class="expense-info-value">3 jours</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Date de début</div>
+                                <div class="expense-info-value">20 Mai 2025</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Date de fin</div>
+                                <div class="expense-info-value">22 Mai 2025</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Date de soumission</div>
+                                <div class="expense-info-value">15 Mai 2025</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Statut</div>
+                                <div class="expense-info-value">
+                                    <span class="status-badge status-rejected-badge">Refusé</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="expense-description">
+                            <div class="expense-info-label">Commentaire</div>
+                            <div class="expense-info-value">Demande pour événement familial. Refusé en raison de la période de forte activité.</div>
+                        </div>
+                        
+                        <!-- Mini calendrier -->
+                        <div class="leave-calendar-container">
+                            <div class="expense-info-label">Période de congé</div>
+                            <div class="mini-calendar" id="miniCalendar4">
+                                <!-- Le calendrier sera généré par JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="expense-actions" style="display: none;">
+                            <button class="btn-cancel-expense" onclick="cancelLeave(4)">
+                                <i class="fas fa-times"></i>
+                                Annuler cette demande
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Détail demande 5 -->
+                    <div class="expense-detail-item" id="leaveDetail5" style="display: none;">
+                        <div class="expense-detail-header">
+                            <h3>Congé Familial</h3>
+                            <span class="status-badge status-pending-badge">
+                                <i class="fas fa-clock"></i>
+                                En attente
+                            </span>
+                        </div>
+                        
+                        <div class="expense-info-grid">
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Type de congé</div>
+                                <div class="expense-info-value">Congé Familial</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Durée</div>
+                                <div class="expense-info-value">2 jours</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Date de début</div>
+                                <div class="expense-info-value">10 Juin 2025</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Date de fin</div>
+                                <div class="expense-info-value">11 Juin 2025</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Date de soumission</div>
+                                <div class="expense-info-value">05 Juin 2025</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Statut</div>
+                                <div class="expense-info-value">
+                                    <span class="status-badge status-pending-badge">En attente</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="expense-description">
+                            <div class="expense-info-label">Commentaire</div>
+                            <div class="expense-info-value">Mariage d'un proche. Cérémonie prévue le 10 juin.</div>
+                        </div>
+                        
+                        <!-- Mini calendrier -->
+                        <div class="leave-calendar-container">
+                            <div class="expense-info-label">Période de congé</div>
+                            <div class="mini-calendar" id="miniCalendar5">
+                                <!-- Le calendrier sera généré par JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="expense-actions">
+                            <button class="btn-cancel-expense" onclick="cancelLeave(5)">
+                                <i class="fas fa-times"></i>
+                                Annuler cette demande
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Détail demande 6 -->
+                    <div class="expense-detail-item" id="leaveDetail6" style="display: none;">
+                        <div class="expense-detail-header">
+                            <h3>Formation</h3>
+                            <span class="status-badge status-approved-badge">
+                                <i class="fas fa-check-circle"></i>
+                                Approuvé
+                            </span>
+                        </div>
+                        
+                        <div class="expense-info-grid">
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Type de congé</div>
+                                <div class="expense-info-value">Formation</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Durée</div>
+                                <div class="expense-info-value">1 jour</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Date</div>
+                                <div class="expense-info-value">15 Avril 2025</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Date de soumission</div>
+                                <div class="expense-info-value">10 Avril 2025</div>
+                            </div>
+                            <div class="expense-info-item">
+                                <div class="expense-info-label">Statut</div>
+                                <div class="expense-info-value">
+                                    <span class="status-badge status-approved-badge">Approuvé</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="expense-description">
+                            <div class="expense-info-label">Commentaire</div>
+                            <div class="expense-info-value">Formation professionnelle en développement web. Certificat requis pour le poste.</div>
+                        </div>
+                        
+                        <!-- Mini calendrier -->
+                        <div class="leave-calendar-container">
+                            <div class="expense-info-label">Période de congé</div>
+                            <div class="mini-calendar" id="miniCalendar6">
+                                <!-- Le calendrier sera généré par JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="expense-actions" style="display: none;">
+                            <button class="btn-cancel-expense" onclick="cancelLeave(6)">
+                                <i class="fas fa-times"></i>
+                                Annuler cette demande
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
         </main>
     </div>
+
+
+        <!-- Modal pour ajouter une nouvelle demande de congé - À ajouter avant la fermeture du body -->
+<div class="modal" id="leaveModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title">Nouvelle Demande de Congé</h3>
+            <button class="close-btn" onclick="closeLeaveModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <form id="leaveRequestForm" onsubmit="submitLeaveRequest(event)">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Type de Congé *</label>
+                    <select class="form-control" required>
+                        <option value="">Sélectionner le type</option>
+                        <option value="annual">Congés Annuels</option>
+                        <option value="sick">Congé Maladie</option>
+                        <option value="maternity">Congé Maternité</option>
+                        <option value="paternity">Congé Paternité</option>
+                        <option value="personal">Congé Personnel</option>
+                        <option value="family">Congé Familial</option>
+                        <option value="training">Formation</option>
+                        <option value="other">Autre</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Durée</label>
+                    <select class="form-control">
+                        <option value="full">Journée Complète</option>
+                        <option value="morning">Demi-journée Matin</option>
+                        <option value="afternoon">Demi-journée Après-midi</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Date de Début *</label>
+                    <input type="date" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Date de Fin *</label>
+                    <input type="date" class="form-control" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Fichier justificatif</label>
+                <div class="file-upload" onclick="document.getElementById('leaveFile').click()">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Cliquez pour télécharger un fichier ou glissez-déposez</p>
+                    <input type="file" id="leaveFile" style="display: none;" accept=".pdf,.jpg,.jpeg,.png">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Commentaire</label>
+                <textarea class="form-control" rows="4" placeholder="Précisez le motif de votre demande"></textarea>
+            </div>
+            
+            <div class="modal-actions">
+                <button type="button" class="btn btn-cancel" onclick="closeLeaveModal()">Annuler</button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i>
+                    Enregistrer
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
 
     <!-- Modal Ajouter Employé -->
     <div class="modal" id="addEmployeeModal">
@@ -3226,6 +3781,382 @@ function initPayrollSection() {
     console.log('Section bulletin de paie initialisée');
 }
 
+
+
+// Variables globales pour la section mes congés
+let currentSelectedLeave = null;
+let currentLeaveFilter = 'all';
+
+// Données des demandes de congé
+const leaveData = {
+    1: {
+        title: 'Congés Annuels',
+        startDate: '2025-07-15',
+        endDate: '2025-07-19',
+        duration: 5
+    },
+    2: {
+        title: 'Congé Maladie',
+        startDate: '2025-06-02',
+        endDate: '2025-06-02',
+        duration: 1
+    },
+    3: {
+        title: 'Formation',
+        startDate: '2025-05-28',
+        endDate: '2025-05-28',
+        duration: 1
+    },
+    4: {
+        title: 'Congé Personnel',
+        startDate: '2025-05-20',
+        endDate: '2025-05-22',
+        duration: 3
+    },
+    5: {
+        title: 'Congé Familial',
+        startDate: '2025-06-10',
+        endDate: '2025-06-11',
+        duration: 2
+    },
+    6: {
+        title: 'Formation',
+        startDate: '2025-04-15',
+        endDate: '2025-04-15',
+        duration: 1
+    }
+};
+
+// Fonction pour sélectionner une demande de congé
+function selectLeave(element, leaveId) {
+    // Retirer la sélection de tous les éléments
+    document.querySelectorAll('#leavesList .expense-item').forEach(item => {
+        item.classList.remove('selected');
+    });
+    
+    // Sélectionner l'élément cliqué
+    element.classList.add('selected');
+    currentSelectedLeave = leaveId;
+    
+    // Mettre à jour l'en-tête
+    updateLeavePreviewHeader(leaveId);
+    
+    // Masquer l'état vide et afficher les détails
+    document.getElementById('emptyLeavePreview').style.display = 'none';
+    document.getElementById('leaveDetails').style.display = 'block';
+    
+    // Masquer tous les détails
+    document.querySelectorAll('#leaveDetails .expense-detail-item').forEach(detail => {
+        detail.style.display = 'none';
+    });
+    
+    // Afficher le détail correspondant
+    const detailElement = document.getElementById(`leaveDetail${leaveId}`);
+    if (detailElement) {
+        detailElement.style.display = 'block';
+    }
+    
+    // Générer le mini calendrier
+    generateMiniCalendar(leaveId);
+    
+    // Afficher/masquer le bouton d'annulation selon le statut
+    const leaveStatus = element.getAttribute('data-status');
+    const actionsElement = detailElement?.querySelector('.expense-actions');
+    if (actionsElement) {
+        if (leaveStatus === 'pending') {
+            actionsElement.style.display = 'flex';
+        } else {
+            actionsElement.style.display = 'none';
+        }
+    }
+}
+
+// Fonction pour mettre à jour l'en-tête de prévisualisation
+function updateLeavePreviewHeader(leaveId) {
+    const leaveInfo = leaveData[leaveId];
+    if (leaveInfo) {
+        document.getElementById('leavePreviewTitle').textContent = leaveInfo.title;
+        
+        if (leaveInfo.startDate === leaveInfo.endDate) {
+            document.getElementById('leavePreviewSubtitle').textContent = `Demande de congé du ${formatDate(leaveInfo.startDate)}`;
+        } else {
+            document.getElementById('leavePreviewSubtitle').textContent = `Demande de congé du ${formatDate(leaveInfo.startDate)} au ${formatDate(leaveInfo.endDate)}`;
+        }
+    }
+}
+
+// Fonction pour filtrer les demandes de congé
+function filterLeaves(filter) {
+    // Mettre à jour les onglets actifs dans la section leave uniquement
+    const leaveSection = document.querySelector('#leave');
+    const filterTabs = leaveSection.querySelectorAll('.filter-tab');
+    
+    filterTabs.forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    const activeTab = leaveSection.querySelector(`[data-filter="${filter}"]`);
+    if (activeTab) {
+        activeTab.classList.add('active');
+    }
+    
+    currentLeaveFilter = filter;
+    
+    // Filtrer les éléments
+    const leaveItems = document.querySelectorAll('#leavesList .expense-item');
+    leaveItems.forEach(item => {
+        const status = item.getAttribute('data-status');
+        
+        if (filter === 'all' || status === filter) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+    
+    // Réinitialiser la sélection si l'élément sélectionné n'est plus visible
+    const selectedItem = document.querySelector('#leavesList .expense-item.selected');
+    if (selectedItem && selectedItem.style.display === 'none') {
+        resetLeaveSelection();
+    }
+}
+
+// Fonction pour réinitialiser la sélection
+function resetLeaveSelection() {
+    currentSelectedLeave = null;
+    
+    // Retirer toutes les sélections
+    document.querySelectorAll('#leavesList .expense-item').forEach(item => {
+        item.classList.remove('selected');
+    });
+    
+    // Afficher l'état vide
+    document.getElementById('emptyLeavePreview').style.display = 'flex';
+    document.getElementById('leaveDetails').style.display = 'none';
+    
+    // Réinitialiser le titre
+    document.getElementById('leavePreviewTitle').textContent = 'Détails de la demande de congé';
+    document.getElementById('leavePreviewSubtitle').textContent = 'Sélectionnez une demande pour voir les détails';
+}
+
+// Fonction pour annuler une demande de congé
+function cancelLeave(leaveId) {
+    const leaveInfo = leaveData[leaveId];
+    const leaveName = leaveInfo ? leaveInfo.title : 'cette demande';
+    
+    if (confirm(`Êtes-vous sûr de vouloir annuler la demande "${leaveName}" ?`)) {
+        showNotification('Demande de congé annulée avec succès', 'success');
+        
+        // Mettre à jour le statut dans la sidebar
+        const leaveItem = document.querySelector(`#leavesList [data-id="${leaveId}"]`);
+        if (leaveItem) {
+            leaveItem.setAttribute('data-status', 'rejected');
+            const statusIcon = leaveItem.querySelector('.expense-status i');
+            if (statusIcon) {
+                statusIcon.className = 'fas fa-times-circle status-rejected';
+            }
+        }
+        
+        // Mettre à jour le badge de statut dans les détails
+        const detailElement = document.getElementById(`leaveDetail${leaveId}`);
+        if (detailElement) {
+            const statusBadge = detailElement.querySelector('.status-badge');
+            if (statusBadge) {
+                statusBadge.className = 'status-badge status-rejected-badge';
+                statusBadge.innerHTML = '<i class="fas fa-times-circle"></i> Refusé';
+            }
+            
+            // Masquer le bouton d'annulation
+            const actionsElement = detailElement.querySelector('.expense-actions');
+            if (actionsElement) {
+                actionsElement.style.display = 'none';
+            }
+        }
+        
+        // Appliquer le filtre actuel pour rafraîchir la vue
+        filterLeaves(currentLeaveFilter);
+    }
+}
+
+// Fonction pour générer le mini calendrier
+function generateMiniCalendar(leaveId) {
+    const leaveInfo = leaveData[leaveId];
+    if (!leaveInfo) return;
+    
+    const calendarElement = document.getElementById(`miniCalendar${leaveId}`);
+    if (!calendarElement) return;
+    
+    const startDate = new Date(leaveInfo.startDate);
+    const endDate = new Date(leaveInfo.endDate);
+    
+    // Déterminer le mois à afficher (celui de la date de début)
+    const year = startDate.getFullYear();
+    const month = startDate.getMonth();
+    
+    // Créer l'en-tête du calendrier
+    const monthNames = [
+        'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+        'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+    ];
+    
+    const header = document.createElement('div');
+    header.className = 'mini-calendar-header';
+    header.textContent = `${monthNames[month]} ${year}`;
+    
+    // Créer les jours de la semaine
+    const weekdays = document.createElement('div');
+    weekdays.className = 'mini-calendar-weekdays';
+    
+    const dayNames = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+    dayNames.forEach(day => {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'mini-weekday';
+        dayElement.textContent = day;
+        weekdays.appendChild(dayElement);
+    });
+    
+    // Créer la grille des jours
+    const daysGrid = document.createElement('div');
+    daysGrid.className = 'mini-calendar-days';
+    
+    // Calculer le premier jour du mois et le nombre de jours
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const daysInMonth = lastDay.getDate();
+    
+    // Calculer le jour de la semaine du premier jour (0 = dimanche, 1 = lundi, etc.)
+    let startDayOfWeek = (firstDay.getDay() + 6) % 7; // Convertir pour que lundi = 0
+    
+    // Ajouter les jours du mois précédent
+    const prevMonth = new Date(year, month - 1, 0);
+    const daysInPrevMonth = prevMonth.getDate();
+    
+    for (let i = startDayOfWeek - 1; i >= 0; i--) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'mini-calendar-day other-month';
+        dayElement.textContent = daysInPrevMonth - i;
+        daysGrid.appendChild(dayElement);
+    }
+    
+    // Ajouter les jours du mois actuel
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'mini-calendar-day';
+        dayElement.textContent = day;
+        
+        const currentDate = new Date(year, month, day);
+        const today = new Date();
+        
+        // Marquer aujourd'hui
+        if (currentDate.toDateString() === today.toDateString()) {
+            dayElement.classList.add('today');
+        }
+        
+        // Marquer les jours de congé
+        if (currentDate >= startDate && currentDate <= endDate) {
+            dayElement.classList.add('leave-day');
+        }
+        
+        daysGrid.appendChild(dayElement);
+    }
+    
+    // Compléter avec les jours du mois suivant si nécessaire
+    const totalCells = daysGrid.children.length;
+    const remainingCells = 42 - totalCells; // 6 semaines * 7 jours
+    
+    for (let day = 1; day <= remainingCells && day <= 14; day++) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'mini-calendar-day other-month';
+        dayElement.textContent = day;
+        daysGrid.appendChild(dayElement);
+    }
+    
+    // Vider le calendrier et ajouter les nouveaux éléments
+    calendarElement.innerHTML = '';
+    calendarElement.appendChild(header);
+    calendarElement.appendChild(weekdays);
+    calendarElement.appendChild(daysGrid);
+}
+
+// Fonction pour formater une date
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('fr-FR', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+    });
+}
+
+// Fonction pour ouvrir le modal de création de demande de congé
+function openLeaveModal() {
+    const modal = document.getElementById('leaveModal');
+    if (modal) {
+        modal.classList.add('show');
+    } else {
+        console.warn('Modal leaveModal not found');
+    }
+}
+
+// Fonction pour fermer le modal de demande de congé
+function closeLeaveModal() {
+    const modal = document.getElementById('leaveModal');
+    if (modal) {
+        modal.classList.remove('show');
+        
+        // Réinitialiser le formulaire
+        const form = document.getElementById('leaveRequestForm');
+        if (form) {
+            form.reset();
+        }
+    }
+}
+
+// Fonction pour soumettre une nouvelle demande de congé
+function submitLeaveRequest(event) {
+    event.preventDefault();
+    
+    showNotification('Nouvelle demande de congé soumise avec succès !', 'success');
+    
+    closeLeaveModal();
+    
+    // Ici, vous pourriez ajouter la nouvelle demande à la liste
+    // Dans une vraie application, cela viendrait du serveur
+}
+
+// Initialisation de la section mes congés
+function initLeavesSection() {
+    // Réinitialiser l'état
+    resetLeaveSelection();
+    
+    // Appliquer le filtre par défaut
+    filterLeaves('all');
+    
+    console.log('Section mes congés initialisée');
+}
+
+// Initialiser quand la section devient active
+document.addEventListener('DOMContentLoaded', function() {
+    // Observer les changements de section pour la section leave
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const leavesSection = document.getElementById('leave');
+                if (leavesSection && leavesSection.classList.contains('active')) {
+                    initLeavesSection();
+                }
+            }
+        });
+    });
+    
+    const leavesSection = document.getElementById('leave');
+    if (leavesSection) {
+        observer.observe(leavesSection, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+    }
+});
 
     </script>
 </body>
