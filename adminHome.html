@@ -4748,13 +4748,19 @@ function updateExpensePreviewHeader(expenseId) {
 }
 
 // Fonction pour filtrer les notes de frais
+        // Fonction corrigée pour filtrer les notes de frais
 function filterExpenses(filter) {
-    // Mettre à jour les onglets actifs
-    document.querySelectorAll('.filter-tab').forEach(tab => {
+    // ✅ Sélecteur spécifique à la section expenses
+    const expensesSection = document.querySelector('#expenses');
+    const filterTabs = expensesSection.querySelectorAll('.filter-tab');
+    
+    // Mettre à jour les onglets actifs dans la section expenses uniquement
+    filterTabs.forEach(tab => {
         tab.classList.remove('active');
     });
     
-    const activeTab = document.querySelector(`[data-filter="${filter}"]`);
+    // Sélectionner l'onglet actif dans la section expenses
+    const activeTab = expensesSection.querySelector(`[data-filter="${filter}"]`);
     if (activeTab) {
         activeTab.classList.add('active');
     }
