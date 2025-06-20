@@ -2466,7 +2466,7 @@
 /* Sections des activités récentes */
 .recent-activities {
     margin-bottom: 30px;
-    max-height: 250px;
+    max-height: 300px;
     overflow-y: auto;
 }
 
