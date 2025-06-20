@@ -1340,482 +1340,929 @@
 
 
             <!-- Section Mes Congés - À ajouter dans adminHome.html -->
-<section id="leave" class="page-section">
-    <div class="expenses-page-container">
-        <!-- Sidebar des demandes de congé -->
-        <div class="expenses-sidebar">
-            <div class="expenses-sidebar-header">
-                <h3>Mes demandes de congé</h3>
-                
-                <!-- Filtres -->
-                <div class="filter-container">
-                    <div class="filter-tabs">
-                        <button class="filter-tab active" onclick="filterLeaves('all')" data-filter="all">
-                            <i class="fas fa-list"></i>
-                            Toutes
-                        </button>
-                        <button class="filter-tab" onclick="filterLeaves('pending')" data-filter="pending">
-                            <i class="fas fa-clock"></i>
-                            En attente
-                        </button>
-                        <button class="filter-tab" onclick="filterLeaves('approved')" data-filter="approved">
-                            <i class="fas fa-check-circle"></i>
-                            Approuvé
-                        </button>
-                        <button class="filter-tab" onclick="filterLeaves('rejected')" data-filter="rejected">
-                            <i class="fas fa-times-circle"></i>
-                            Refusé
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="expenses-list" id="leavesList">
-                <div class="expense-item" onclick="selectLeave(this, 1)" data-status="pending" data-id="1">
-                    <div class="expense-item-content">
-                        <div class="expense-title">Congés Annuels</div>
-                        <div class="expense-amount">5 jours</div>
-                        <div class="expense-date">Du 15 au 19 Juillet 2025</div>
-                    </div>
-                    <div class="expense-status">
-                        <i class="fas fa-clock status-pending"></i>
-                    </div>
-                </div>
-                
-                <div class="expense-item" onclick="selectLeave(this, 2)" data-status="approved" data-id="2">
-                    <div class="expense-item-content">
-                        <div class="expense-title">Congé Maladie</div>
-                        <div class="expense-amount">1 jour</div>
-                        <div class="expense-date">Le 02 Juin 2025</div>
-                    </div>
-                    <div class="expense-status">
-                        <i class="fas fa-check-circle status-approved"></i>
-                    </div>
-                </div>
-                
-                <div class="expense-item" onclick="selectLeave(this, 3)" data-status="approved" data-id="3">
-                    <div class="expense-item-content">
-                        <div class="expense-title">Formation</div>
-                        <div class="expense-amount">1 jour</div>
-                        <div class="expense-date">Le 28 Mai 2025</div>
-                    </div>
-                    <div class="expense-status">
-                        <i class="fas fa-check-circle status-approved"></i>
-                    </div>
-                </div>
-                
-                <div class="expense-item" onclick="selectLeave(this, 4)" data-status="rejected" data-id="4">
-                    <div class="expense-item-content">
-                        <div class="expense-title">Congé Personnel</div>
-                        <div class="expense-amount">3 jours</div>
-                        <div class="expense-date">Du 20 au 22 Mai 2025</div>
-                    </div>
-                    <div class="expense-status">
-                        <i class="fas fa-times-circle status-rejected"></i>
-                    </div>
-                </div>
-                
-                <div class="expense-item" onclick="selectLeave(this, 5)" data-status="pending" data-id="5">
-                    <div class="expense-item-content">
-                        <div class="expense-title">Congé Familial</div>
-                        <div class="expense-amount">2 jours</div>
-                        <div class="expense-date">Du 10 au 11 Juin 2025</div>
-                    </div>
-                    <div class="expense-status">
-                        <i class="fas fa-clock status-pending"></i>
-                    </div>
-                </div>
-                
-                <div class="expense-item" onclick="selectLeave(this, 6)" data-status="approved" data-id="6">
-                    <div class="expense-item-content">
-                        <div class="expense-title">Formation</div>
-                        <div class="expense-amount">1 jour</div>
-                        <div class="expense-date">Le 15 Avril 2025</div>
-                    </div>
-                    <div class="expense-status">
-                        <i class="fas fa-check-circle status-approved"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Zone de détails -->
-        <div class="expenses-preview">
-            <div class="expenses-preview-header">
-                <div class="preview-title">
-                    <h2 id="leavePreviewTitle">Détails de la demande de congé</h2>
-                    <p id="leavePreviewSubtitle">Sélectionnez une demande pour voir les détails</p>
-                </div>
-                <button class="add-expense-btn" onclick="openLeaveModal()">
-                    <i class="fas fa-plus"></i>
-                    Ajouter une nouvelle demande
-                </button>
-            </div>
-            
-            <!-- État vide -->
-            <div class="empty-expense-preview" id="emptyLeavePreview">
-                <div class="empty-icon">
-                    <i class="fas fa-calendar-alt"></i>
-                </div>
-                <h3>Aucune demande sélectionnée</h3>
-                <p>Sélectionnez une demande de congé pour voir les détails</p>
-            </div>
-            
-            <!-- Détails de la demande -->
-            <div class="expense-details" id="leaveDetails" style="display: none;">
-                <div class="expense-details-content">
-                    <!-- Détail demande 1 -->
-                    <div class="expense-detail-item" id="leaveDetail1">
-                        <div class="expense-detail-header">
-                            <h3>Congés Annuels</h3>
-                            <span class="status-badge status-pending-badge">
-                                <i class="fas fa-clock"></i>
-                                En attente
-                            </span>
-                        </div>
-                        
-                        <div class="expense-info-grid">
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Type de congé</div>
-                                <div class="expense-info-value">Congés Annuels</div>
+                <section id="leave" class="page-section">
+                    <div class="expenses-page-container">
+                        <!-- Sidebar des demandes de congé -->
+                        <div class="expenses-sidebar">
+                            <div class="expenses-sidebar-header">
+                                <h3>Mes demandes de congé</h3>
+                                
+                                <!-- Filtres -->
+                                <div class="filter-container">
+                                    <div class="filter-tabs">
+                                        <button class="filter-tab active" onclick="filterLeaves('all')" data-filter="all">
+                                            <i class="fas fa-list"></i>
+                                            Toutes
+                                        </button>
+                                        <button class="filter-tab" onclick="filterLeaves('pending')" data-filter="pending">
+                                            <i class="fas fa-clock"></i>
+                                            En attente
+                                        </button>
+                                        <button class="filter-tab" onclick="filterLeaves('approved')" data-filter="approved">
+                                            <i class="fas fa-check-circle"></i>
+                                            Approuvé
+                                        </button>
+                                        <button class="filter-tab" onclick="filterLeaves('rejected')" data-filter="rejected">
+                                            <i class="fas fa-times-circle"></i>
+                                            Refusé
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Durée</div>
-                                <div class="expense-info-value">5 jours</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Date de début</div>
-                                <div class="expense-info-value">15 Juillet 2025</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Date de fin</div>
-                                <div class="expense-info-value">19 Juillet 2025</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Date de soumission</div>
-                                <div class="expense-info-value">12 Juin 2025</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Statut</div>
-                                <div class="expense-info-value">
-                                    <span class="status-badge status-pending-badge">En attente</span>
+                            
+                            <div class="expenses-list" id="leavesList">
+                                <div class="expense-item" onclick="selectLeave(this, 1)" data-status="pending" data-id="1">
+                                    <div class="expense-item-content">
+                                        <div class="expense-title">Congés Annuels</div>
+                                        <div class="expense-amount">5 jours</div>
+                                        <div class="expense-date">Du 15 au 19 Juillet 2025</div>
+                                    </div>
+                                    <div class="expense-status">
+                                        <i class="fas fa-clock status-pending"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="expense-item" onclick="selectLeave(this, 2)" data-status="approved" data-id="2">
+                                    <div class="expense-item-content">
+                                        <div class="expense-title">Congé Maladie</div>
+                                        <div class="expense-amount">1 jour</div>
+                                        <div class="expense-date">Le 02 Juin 2025</div>
+                                    </div>
+                                    <div class="expense-status">
+                                        <i class="fas fa-check-circle status-approved"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="expense-item" onclick="selectLeave(this, 3)" data-status="approved" data-id="3">
+                                    <div class="expense-item-content">
+                                        <div class="expense-title">Formation</div>
+                                        <div class="expense-amount">1 jour</div>
+                                        <div class="expense-date">Le 28 Mai 2025</div>
+                                    </div>
+                                    <div class="expense-status">
+                                        <i class="fas fa-check-circle status-approved"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="expense-item" onclick="selectLeave(this, 4)" data-status="rejected" data-id="4">
+                                    <div class="expense-item-content">
+                                        <div class="expense-title">Congé Personnel</div>
+                                        <div class="expense-amount">3 jours</div>
+                                        <div class="expense-date">Du 20 au 22 Mai 2025</div>
+                                    </div>
+                                    <div class="expense-status">
+                                        <i class="fas fa-times-circle status-rejected"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="expense-item" onclick="selectLeave(this, 5)" data-status="pending" data-id="5">
+                                    <div class="expense-item-content">
+                                        <div class="expense-title">Congé Familial</div>
+                                        <div class="expense-amount">2 jours</div>
+                                        <div class="expense-date">Du 10 au 11 Juin 2025</div>
+                                    </div>
+                                    <div class="expense-status">
+                                        <i class="fas fa-clock status-pending"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="expense-item" onclick="selectLeave(this, 6)" data-status="approved" data-id="6">
+                                    <div class="expense-item-content">
+                                        <div class="expense-title">Formation</div>
+                                        <div class="expense-amount">1 jour</div>
+                                        <div class="expense-date">Le 15 Avril 2025</div>
+                                    </div>
+                                    <div class="expense-status">
+                                        <i class="fas fa-check-circle status-approved"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="expense-description">
-                            <div class="expense-info-label">Commentaire</div>
-                            <div class="expense-info-value">Vacances d'été en famille. Voyage prévu à l'étranger du 15 au 19 juillet.</div>
-                        </div>
-                        
-                        <!-- Mini calendrier pour la période de congé -->
-                        <div class="leave-calendar-container">
-                            <div class="expense-info-label">Période de congé</div>
-                            <div class="mini-calendar" id="miniCalendar1">
-                                <!-- Le calendrier sera généré par JavaScript -->
+                        <!-- Zone de détails -->
+                        <div class="expenses-preview">
+                            <div class="expenses-preview-header">
+                                <div class="preview-title">
+                                    <h2 id="leavePreviewTitle">Détails de la demande de congé</h2>
+                                    <p id="leavePreviewSubtitle">Sélectionnez une demande pour voir les détails</p>
+                                </div>
+                                <button class="add-expense-btn" onclick="openLeaveModal()">
+                                    <i class="fas fa-plus"></i>
+                                    Ajouter une nouvelle demande
+                                </button>
                             </div>
-                        </div>
-                        
-                        <div class="expense-actions">
-                            <button class="btn-cancel-expense" onclick="cancelLeave(1)">
-                                <i class="fas fa-times"></i>
-                                Annuler cette demande
-                            </button>
+                            
+                            <!-- État vide -->
+                            <div class="empty-expense-preview" id="emptyLeavePreview">
+                                <div class="empty-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <h3>Aucune demande sélectionnée</h3>
+                                <p>Sélectionnez une demande de congé pour voir les détails</p>
+                            </div>
+                            
+                            <!-- Détails de la demande -->
+                            <div class="expense-details" id="leaveDetails" style="display: none;">
+                                <div class="expense-details-content">
+                                    <!-- Détail demande 1 -->
+                                    <div class="expense-detail-item" id="leaveDetail1">
+                                        <div class="expense-detail-header">
+                                            <h3>Congés Annuels</h3>
+                                            <span class="status-badge status-pending-badge">
+                                                <i class="fas fa-clock"></i>
+                                                En attente
+                                            </span>
+                                        </div>
+                                        
+                                        <div class="expense-info-grid">
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Type de congé</div>
+                                                <div class="expense-info-value">Congés Annuels</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Durée</div>
+                                                <div class="expense-info-value">5 jours</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de début</div>
+                                                <div class="expense-info-value">15 Juillet 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de fin</div>
+                                                <div class="expense-info-value">19 Juillet 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de soumission</div>
+                                                <div class="expense-info-value">12 Juin 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Statut</div>
+                                                <div class="expense-info-value">
+                                                    <span class="status-badge status-pending-badge">En attente</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="expense-description">
+                                            <div class="expense-info-label">Commentaire</div>
+                                            <div class="expense-info-value">Vacances d'été en famille. Voyage prévu à l'étranger du 15 au 19 juillet.</div>
+                                        </div>
+                                        
+                                        <!-- Mini calendrier pour la période de congé -->
+                                        <div class="leave-calendar-container">
+                                            <div class="expense-info-label">Période de congé</div>
+                                            <div class="mini-calendar" id="miniCalendar1">
+                                                <!-- Le calendrier sera généré par JavaScript -->
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="expense-actions">
+                                            <button class="btn-cancel-expense" onclick="cancelLeave(1)">
+                                                <i class="fas fa-times"></i>
+                                                Annuler cette demande
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Détail demande 2 -->
+                                    <div class="expense-detail-item" id="leaveDetail2" style="display: none;">
+                                        <div class="expense-detail-header">
+                                            <h3>Congé Maladie</h3>
+                                            <span class="status-badge status-approved-badge">
+                                                <i class="fas fa-check-circle"></i>
+                                                Approuvé
+                                            </span>
+                                        </div>
+                                        
+                                        <div class="expense-info-grid">
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Type de congé</div>
+                                                <div class="expense-info-value">Congé Maladie</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Durée</div>
+                                                <div class="expense-info-value">1 jour</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date</div>
+                                                <div class="expense-info-value">02 Juin 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de soumission</div>
+                                                <div class="expense-info-value">02 Juin 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Statut</div>
+                                                <div class="expense-info-value">
+                                                    <span class="status-badge status-approved-badge">Approuvé</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="expense-description">
+                                            <div class="expense-info-label">Commentaire</div>
+                                            <div class="expense-info-value">Visite médicale urgente. Certificat médical fourni.</div>
+                                        </div>
+                                        
+                                        <!-- Mini calendrier -->
+                                        <div class="leave-calendar-container">
+                                            <div class="expense-info-label">Période de congé</div>
+                                            <div class="mini-calendar" id="miniCalendar2">
+                                                <!-- Le calendrier sera généré par JavaScript -->
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="expense-actions" style="display: none;">
+                                            <button class="btn-cancel-expense" onclick="cancelLeave(2)">
+                                                <i class="fas fa-times"></i>
+                                                Annuler cette demande
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Détail demande 3 -->
+                                    <div class="expense-detail-item" id="leaveDetail3" style="display: none;">
+                                        <div class="expense-detail-header">
+                                            <h3>Formation</h3>
+                                            <span class="status-badge status-approved-badge">
+                                                <i class="fas fa-check-circle"></i>
+                                                Approuvé
+                                            </span>
+                                        </div>
+                                        
+                                        <div class="expense-info-grid">
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Type de congé</div>
+                                                <div class="expense-info-value">Formation</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Durée</div>
+                                                <div class="expense-info-value">1 jour</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date</div>
+                                                <div class="expense-info-value">28 Mai 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de soumission</div>
+                                                <div class="expense-info-value">20 Mai 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Statut</div>
+                                                <div class="expense-info-value">
+                                                    <span class="status-badge status-approved-badge">Approuvé</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="expense-description">
+                                            <div class="expense-info-label">Commentaire</div>
+                                            <div class="expense-info-value">Journée de récupération suite aux heures supplémentaires.</div>
+                                        </div>
+                                        
+                                        <!-- Mini calendrier -->
+                                        <div class="leave-calendar-container">
+                                            <div class="expense-info-label">Période de congé</div>
+                                            <div class="mini-calendar" id="miniCalendar3">
+                                                <!-- Le calendrier sera généré par JavaScript -->
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="expense-actions" style="display: none;">
+                                            <button class="btn-cancel-expense" onclick="cancelLeave(3)">
+                                                <i class="fas fa-times"></i>
+                                                Annuler cette demande
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Détail demande 4 -->
+                                    <div class="expense-detail-item" id="leaveDetail4" style="display: none;">
+                                        <div class="expense-detail-header">
+                                            <h3>Congé Personnel</h3>
+                                            <span class="status-badge status-rejected-badge">
+                                                <i class="fas fa-times-circle"></i>
+                                                Refusé
+                                            </span>
+                                        </div>
+                                        
+                                        <div class="expense-info-grid">
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Type de congé</div>
+                                                <div class="expense-info-value">Congé Personnel</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Durée</div>
+                                                <div class="expense-info-value">3 jours</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de début</div>
+                                                <div class="expense-info-value">20 Mai 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de fin</div>
+                                                <div class="expense-info-value">22 Mai 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de soumission</div>
+                                                <div class="expense-info-value">15 Mai 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Statut</div>
+                                                <div class="expense-info-value">
+                                                    <span class="status-badge status-rejected-badge">Refusé</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="expense-description">
+                                            <div class="expense-info-label">Commentaire</div>
+                                            <div class="expense-info-value">Demande pour événement familial. Refusé en raison de la période de forte activité.</div>
+                                        </div>
+                                        
+                                        <!-- Mini calendrier -->
+                                        <div class="leave-calendar-container">
+                                            <div class="expense-info-label">Période de congé</div>
+                                            <div class="mini-calendar" id="miniCalendar4">
+                                                <!-- Le calendrier sera généré par JavaScript -->
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="expense-actions" style="display: none;">
+                                            <button class="btn-cancel-expense" onclick="cancelLeave(4)">
+                                                <i class="fas fa-times"></i>
+                                                Annuler cette demande
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Détail demande 5 -->
+                                    <div class="expense-detail-item" id="leaveDetail5" style="display: none;">
+                                        <div class="expense-detail-header">
+                                            <h3>Congé Familial</h3>
+                                            <span class="status-badge status-pending-badge">
+                                                <i class="fas fa-clock"></i>
+                                                En attente
+                                            </span>
+                                        </div>
+                                        
+                                        <div class="expense-info-grid">
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Type de congé</div>
+                                                <div class="expense-info-value">Congé Familial</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Durée</div>
+                                                <div class="expense-info-value">2 jours</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de début</div>
+                                                <div class="expense-info-value">10 Juin 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de fin</div>
+                                                <div class="expense-info-value">11 Juin 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de soumission</div>
+                                                <div class="expense-info-value">05 Juin 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Statut</div>
+                                                <div class="expense-info-value">
+                                                    <span class="status-badge status-pending-badge">En attente</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="expense-description">
+                                            <div class="expense-info-label">Commentaire</div>
+                                            <div class="expense-info-value">Mariage d'un proche. Cérémonie prévue le 10 juin.</div>
+                                        </div>
+                                        
+                                        <!-- Mini calendrier -->
+                                        <div class="leave-calendar-container">
+                                            <div class="expense-info-label">Période de congé</div>
+                                            <div class="mini-calendar" id="miniCalendar5">
+                                                <!-- Le calendrier sera généré par JavaScript -->
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="expense-actions">
+                                            <button class="btn-cancel-expense" onclick="cancelLeave(5)">
+                                                <i class="fas fa-times"></i>
+                                                Annuler cette demande
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Détail demande 6 -->
+                                    <div class="expense-detail-item" id="leaveDetail6" style="display: none;">
+                                        <div class="expense-detail-header">
+                                            <h3>Formation</h3>
+                                            <span class="status-badge status-approved-badge">
+                                                <i class="fas fa-check-circle"></i>
+                                                Approuvé
+                                            </span>
+                                        </div>
+                                        
+                                        <div class="expense-info-grid">
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Type de congé</div>
+                                                <div class="expense-info-value">Formation</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Durée</div>
+                                                <div class="expense-info-value">1 jour</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date</div>
+                                                <div class="expense-info-value">15 Avril 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de soumission</div>
+                                                <div class="expense-info-value">10 Avril 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Statut</div>
+                                                <div class="expense-info-value">
+                                                    <span class="status-badge status-approved-badge">Approuvé</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="expense-description">
+                                            <div class="expense-info-label">Commentaire</div>
+                                            <div class="expense-info-value">Formation professionnelle en développement web. Certificat requis pour le poste.</div>
+                                        </div>
+                                        
+                                        <!-- Mini calendrier -->
+                                        <div class="leave-calendar-container">
+                                            <div class="expense-info-label">Période de congé</div>
+                                            <div class="mini-calendar" id="miniCalendar6">
+                                                <!-- Le calendrier sera généré par JavaScript -->
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="expense-actions" style="display: none;">
+                                            <button class="btn-cancel-expense" onclick="cancelLeave(6)">
+                                                <i class="fas fa-times"></i>
+                                                Annuler cette demande
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    
-                    <!-- Détail demande 2 -->
-                    <div class="expense-detail-item" id="leaveDetail2" style="display: none;">
-                        <div class="expense-detail-header">
-                            <h3>Congé Maladie</h3>
-                            <span class="status-badge status-approved-badge">
-                                <i class="fas fa-check-circle"></i>
-                                Approuvé
-                            </span>
-                        </div>
-                        
-                        <div class="expense-info-grid">
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Type de congé</div>
-                                <div class="expense-info-value">Congé Maladie</div>
+                </section>
+
+
+
+                <!-- Section Note de Frais - À ajouter dans adminHome.html -->
+                <section id="expenses" class="page-section">
+                    <div class="expenses-page-container">
+                        <!-- Sidebar des notes de frais -->
+                        <div class="expenses-sidebar">
+                            <div class="expenses-sidebar-header">
+                                <h3>Mes notes de frais</h3>
+                                
+                                <!-- Filtres -->
+                                <div class="filter-container">
+                                    <div class="filter-tabs">
+                                        <button class="filter-tab active" onclick="filterExpenses('all')" data-filter="all">
+                                            <i class="fas fa-list"></i>
+                                            Toutes
+                                        </button>
+                                        <button class="filter-tab" onclick="filterExpenses('pending')" data-filter="pending">
+                                            <i class="fas fa-clock"></i>
+                                            En attente
+                                        </button>
+                                        <button class="filter-tab" onclick="filterExpenses('approved')" data-filter="approved">
+                                            <i class="fas fa-check-circle"></i>
+                                            Approuvé
+                                        </button>
+                                        <button class="filter-tab" onclick="filterExpenses('rejected')" data-filter="rejected">
+                                            <i class="fas fa-times-circle"></i>
+                                            Annulé
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Durée</div>
-                                <div class="expense-info-value">1 jour</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Date</div>
-                                <div class="expense-info-value">02 Juin 2025</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Date de soumission</div>
-                                <div class="expense-info-value">02 Juin 2025</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Statut</div>
-                                <div class="expense-info-value">
-                                    <span class="status-badge status-approved-badge">Approuvé</span>
+                            
+                            <div class="expenses-list" id="expensesList">
+                                <div class="expense-item" onclick="selectExpense(this, 1)" data-status="approved" data-id="1">
+                                    <div class="expense-item-content">
+                                        <div class="expense-title">Transport - Déplacement client</div>
+                                        <div class="expense-amount">25,000 FCFA</div>
+                                        <div class="expense-date">Soumis le 15/06/2025</div>
+                                    </div>
+                                    <div class="expense-status">
+                                        <i class="fas fa-check-circle status-approved"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="expense-item" onclick="selectExpense(this, 2)" data-status="pending" data-id="2">
+                                    <div class="expense-item-content">
+                                        <div class="expense-title">Repas d'affaires</div>
+                                        <div class="expense-amount">15,750 FCFA</div>
+                                        <div class="expense-date">Soumis le 12/06/2025</div>
+                                    </div>
+                                    <div class="expense-status">
+                                        <i class="fas fa-clock status-pending"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="expense-item" onclick="selectExpense(this, 3)" data-status="approved" data-id="3">
+                                    <div class="expense-item-content">
+                                        <div class="expense-title">Fournitures de bureau</div>
+                                        <div class="expense-amount">8,500 FCFA</div>
+                                        <div class="expense-date">Soumis le 10/06/2025</div>
+                                    </div>
+                                    <div class="expense-status">
+                                        <i class="fas fa-check-circle status-approved"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="expense-item" onclick="selectExpense(this, 4)" data-status="rejected" data-id="4">
+                                    <div class="expense-item-content">
+                                        <div class="expense-title">Taxi - Réunion externe</div>
+                                        <div class="expense-amount">12,000 FCFA</div>
+                                        <div class="expense-date">Soumis le 08/06/2025</div>
+                                    </div>
+                                    <div class="expense-status">
+                                        <i class="fas fa-times-circle status-rejected"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="expense-item" onclick="selectExpense(this, 5)" data-status="pending" data-id="5">
+                                    <div class="expense-item-content">
+                                        <div class="expense-title">Hébergement - Mission</div>
+                                        <div class="expense-amount">45,000 FCFA</div>
+                                        <div class="expense-date">Soumis le 05/06/2025</div>
+                                    </div>
+                                    <div class="expense-status">
+                                        <i class="fas fa-clock status-pending"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="expense-item" onclick="selectExpense(this, 6)" data-status="approved" data-id="6">
+                                    <div class="expense-item-content">
+                                        <div class="expense-title">Carburant - Véhicule société</div>
+                                        <div class="expense-amount">30,000 FCFA</div>
+                                        <div class="expense-date">Soumis le 03/06/2025</div>
+                                    </div>
+                                    <div class="expense-status">
+                                        <i class="fas fa-check-circle status-approved"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="expense-description">
-                            <div class="expense-info-label">Commentaire</div>
-                            <div class="expense-info-value">Visite médicale urgente. Certificat médical fourni.</div>
-                        </div>
-                        
-                        <!-- Mini calendrier -->
-                        <div class="leave-calendar-container">
-                            <div class="expense-info-label">Période de congé</div>
-                            <div class="mini-calendar" id="miniCalendar2">
-                                <!-- Le calendrier sera généré par JavaScript -->
+                        <!-- Zone de détails -->
+                        <div class="expenses-preview">
+                            <div class="expenses-preview-header">
+                                <div class="preview-title">
+                                    <h2 id="expensePreviewTitle">Détails de la note de frais</h2>
+                                    <p id="expensePreviewSubtitle">Sélectionnez une note pour voir les détails</p>
+                                </div>
+                                <button class="add-expense-btn" onclick="openExpenseModal()">
+                                    <i class="fas fa-plus"></i>
+                                    Ajouter une nouvelle note
+                                </button>
                             </div>
-                        </div>
-                        
-                        <div class="expense-actions" style="display: none;">
-                            <button class="btn-cancel-expense" onclick="cancelLeave(2)">
-                                <i class="fas fa-times"></i>
-                                Annuler cette demande
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Détail demande 3 -->
-                    <div class="expense-detail-item" id="leaveDetail3" style="display: none;">
-                        <div class="expense-detail-header">
-                            <h3>Formation</h3>
-                            <span class="status-badge status-approved-badge">
-                                <i class="fas fa-check-circle"></i>
-                                Approuvé
-                            </span>
-                        </div>
-                        
-                        <div class="expense-info-grid">
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Type de congé</div>
-                                <div class="expense-info-value">Formation</div>
+                            
+                            <!-- État vide -->
+                            <div class="empty-expense-preview" id="emptyExpensePreview">
+                                <div class="empty-icon">
+                                    <i class="fas fa-receipt"></i>
+                                </div>
+                                <h3>Aucune note sélectionnée</h3>
+                                <p>Sélectionnez une note pour voir les détails</p>
                             </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Durée</div>
-                                <div class="expense-info-value">1 jour</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Date</div>
-                                <div class="expense-info-value">28 Mai 2025</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Date de soumission</div>
-                                <div class="expense-info-value">20 Mai 2025</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Statut</div>
-                                <div class="expense-info-value">
-                                    <span class="status-badge status-approved-badge">Approuvé</span>
+                            
+                            <!-- Détails de la note -->
+                            <div class="expense-details" id="expenseDetails" style="display: none;">
+                                <div class="expense-details-content">
+                                    <!-- Détail note 1 -->
+                                    <div class="expense-detail-item" id="expenseDetail1">
+                                        <div class="expense-detail-header">
+                                            <h3>Transport - Déplacement client</h3>
+                                            <span class="status-badge status-approved-badge">
+                                                <i class="fas fa-check-circle"></i>
+                                                Approuvé
+                                            </span>
+                                        </div>
+                                        
+                                        <div class="expense-info-grid">
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Type de dépense</div>
+                                                <div class="expense-info-value">Transport</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Montant</div>
+                                                <div class="expense-info-value">25,000 FCFA</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de la dépense</div>
+                                                <div class="expense-info-value">15 Juin 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de soumission</div>
+                                                <div class="expense-info-value">15 Juin 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Numéro de référence</div>
+                                                <div class="expense-info-value">REF-2025-001</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Statut</div>
+                                                <div class="expense-info-value">
+                                                    <span class="status-badge status-approved-badge">Approuvé</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="expense-description">
+                                            <div class="expense-info-label">Description</div>
+                                            <div class="expense-info-value">Frais de transport pour rendez-vous client à Plateau. Taxi aller-retour depuis le bureau.</div>
+                                        </div>
+                                        
+                                        <div class="expense-actions" style="display: none;">
+                                            <button class="btn-cancel-expense" onclick="cancelExpense(1)">
+                                                <i class="fas fa-times"></i>
+                                                Annuler cette note
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Détail note 2 -->
+                                    <div class="expense-detail-item" id="expenseDetail2" style="display: none;">
+                                        <div class="expense-detail-header">
+                                            <h3>Repas d'affaires</h3>
+                                            <span class="status-badge status-pending-badge">
+                                                <i class="fas fa-clock"></i>
+                                                En attente
+                                            </span>
+                                        </div>
+                                        
+                                        <div class="expense-info-grid">
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Type de dépense</div>
+                                                <div class="expense-info-value">Repas</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Montant</div>
+                                                <div class="expense-info-value">15,750 FCFA</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de la dépense</div>
+                                                <div class="expense-info-value">12 Juin 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de soumission</div>
+                                                <div class="expense-info-value">12 Juin 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Numéro de référence</div>
+                                                <div class="expense-info-value">REF-2025-002</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Statut</div>
+                                                <div class="expense-info-value">
+                                                    <span class="status-badge status-pending-badge">En attente</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="expense-description">
+                                            <div class="expense-info-label">Description</div>
+                                            <div class="expense-info-value">Déjeuner d'affaires avec prospects. Restaurant Le Bô à Cocody.</div>
+                                        </div>
+                                        
+                                        <div class="expense-actions">
+                                            <button class="btn-cancel-expense" onclick="cancelExpense(2)">
+                                                <i class="fas fa-times"></i>
+                                                Annuler cette note
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Détail note 3 -->
+                                    <div class="expense-detail-item" id="expenseDetail3" style="display: none;">
+                                        <div class="expense-detail-header">
+                                            <h3>Fournitures de bureau</h3>
+                                            <span class="status-badge status-approved-badge">
+                                                <i class="fas fa-check-circle"></i>
+                                                Approuvé
+                                            </span>
+                                        </div>
+                                        
+                                        <div class="expense-info-grid">
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Type de dépense</div>
+                                                <div class="expense-info-value">Fournitures</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Montant</div>
+                                                <div class="expense-info-value">8,500 FCFA</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de la dépense</div>
+                                                <div class="expense-info-value">10 Juin 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de soumission</div>
+                                                <div class="expense-info-value">10 Juin 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Numéro de référence</div>
+                                                <div class="expense-info-value">REF-2025-003</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Statut</div>
+                                                <div class="expense-info-value">
+                                                    <span class="status-badge status-approved-badge">Approuvé</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="expense-description">
+                                            <div class="expense-info-label">Description</div>
+                                            <div class="expense-info-value">Achat de stylos, cahiers et autres fournitures pour l'équipe.</div>
+                                        </div>
+                                        
+                                        <div class="expense-actions" style="display: none;">
+                                            <button class="btn-cancel-expense" onclick="cancelExpense(3)">
+                                                <i class="fas fa-times"></i>
+                                                Annuler cette note
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Détail note 4 -->
+                                    <div class="expense-detail-item" id="expenseDetail4" style="display: none;">
+                                        <div class="expense-detail-header">
+                                            <h3>Taxi - Réunion externe</h3>
+                                            <span class="status-badge status-rejected-badge">
+                                                <i class="fas fa-times-circle"></i>
+                                                Annulé
+                                            </span>
+                                        </div>
+                                        
+                                        <div class="expense-info-grid">
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Type de dépense</div>
+                                                <div class="expense-info-value">Transport</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Montant</div>
+                                                <div class="expense-info-value">12,000 FCFA</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de la dépense</div>
+                                                <div class="expense-info-value">08 Juin 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de soumission</div>
+                                                <div class="expense-info-value">08 Juin 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Numéro de référence</div>
+                                                <div class="expense-info-value">REF-2025-004</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Statut</div>
+                                                <div class="expense-info-value">
+                                                    <span class="status-badge status-rejected-badge">Annulé</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="expense-description">
+                                            <div class="expense-info-label">Description</div>
+                                            <div class="expense-info-value">Transport en taxi pour réunion externe annulée au dernier moment.</div>
+                                        </div>
+                                        
+                                        <div class="expense-actions" style="display: none;">
+                                            <button class="btn-cancel-expense" onclick="cancelExpense(4)">
+                                                <i class="fas fa-times"></i>
+                                                Annuler cette note
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Détail note 5 -->
+                                    <div class="expense-detail-item" id="expenseDetail5" style="display: none;">
+                                        <div class="expense-detail-header">
+                                            <h3>Hébergement - Mission</h3>
+                                            <span class="status-badge status-pending-badge">
+                                                <i class="fas fa-clock"></i>
+                                                En attente
+                                            </span>
+                                        </div>
+                                        
+                                        <div class="expense-info-grid">
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Type de dépense</div>
+                                                <div class="expense-info-value">Hébergement</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Montant</div>
+                                                <div class="expense-info-value">45,000 FCFA</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de la dépense</div>
+                                                <div class="expense-info-value">05 Juin 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de soumission</div>
+                                                <div class="expense-info-value">05 Juin 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Numéro de référence</div>
+                                                <div class="expense-info-value">REF-2025-005</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Statut</div>
+                                                <div class="expense-info-value">
+                                                    <span class="status-badge status-pending-badge">En attente</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="expense-description">
+                                            <div class="expense-info-label">Description</div>
+                                            <div class="expense-info-value">Nuitée à l'hôtel Ibis Abidjan pour mission de formation de 2 jours.</div>
+                                        </div>
+                                        
+                                        <div class="expense-actions">
+                                            <button class="btn-cancel-expense" onclick="cancelExpense(5)">
+                                                <i class="fas fa-times"></i>
+                                                Annuler cette note
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Détail note 6 -->
+                                    <div class="expense-detail-item" id="expenseDetail6" style="display: none;">
+                                        <div class="expense-detail-header">
+                                            <h3>Carburant - Véhicule société</h3>
+                                            <span class="status-badge status-approved-badge">
+                                                <i class="fas fa-check-circle"></i>
+                                                Approuvé
+                                            </span>
+                                        </div>
+                                        
+                                        <div class="expense-info-grid">
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Type de dépense</div>
+                                                <div class="expense-info-value">Carburant</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Montant</div>
+                                                <div class="expense-info-value">30,000 FCFA</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de la dépense</div>
+                                                <div class="expense-info-value">03 Juin 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Date de soumission</div>
+                                                <div class="expense-info-value">03 Juin 2025</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Numéro de référence</div>
+                                                <div class="expense-info-value">REF-2025-006</div>
+                                            </div>
+                                            <div class="expense-info-item">
+                                                <div class="expense-info-label">Statut</div>
+                                                <div class="expense-info-value">
+                                                    <span class="status-badge status-approved-badge">Approuvé</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="expense-description">
+                                            <div class="expense-info-label">Description</div>
+                                            <div class="expense-info-value">Plein d'essence pour véhicule de société utilisé pour les déplacements clients de la semaine.</div>
+                                        </div>
+                                        
+                                        <div class="expense-actions" style="display: none;">
+                                            <button class="btn-cancel-expense" onclick="cancelExpense(6)">
+                                                <i class="fas fa-times"></i>
+                                                Annuler cette note
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="expense-description">
-                            <div class="expense-info-label">Commentaire</div>
-                            <div class="expense-info-value">Journée de récupération suite aux heures supplémentaires.</div>
-                        </div>
-                        
-                        <!-- Mini calendrier -->
-                        <div class="leave-calendar-container">
-                            <div class="expense-info-label">Période de congé</div>
-                            <div class="mini-calendar" id="miniCalendar3">
-                                <!-- Le calendrier sera généré par JavaScript -->
-                            </div>
-                        </div>
-                        
-                        <div class="expense-actions" style="display: none;">
-                            <button class="btn-cancel-expense" onclick="cancelLeave(3)">
-                                <i class="fas fa-times"></i>
-                                Annuler cette demande
-                            </button>
-                        </div>
                     </div>
-                    
-                    <!-- Détail demande 4 -->
-                    <div class="expense-detail-item" id="leaveDetail4" style="display: none;">
-                        <div class="expense-detail-header">
-                            <h3>Congé Personnel</h3>
-                            <span class="status-badge status-rejected-badge">
-                                <i class="fas fa-times-circle"></i>
-                                Refusé
-                            </span>
-                        </div>
-                        
-                        <div class="expense-info-grid">
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Type de congé</div>
-                                <div class="expense-info-value">Congé Personnel</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Durée</div>
-                                <div class="expense-info-value">3 jours</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Date de début</div>
-                                <div class="expense-info-value">20 Mai 2025</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Date de fin</div>
-                                <div class="expense-info-value">22 Mai 2025</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Date de soumission</div>
-                                <div class="expense-info-value">15 Mai 2025</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Statut</div>
-                                <div class="expense-info-value">
-                                    <span class="status-badge status-rejected-badge">Refusé</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="expense-description">
-                            <div class="expense-info-label">Commentaire</div>
-                            <div class="expense-info-value">Demande pour événement familial. Refusé en raison de la période de forte activité.</div>
-                        </div>
-                        
-                        <!-- Mini calendrier -->
-                        <div class="leave-calendar-container">
-                            <div class="expense-info-label">Période de congé</div>
-                            <div class="mini-calendar" id="miniCalendar4">
-                                <!-- Le calendrier sera généré par JavaScript -->
-                            </div>
-                        </div>
-                        
-                        <div class="expense-actions" style="display: none;">
-                            <button class="btn-cancel-expense" onclick="cancelLeave(4)">
-                                <i class="fas fa-times"></i>
-                                Annuler cette demande
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Détail demande 5 -->
-                    <div class="expense-detail-item" id="leaveDetail5" style="display: none;">
-                        <div class="expense-detail-header">
-                            <h3>Congé Familial</h3>
-                            <span class="status-badge status-pending-badge">
-                                <i class="fas fa-clock"></i>
-                                En attente
-                            </span>
-                        </div>
-                        
-                        <div class="expense-info-grid">
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Type de congé</div>
-                                <div class="expense-info-value">Congé Familial</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Durée</div>
-                                <div class="expense-info-value">2 jours</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Date de début</div>
-                                <div class="expense-info-value">10 Juin 2025</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Date de fin</div>
-                                <div class="expense-info-value">11 Juin 2025</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Date de soumission</div>
-                                <div class="expense-info-value">05 Juin 2025</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Statut</div>
-                                <div class="expense-info-value">
-                                    <span class="status-badge status-pending-badge">En attente</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="expense-description">
-                            <div class="expense-info-label">Commentaire</div>
-                            <div class="expense-info-value">Mariage d'un proche. Cérémonie prévue le 10 juin.</div>
-                        </div>
-                        
-                        <!-- Mini calendrier -->
-                        <div class="leave-calendar-container">
-                            <div class="expense-info-label">Période de congé</div>
-                            <div class="mini-calendar" id="miniCalendar5">
-                                <!-- Le calendrier sera généré par JavaScript -->
-                            </div>
-                        </div>
-                        
-                        <div class="expense-actions">
-                            <button class="btn-cancel-expense" onclick="cancelLeave(5)">
-                                <i class="fas fa-times"></i>
-                                Annuler cette demande
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Détail demande 6 -->
-                    <div class="expense-detail-item" id="leaveDetail6" style="display: none;">
-                        <div class="expense-detail-header">
-                            <h3>Formation</h3>
-                            <span class="status-badge status-approved-badge">
-                                <i class="fas fa-check-circle"></i>
-                                Approuvé
-                            </span>
-                        </div>
-                        
-                        <div class="expense-info-grid">
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Type de congé</div>
-                                <div class="expense-info-value">Formation</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Durée</div>
-                                <div class="expense-info-value">1 jour</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Date</div>
-                                <div class="expense-info-value">15 Avril 2025</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Date de soumission</div>
-                                <div class="expense-info-value">10 Avril 2025</div>
-                            </div>
-                            <div class="expense-info-item">
-                                <div class="expense-info-label">Statut</div>
-                                <div class="expense-info-value">
-                                    <span class="status-badge status-approved-badge">Approuvé</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="expense-description">
-                            <div class="expense-info-label">Commentaire</div>
-                            <div class="expense-info-value">Formation professionnelle en développement web. Certificat requis pour le poste.</div>
-                        </div>
-                        
-                        <!-- Mini calendrier -->
-                        <div class="leave-calendar-container">
-                            <div class="expense-info-label">Période de congé</div>
-                            <div class="mini-calendar" id="miniCalendar6">
-                                <!-- Le calendrier sera généré par JavaScript -->
-                            </div>
-                        </div>
-                        
-                        <div class="expense-actions" style="display: none;">
-                            <button class="btn-cancel-expense" onclick="cancelLeave(6)">
-                                <i class="fas fa-times"></i>
-                                Annuler cette demande
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+                </section>
+
+
+
 
         </main>
     </div>
@@ -1999,6 +2446,83 @@
             </form>
         </div>
     </div>
+
+
+    <!-- Modal des Notes de Frais - À ajouter avant la fermeture du body -->
+<div class="modal" id="expenseModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title">Ajouter une nouvelle dépense</h3>
+            <button class="close-btn" onclick="closeExpenseModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <form id="expenseForm" onsubmit="submitExpense(event)">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Catégorie de dépense *</label>
+                    <select class="form-control" required>
+                        <option value="">Sélectionnez une catégorie de dépense...</option>
+                        <option value="transport">Transport</option>
+                        <option value="meals">Repas d'affaires</option>
+                        <option value="office-supplies">Fournitures de bureau</option>
+                        <option value="accommodation">Hébergement</option>
+                        <option value="fuel">Carburant</option>
+                        <option value="training">Formation</option>
+                        <option value="travel">Voyage</option>
+                        <option value="utilities">Services publics</option>
+                        <option value="miscellaneous">Divers</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Montant *</label>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="background: var(--light-bg); padding: 0.75rem 1rem; border: 2px solid var(--border-color); border-radius: 10px 0 0 10px;">FCFA</span>
+                        <input type="number" class="form-control" placeholder="Veuillez entrer le montant" required style="border-radius: 0 10px 10px 0; border-left: none;">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Date de la dépense *</label>
+                    <input type="date" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Numéro de référence</label>
+                    <input type="text" class="form-control" placeholder="Veuillez entrer le numéro de référence">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Télécharger le reçu</label>
+                <div class="file-upload" onclick="document.getElementById('expenseFile').click()">
+                    <i class="fas fa-upload"></i>
+                    <p>Cliquez pour télécharger un fichier ou glissez-déposez</p>
+                    <input type="file" id="expenseFile" style="display: none;" accept=".pdf,.jpg,.jpeg,.png">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Description *</label>
+                <textarea class="form-control" rows="4" placeholder="Décrivez la dépense et son contexte professionnel" required></textarea>
+            </div>
+            
+            <div class="modal-actions">
+                <button type="button" class="btn btn-cancel" onclick="closeExpenseModal()">Annuler</button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-check"></i>
+                    Créer
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
 
     <script>
         // Fonction pour basculer le menu mobile
@@ -4157,6 +4681,230 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+
+
+// Variables globales pour la section note de frais
+let currentSelectedExpense = null;
+let currentFilter = 'all';
+
+// Fonction pour sélectionner une note de frais
+function selectExpense(element, expenseId) {
+    // Retirer la sélection de tous les éléments
+    document.querySelectorAll('.expense-item').forEach(item => {
+        item.classList.remove('selected');
+    });
+    
+    // Sélectionner l'élément cliqué
+    element.classList.add('selected');
+    currentSelectedExpense = expenseId;
+    
+    // Mettre à jour l'en-tête
+    updateExpensePreviewHeader(expenseId);
+    
+    // Masquer l'état vide et afficher les détails
+    document.getElementById('emptyExpensePreview').style.display = 'none';
+    document.getElementById('expenseDetails').style.display = 'block';
+    
+    // Masquer tous les détails
+    document.querySelectorAll('.expense-detail-item').forEach(detail => {
+        detail.style.display = 'none';
+    });
+    
+    // Afficher le détail correspondant
+    const detailElement = document.getElementById(`expenseDetail${expenseId}`);
+    if (detailElement) {
+        detailElement.style.display = 'block';
+    }
+    
+    // Afficher/masquer le bouton d'annulation selon le statut
+    const expenseStatus = element.getAttribute('data-status');
+    const actionsElement = detailElement?.querySelector('.expense-actions');
+    if (actionsElement) {
+        if (expenseStatus === 'pending') {
+            actionsElement.style.display = 'flex';
+        } else {
+            actionsElement.style.display = 'none';
+        }
+    }
+}
+
+// Fonction pour mettre à jour l'en-tête de prévisualisation
+function updateExpensePreviewHeader(expenseId) {
+    const expenseData = {
+        1: { title: 'Transport - Déplacement client', subtitle: 'Note de frais du 15 Juin 2025' },
+        2: { title: 'Repas d\'affaires', subtitle: 'Note de frais du 12 Juin 2025' },
+        3: { title: 'Fournitures de bureau', subtitle: 'Note de frais du 10 Juin 2025' },
+        4: { title: 'Taxi - Réunion externe', subtitle: 'Note de frais du 08 Juin 2025' },
+        5: { title: 'Hébergement - Mission', subtitle: 'Note de frais du 05 Juin 2025' },
+        6: { title: 'Carburant - Véhicule société', subtitle: 'Note de frais du 03 Juin 2025' }
+    };
+    
+    const expense = expenseData[expenseId];
+    if (expense) {
+        document.getElementById('expensePreviewTitle').textContent = expense.title;
+        document.getElementById('expensePreviewSubtitle').textContent = expense.subtitle;
+    }
+}
+
+// Fonction pour filtrer les notes de frais
+function filterExpenses(filter) {
+    // Mettre à jour les onglets actifs
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    const activeTab = document.querySelector(`[data-filter="${filter}"]`);
+    if (activeTab) {
+        activeTab.classList.add('active');
+    }
+    
+    currentFilter = filter;
+    
+    // Filtrer les éléments
+    const expenseItems = document.querySelectorAll('#expensesList .expense-item');
+    expenseItems.forEach(item => {
+        const status = item.getAttribute('data-status');
+        
+        if (filter === 'all' || status === filter) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+    
+    // Réinitialiser la sélection si l'élément sélectionné n'est plus visible
+    const selectedItem = document.querySelector('#expensesList .expense-item.selected');
+    if (selectedItem && selectedItem.style.display === 'none') {
+        resetExpenseSelection();
+    }
+}
+
+// Fonction pour réinitialiser la sélection
+function resetExpenseSelection() {
+    currentSelectedExpense = null;
+    
+    // Retirer toutes les sélections
+    document.querySelectorAll('.expense-item').forEach(item => {
+        item.classList.remove('selected');
+    });
+    
+    // Afficher l'état vide
+    document.getElementById('emptyExpensePreview').style.display = 'flex';
+    document.getElementById('expenseDetails').style.display = 'none';
+    
+    // Réinitialiser le titre
+    document.getElementById('expensePreviewTitle').textContent = 'Détails de la note de frais';
+    document.getElementById('expensePreviewSubtitle').textContent = 'Sélectionnez une note pour voir les détails';
+}
+
+// Fonction pour annuler une note de frais
+function cancelExpense(expenseId) {
+    const expenseData = {
+        1: 'Transport - Déplacement client',
+        2: 'Repas d\'affaires',
+        3: 'Fournitures de bureau',
+        4: 'Taxi - Réunion externe',
+        5: 'Hébergement - Mission',
+        6: 'Carburant - Véhicule société'
+    };
+    
+    const expenseName = expenseData[expenseId];
+    
+    if (confirm(`Êtes-vous sûr de vouloir annuler la note de frais "${expenseName}" ?`)) {
+        showNotification('Note de frais annulée avec succès', 'success');
+        
+        // Mettre à jour le statut dans la sidebar
+        const expenseItem = document.querySelector(`[data-id="${expenseId}"]`);
+        if (expenseItem) {
+            expenseItem.setAttribute('data-status', 'rejected');
+            const statusIcon = expenseItem.querySelector('.expense-status i');
+            if (statusIcon) {
+                statusIcon.className = 'fas fa-times-circle status-rejected';
+            }
+        }
+        
+        // Mettre à jour le badge de statut dans les détails
+        const detailElement = document.getElementById(`expenseDetail${expenseId}`);
+        if (detailElement) {
+            const statusBadge = detailElement.querySelector('.status-badge');
+            if (statusBadge) {
+                statusBadge.className = 'status-badge status-rejected-badge';
+                statusBadge.innerHTML = '<i class="fas fa-times-circle"></i> Annulé';
+            }
+            
+            // Masquer le bouton d'annulation
+            const actionsElement = detailElement.querySelector('.expense-actions');
+            if (actionsElement) {
+                actionsElement.style.display = 'none';
+            }
+        }
+        
+        // Appliquer le filtre actuel pour rafraîchir la vue
+        filterExpenses(currentFilter);
+    }
+}
+
+// Fonction pour ouvrir le modal de création de note de frais
+function openExpenseModal() {
+    document.getElementById('expenseModal').classList.add('show');
+}
+
+// Fonction pour fermer le modal
+function closeExpenseModal() {
+    document.getElementById('expenseModal').classList.remove('show');
+}
+
+// Fonction pour soumettre une nouvelle note de frais
+function submitExpense(event) {
+    event.preventDefault();
+    
+    showNotification('Nouvelle note de frais soumise avec succès !', 'success');
+    
+    const modal = document.getElementById('expenseModal');
+    if (modal) {
+        modal.classList.remove('show');
+        event.target.reset();
+    }
+    
+    // Ici, vous pourriez ajouter la nouvelle note à la liste
+    // Dans une vraie application, cela viendrait du serveur
+}
+
+// Initialisation de la section note de frais
+function initExpensesSection() {
+    // Réinitialiser l'état
+    resetExpenseSelection();
+    
+    // Appliquer le filtre par défaut
+    filterExpenses('all');
+    
+    console.log('Section note de frais initialisée');
+}
+
+// Initialiser quand la section devient active
+document.addEventListener('DOMContentLoaded', function() {
+    // Observer les changements de section
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const expensesSection = document.getElementById('expenses');
+                if (expensesSection && expensesSection.classList.contains('active')) {
+                    initExpensesSection();
+                }
+            }
+        });
+    });
+    
+    const expensesSection = document.getElementById('expenses');
+    if (expensesSection) {
+        observer.observe(expensesSection, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+    }
+});
+
 
     </script>
 </body>
