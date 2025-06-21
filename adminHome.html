@@ -2265,10 +2265,10 @@
                 </section>
 
 
-                <!-- Section Leave Approvals  -->
+                <!-- Section Leave Approvals - À ajouter dans adminHome.html -->
                 <section id="leave-approvals" class="page-section">
-                    <!-- <div class="expenses-page-container"> -->
-                        <!-- Zone principale -->
+                    <div class="expenses-page-container">
+                        <!-- Zone principale dans un cadre unifié -->
                         <div class="dashboard-main-area leave-approvals-main" id="leaveApprovalsMain">
                             <!-- Header -->
                             <div class="expenses-preview-header">
@@ -2282,299 +2282,304 @@
                                 </button>
                             </div>
                             
-                           <!-- Search and Filters -->
-                                <div style="margin-bottom: 30px;">
-                                    <!-- Filtres alignés horizontalement -->
-                                    <div class="filter-container" style="margin-bottom: 15px; margin-left: 8px;">
-                                        <div class="filter-tabs" style="display: flex; gap: 15px; flex-wrap: wrap;">
-                                            <button class="filter-tab active" onclick="filterLeaveApprovals('all')" data-filter="all">
-                                                <i class="fas fa-list"></i>
-                                                Toutes
-                                            </button>
-                                            <button class="filter-tab" onclick="filterLeaveApprovals('pending')" data-filter="pending">
-                                                <i class="fas fa-clock"></i>
-                                                En attente
-                                            </button>
-                                            <button class="filter-tab" onclick="filterLeaveApprovals('approved')" data-filter="approved">
-                                                <i class="fas fa-check-circle"></i>
-                                                Approuvé
-                                            </button>
-                                            <button class="filter-tab" onclick="filterLeaveApprovals('rejected')" data-filter="rejected">
-                                                <i class="fas fa-times-circle"></i>
-                                                Rejeté
-                                            </button>
-                                            <button class="filter-tab" onclick="filterLeaveApprovals('cancelled')" data-filter="cancelled">
-                                                <i class="fas fa-ban"></i>
-                                                Annulé
-                                            </button>
+                            <!-- Contenu principal dans le cadre -->
+                            <div class="expense-details">
+                                <div class="expense-details-content">
+                                    <!-- Search and Filters -->
+                                    <div style="margin-bottom: 30px;">
+                                        <!-- Filtres alignés horizontalement -->
+                                        <div class="filter-container" style="margin-bottom: 15px; margin-left: 8px;">
+                                            <div class="filter-tabs" style="display: flex; gap: 15px; flex-wrap: wrap;">
+                                                <button class="filter-tab active" onclick="filterLeaveApprovals('all')" data-filter="all">
+                                                    <i class="fas fa-list"></i>
+                                                    Toutes
+                                                </button>
+                                                <button class="filter-tab" onclick="filterLeaveApprovals('pending')" data-filter="pending">
+                                                    <i class="fas fa-clock"></i>
+                                                    En attente
+                                                </button>
+                                                <button class="filter-tab" onclick="filterLeaveApprovals('approved')" data-filter="approved">
+                                                    <i class="fas fa-check-circle"></i>
+                                                    Approuvé
+                                                </button>
+                                                <button class="filter-tab" onclick="filterLeaveApprovals('rejected')" data-filter="rejected">
+                                                    <i class="fas fa-times-circle"></i>
+                                                    Rejeté
+                                                </button>
+                                                <button class="filter-tab" onclick="filterLeaveApprovals('cancelled')" data-filter="cancelled">
+                                                    <i class="fas fa-ban"></i>
+                                                    Annulé
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    
-                                    <!-- Barre de recherche réduite et positionnée à gauche -->
-                                    <div style="margin-left: 8px;">
-                                        <div style="width: 700px;">
-                                            <div class="search-input-wrapper">
-                                                <i class="fas fa-search"></i>
-                                                <input type="text" placeholder="Rechercher par nom ou type de congé..." class="payroll-search" id="leaveApprovalsSearch">
+                                        
+                                        <!-- Barre de recherche réduite et positionnée à gauche -->
+                                        <div style="margin-left: 8px;">
+                                            <div style="width: 700px;">
+                                                <div class="search-input-wrapper">
+                                                    <i class="fas fa-search"></i>
+                                                    <input type="text" placeholder="Rechercher par nom ou type de congé..." class="payroll-search" id="leaveApprovalsSearch">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                            <!-- Demandes Grid -->
-                            <div class="leave-requests-grid" id="leaveRequestsGrid">
-                                <!-- Demande 1 - En attente -->
-                                <div class="leave-request-card" data-status="pending" data-employee="marie-kone" data-type="annual" onclick="viewLeaveRequest('req1')">
-                                    <div class="leave-request-header">
-                                        <div class="employee-info">
-                                            <div class="profile-avatar-large" style="width: 50px; height: 50px; font-size: 16px; background-image: url('images/employ2.jpg'); background-size: cover; background-position: center; color: transparent;">MK</div>
-                                            <div class="employee-details">
-                                                <div class="employee-name">Marie Koné</div>
-                                                <div class="employee-position">Assistante RH</div>
+                                    <!-- Demandes Grid -->
+                                    <div class="leave-requests-grid" id="leaveRequestsGrid">
+                                        <!-- Demande 1 - En attente -->
+                                        <div class="leave-request-card" data-status="pending" data-employee="marie-kone" data-type="annual" onclick="viewLeaveRequest('req1')">
+                                            <div class="leave-request-header">
+                                                <div class="employee-info">
+                                                    <div class="profile-avatar-large" style="width: 50px; height: 50px; font-size: 16px; background-image: url('images/employ2.jpg'); background-size: cover; background-position: center; color: transparent;">MK</div>
+                                                    <div class="employee-details">
+                                                        <div class="employee-name">Marie Koné</div>
+                                                        <div class="employee-position">Assistante RH</div>
+                                                    </div>
+                                                </div>
+                                                <span class="status-badge" style="background: #98baff; color: white; font-size: 11px;">
+                                                    <i class="fas fa-clock"></i>
+                                                    En attente
+                                                </span>
+                                            </div>
+                                            <div class="leave-request-content">
+                                                <div class="leave-type">
+                                                    <i class="fas fa-calendar-minus"></i>
+                                                    Congés Annuels
+                                                </div>
+                                                <div class="leave-duration">
+                                                    <strong>5 jours</strong> - Du 15 au 19 Juillet 2025
+                                                </div>
+                                                <div class="leave-reason">
+                                                    Vacances d'été en famille
+                                                </div>
+                                                <div class="leave-submit-date">
+                                                    Soumis le 12 Juin 2025
+                                                </div>
                                             </div>
                                         </div>
-                                        <span class="status-badge" style="background: #98baff; color: white; font-size: 11px;">
-                                            <i class="fas fa-clock"></i>
-                                            En attente
-                                        </span>
-                                    </div>
-                                    <div class="leave-request-content">
-                                        <div class="leave-type">
-                                            <i class="fas fa-calendar-minus"></i>
-                                            Congés Annuels
-                                        </div>
-                                        <div class="leave-duration">
-                                            <strong>5 jours</strong> - Du 15 au 19 Juillet 2025
-                                        </div>
-                                        <div class="leave-reason">
-                                            Vacances d'été en famille
-                                        </div>
-                                        <div class="leave-submit-date">
-                                            Soumis le 12 Juin 2025
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <!-- Demande 2 - En attente -->
-                                <div class="leave-request-card" data-status="pending" data-employee="amadou-traore" data-type="sick" onclick="viewLeaveRequest('req2')">
-                                    <div class="leave-request-header">
-                                        <div class="employee-info">
-                                            <div class="profile-avatar-large" style="width: 50px; height: 50px; font-size: 16px; background-image: url('images/employ2.jpg'); background-size: cover; background-position: center; color: transparent;">AT</div>
-                                            <div class="employee-details">
-                                                <div class="employee-name">Amadou Traoré</div>
-                                                <div class="employee-position">Développeur Backend</div>
+                                        <!-- Demande 2 - En attente -->
+                                        <div class="leave-request-card" data-status="pending" data-employee="amadou-traore" data-type="sick" onclick="viewLeaveRequest('req2')">
+                                            <div class="leave-request-header">
+                                                <div class="employee-info">
+                                                    <div class="profile-avatar-large" style="width: 50px; height: 50px; font-size: 16px; background-image: url('images/employ2.jpg'); background-size: cover; background-position: center; color: transparent;">AT</div>
+                                                    <div class="employee-details">
+                                                        <div class="employee-name">Amadou Traoré</div>
+                                                        <div class="employee-position">Développeur Backend</div>
+                                                    </div>
+                                                </div>
+                                                <span class="status-badge" style="background: #98baff; color: white; font-size: 11px;">
+                                                    <i class="fas fa-clock"></i>
+                                                    En attente
+                                                </span>
+                                            </div>
+                                            <div class="leave-request-content">
+                                                <div class="leave-type">
+                                                    <i class="fas fa-user-injured"></i>
+                                                    Congé Maladie
+                                                </div>
+                                                <div class="leave-duration">
+                                                    <strong>1 jour</strong> - Le 25 Juin 2025
+                                                </div>
+                                                <div class="leave-reason">
+                                                    Visite médicale urgente
+                                                </div>
+                                                <div class="leave-submit-date">
+                                                    Soumis le 20 Juin 2025
+                                                </div>
                                             </div>
                                         </div>
-                                        <span class="status-badge" style="background: #98baff; color: white; font-size: 11px;">
-                                            <i class="fas fa-clock"></i>
-                                            En attente
-                                        </span>
-                                    </div>
-                                    <div class="leave-request-content">
-                                        <div class="leave-type">
-                                            <i class="fas fa-user-injured"></i>
-                                            Congé Maladie
-                                        </div>
-                                        <div class="leave-duration">
-                                            <strong>1 jour</strong> - Le 25 Juin 2025
-                                        </div>
-                                        <div class="leave-reason">
-                                            Visite médicale urgente
-                                        </div>
-                                        <div class="leave-submit-date">
-                                            Soumis le 20 Juin 2025
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <!-- Demande 3 - En attente -->
-                                <div class="leave-request-card" data-status="pending" data-employee="ibrahim-sanogo" data-type="training" onclick="viewLeaveRequest('req3')">
-                                    <div class="leave-request-header">
-                                        <div class="employee-info">
-                                            <div class="profile-avatar-large" style="width: 50px; height: 50px; font-size: 16px; background-image: url('images/employ2.jpg'); background-size: cover; background-position: center; color: transparent;">IS</div>
-                                            <div class="employee-details">
-                                                <div class="employee-name">Ibrahim Sanogo</div>
-                                                <div class="employee-position">DevOps Engineer</div>
+                                        <!-- Demande 3 - En attente -->
+                                        <div class="leave-request-card" data-status="pending" data-employee="ibrahim-sanogo" data-type="training" onclick="viewLeaveRequest('req3')">
+                                            <div class="leave-request-header">
+                                                <div class="employee-info">
+                                                    <div class="profile-avatar-large" style="width: 50px; height: 50px; font-size: 16px; background-image: url('images/employ2.jpg'); background-size: cover; background-position: center; color: transparent;">IS</div>
+                                                    <div class="employee-details">
+                                                        <div class="employee-name">Ibrahim Sanogo</div>
+                                                        <div class="employee-position">DevOps Engineer</div>
+                                                    </div>
+                                                </div>
+                                                <span class="status-badge" style="background: #98baff; color: white; font-size: 11px;">
+                                                    <i class="fas fa-clock"></i>
+                                                    En attente
+                                                </span>
+                                            </div>
+                                            <div class="leave-request-content">
+                                                <div class="leave-type">
+                                                    <i class="fas fa-graduation-cap"></i>
+                                                    Formation
+                                                </div>
+                                                <div class="leave-duration">
+                                                    <strong>2 jours</strong> - Du 30 Juin au 1 Juillet 2025
+                                                </div>
+                                                <div class="leave-reason">
+                                                    Formation certifiante DevOps
+                                                </div>
+                                                <div class="leave-submit-date">
+                                                    Soumis le 18 Juin 2025
+                                                </div>
                                             </div>
                                         </div>
-                                        <span class="status-badge" style="background: #98baff; color: white; font-size: 11px;">
-                                            <i class="fas fa-clock"></i>
-                                            En attente
-                                        </span>
-                                    </div>
-                                    <div class="leave-request-content">
-                                        <div class="leave-type">
-                                            <i class="fas fa-graduation-cap"></i>
-                                            Formation
-                                        </div>
-                                        <div class="leave-duration">
-                                            <strong>2 jours</strong> - Du 30 Juin au 1 Juillet 2025
-                                        </div>
-                                        <div class="leave-reason">
-                                            Formation certifiante DevOps
-                                        </div>
-                                        <div class="leave-submit-date">
-                                            Soumis le 18 Juin 2025
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <!-- Demande 4 - Approuvé -->
-                                <div class="leave-request-card" data-status="approved" data-employee="konan-kassi" data-type="personal" onclick="viewLeaveRequest('req4')">
-                                    <div class="leave-request-header">
-                                        <div class="employee-info">
-                                            <div class="profile-avatar-large" style="width: 50px; height: 50px; font-size: 16px; background-image: url('images/employ2.jpg'); background-size: cover; background-position: center; color: transparent;">KK</div>
-                                            <div class="employee-details">
-                                                <div class="employee-name">KONAN Kassi</div>
-                                                <div class="employee-position">Développeur Frontend</div>
+                                        <!-- Demande 4 - Approuvé -->
+                                        <div class="leave-request-card" data-status="approved" data-employee="konan-kassi" data-type="personal" onclick="viewLeaveRequest('req4')">
+                                            <div class="leave-request-header">
+                                                <div class="employee-info">
+                                                    <div class="profile-avatar-large" style="width: 50px; height: 50px; font-size: 16px; background-image: url('images/employ2.jpg'); background-size: cover; background-position: center; color: transparent;">KK</div>
+                                                    <div class="employee-details">
+                                                        <div class="employee-name">KONAN Kassi</div>
+                                                        <div class="employee-position">Développeur Frontend</div>
+                                                    </div>
+                                                </div>
+                                                <span class="status-badge" style="background: #3f1b68; color: white; font-size: 11px;">
+                                                    <i class="fas fa-check-circle"></i>
+                                                    Approuvé
+                                                </span>
+                                            </div>
+                                            <div class="leave-request-content">
+                                                <div class="leave-type">
+                                                    <i class="fas fa-user"></i>
+                                                    Congé Personnel
+                                                </div>
+                                                <div class="leave-duration">
+                                                    <strong>1 jour</strong> - Le 28 Juin 2025
+                                                </div>
+                                                <div class="leave-reason">
+                                                    Démarches administratives
+                                                </div>
+                                                <div class="leave-submit-date">
+                                                    Soumis le 15 Juin 2025
+                                                </div>
                                             </div>
                                         </div>
-                                        <span class="status-badge" style="background: #3f1b68; color: white; font-size: 11px;">
-                                            <i class="fas fa-check-circle"></i>
-                                            Approuvé
-                                        </span>
-                                    </div>
-                                    <div class="leave-request-content">
-                                        <div class="leave-type">
-                                            <i class="fas fa-user"></i>
-                                            Congé Personnel
-                                        </div>
-                                        <div class="leave-duration">
-                                            <strong>1 jour</strong> - Le 28 Juin 2025
-                                        </div>
-                                        <div class="leave-reason">
-                                            Démarches administratives
-                                        </div>
-                                        <div class="leave-submit-date">
-                                            Soumis le 15 Juin 2025
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <!-- Demande 5 - Rejeté -->
-                                <div class="leave-request-card" data-status="rejected" data-employee="awa-bamba" data-type="annual" onclick="viewLeaveRequest('req5')">
-                                    <div class="leave-request-header">
-                                        <div class="employee-info">
-                                            <div class="profile-avatar-large" style="width: 50px; height: 50px; font-size: 16px; background-image: url('images/employ2.jpg'); background-size: cover; background-position: center; color: transparent;">AB</div>
-                                            <div class="employee-details">
-                                                <div class="employee-name">Awa Bamba</div>
-                                                <div class="employee-position">Comptable</div>
+                                        <!-- Demande 5 - Rejeté -->
+                                        <div class="leave-request-card" data-status="rejected" data-employee="awa-bamba" data-type="annual" onclick="viewLeaveRequest('req5')">
+                                            <div class="leave-request-header">
+                                                <div class="employee-info">
+                                                    <div class="profile-avatar-large" style="width: 50px; height: 50px; font-size: 16px; background-image: url('images/employ2.jpg'); background-size: cover; background-position: center; color: transparent;">AB</div>
+                                                    <div class="employee-details">
+                                                        <div class="employee-name">Awa Bamba</div>
+                                                        <div class="employee-position">Comptable</div>
+                                                    </div>
+                                                </div>
+                                                <span class="status-badge" style="background: #fd7253; color: white; font-size: 11px;">
+                                                    <i class="fas fa-times-circle"></i>
+                                                    Rejeté
+                                                </span>
+                                            </div>
+                                            <div class="leave-request-content">
+                                                <div class="leave-type">
+                                                    <i class="fas fa-calendar-minus"></i>
+                                                    Congés Annuels
+                                                </div>
+                                                <div class="leave-duration">
+                                                    <strong>7 jours</strong> - Du 1 au 7 Juillet 2025
+                                                </div>
+                                                <div class="leave-reason">
+                                                    Vacances familiales
+                                                </div>
+                                                <div class="leave-submit-date">
+                                                    Soumis le 10 Juin 2025
+                                                </div>
                                             </div>
                                         </div>
-                                        <span class="status-badge" style="background: #fd7253; color: white; font-size: 11px;">
-                                            <i class="fas fa-times-circle"></i>
-                                            Rejeté
-                                        </span>
-                                    </div>
-                                    <div class="leave-request-content">
-                                        <div class="leave-type">
-                                            <i class="fas fa-calendar-minus"></i>
-                                            Congés Annuels
-                                        </div>
-                                        <div class="leave-duration">
-                                            <strong>7 jours</strong> - Du 1 au 7 Juillet 2025
-                                        </div>
-                                        <div class="leave-reason">
-                                            Vacances familiales
-                                        </div>
-                                        <div class="leave-submit-date">
-                                            Soumis le 10 Juin 2025
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <!-- Demande 6 - Annulé -->
-                                <div class="leave-request-card" data-status="cancelled" data-employee="fatou-diallo" data-type="training" onclick="viewLeaveRequest('req6')">
-                                    <div class="leave-request-header">
-                                        <div class="employee-info">
-                                            <div class="profile-avatar-large" style="width: 50px; height: 50px; font-size: 16px; background-image: url('images/employ2.jpg'); background-size: cover; background-position: center; color: transparent;">FD</div>
-                                            <div class="employee-details">
-                                                <div class="employee-name">Fatou Diallo</div>
-                                                <div class="employee-position">Contrôleur de Gestion</div>
+                                        <!-- Demande 6 - Annulé -->
+                                        <div class="leave-request-card" data-status="cancelled" data-employee="fatou-diallo" data-type="training" onclick="viewLeaveRequest('req6')">
+                                            <div class="leave-request-header">
+                                                <div class="employee-info">
+                                                    <div class="profile-avatar-large" style="width: 50px; height: 50px; font-size: 16px; background-image: url('images/employ2.jpg'); background-size: cover; background-position: center; color: transparent;">FD</div>
+                                                    <div class="employee-details">
+                                                        <div class="employee-name">Fatou Diallo</div>
+                                                        <div class="employee-position">Contrôleur de Gestion</div>
+                                                    </div>
+                                                </div>
+                                                <span class="status-badge" style="background: #d9d9d9; color: #666; font-size: 11px;">
+                                                    <i class="fas fa-ban"></i>
+                                                    Annulé
+                                                </span>
+                                            </div>
+                                            <div class="leave-request-content">
+                                                <div class="leave-type">
+                                                    <i class="fas fa-graduation-cap"></i>
+                                                    Formation
+                                                </div>
+                                                <div class="leave-duration">
+                                                    <strong>1 jour</strong> - Le 5 Juillet 2025
+                                                </div>
+                                                <div class="leave-reason">
+                                                    Formation en comptabilité
+                                                </div>
+                                                <div class="leave-submit-date">
+                                                    Soumis le 8 Juin 2025
+                                                </div>
                                             </div>
                                         </div>
-                                        <span class="status-badge" style="background: #d9d9d9; color: #666; font-size: 11px;">
-                                            <i class="fas fa-ban"></i>
-                                            Annulé
-                                        </span>
-                                    </div>
-                                    <div class="leave-request-content">
-                                        <div class="leave-type">
-                                            <i class="fas fa-graduation-cap"></i>
-                                            Formation
-                                        </div>
-                                        <div class="leave-duration">
-                                            <strong>1 jour</strong> - Le 5 Juillet 2025
-                                        </div>
-                                        <div class="leave-reason">
-                                            Formation en comptabilité
-                                        </div>
-                                        <div class="leave-submit-date">
-                                            Soumis le 8 Juin 2025
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <!-- Demande 7 - En attente -->
-                                <div class="leave-request-card" data-status="pending" data-employee="aissa-barry" data-type="family" onclick="viewLeaveRequest('req7')">
-                                    <div class="leave-request-header">
-                                        <div class="employee-info">
-                                            <div class="profile-avatar-large" style="width: 50px; height: 50px; font-size: 16px; background-image: url('images/employ2.jpg'); background-size: cover; background-position: center; color: transparent;">AB</div>
-                                            <div class="employee-details">
-                                                <div class="employee-name">Aissatou Barry</div>
-                                                <div class="employee-position">Responsable Formation</div>
+                                        <!-- Demande 7 - En attente -->
+                                        <div class="leave-request-card" data-status="pending" data-employee="aissa-barry" data-type="family" onclick="viewLeaveRequest('req7')">
+                                            <div class="leave-request-header">
+                                                <div class="employee-info">
+                                                    <div class="profile-avatar-large" style="width: 50px; height: 50px; font-size: 16px; background-image: url('images/employ2.jpg'); background-size: cover; background-position: center; color: transparent;">AB</div>
+                                                    <div class="employee-details">
+                                                        <div class="employee-name">Aissatou Barry</div>
+                                                        <div class="employee-position">Responsable Formation</div>
+                                                    </div>
+                                                </div>
+                                                <span class="status-badge" style="background: #98baff; color: white; font-size: 11px;">
+                                                    <i class="fas fa-clock"></i>
+                                                    En attente
+                                                </span>
+                                            </div>
+                                            <div class="leave-request-content">
+                                                <div class="leave-type">
+                                                    <i class="fas fa-heart"></i>
+                                                    Congé Familial
+                                                </div>
+                                                <div class="leave-duration">
+                                                    <strong>2 jours</strong> - Du 8 au 9 Juillet 2025
+                                                </div>
+                                                <div class="leave-reason">
+                                                    Mariage d'un proche
+                                                </div>
+                                                <div class="leave-submit-date">
+                                                    Soumis le 19 Juin 2025
+                                                </div>
                                             </div>
                                         </div>
-                                        <span class="status-badge" style="background: #98baff; color: white; font-size: 11px;">
-                                            <i class="fas fa-clock"></i>
-                                            En attente
-                                        </span>
-                                    </div>
-                                    <div class="leave-request-content">
-                                        <div class="leave-type">
-                                            <i class="fas fa-heart"></i>
-                                            Congé Familial
-                                        </div>
-                                        <div class="leave-duration">
-                                            <strong>2 jours</strong> - Du 8 au 9 Juillet 2025
-                                        </div>
-                                        <div class="leave-reason">
-                                            Mariage d'un proche
-                                        </div>
-                                        <div class="leave-submit-date">
-                                            Soumis le 19 Juin 2025
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <!-- Demande 8 - En attente -->
-                                <div class="leave-request-card" data-status="pending" data-employee="yacine-toure" data-type="annual" onclick="viewLeaveRequest('req8')">
-                                    <div class="leave-request-header">
-                                        <div class="employee-info">
-                                            <div class="profile-avatar-large" style="width: 50px; height: 50px; font-size: 16px; background-image: url('images/employ2.jpg'); background-size: cover; background-position: center; color: transparent;">YT</div>
-                                            <div class="employee-details">
-                                                <div class="employee-name">Yacine Touré</div>
-                                                <div class="employee-position">Responsable Recrutement</div>
+                                        <!-- Demande 8 - En attente -->
+                                        <div class="leave-request-card" data-status="pending" data-employee="yacine-toure" data-type="annual" onclick="viewLeaveRequest('req8')">
+                                            <div class="leave-request-header">
+                                                <div class="employee-info">
+                                                    <div class="profile-avatar-large" style="width: 50px; height: 50px; font-size: 16px; background-image: url('images/employ2.jpg'); background-size: cover; background-position: center; color: transparent;">YT</div>
+                                                    <div class="employee-details">
+                                                        <div class="employee-name">Yacine Touré</div>
+                                                        <div class="employee-position">Responsable Recrutement</div>
+                                                    </div>
+                                                </div>
+                                                <span class="status-badge" style="background: #98baff; color: white; font-size: 11px;">
+                                                    <i class="fas fa-clock"></i>
+                                                    En attente
+                                                </span>
                                             </div>
-                                        </div>
-                                        <span class="status-badge" style="background: #98baff; color: white; font-size: 11px;">
-                                            <i class="fas fa-clock"></i>
-                                            En attente
-                                        </span>
-                                    </div>
-                                    <div class="leave-request-content">
-                                        <div class="leave-type">
-                                            <i class="fas fa-calendar-minus"></i>
-                                            Congés Annuels
-                                        </div>
-                                        <div class="leave-duration">
-                                            <strong>3 jours</strong> - Du 12 au 14 Juillet 2025
-                                        </div>
-                                        <div class="leave-reason">
-                                            Week-end prolongé
-                                        </div>
-                                        <div class="leave-submit-date">
-                                            Soumis le 16 Juin 2025
+                                            <div class="leave-request-content">
+                                                <div class="leave-type">
+                                                    <i class="fas fa-calendar-minus"></i>
+                                                    Congés Annuels
+                                                </div>
+                                                <div class="leave-duration">
+                                                    <strong>3 jours</strong> - Du 12 au 14 Juillet 2025
+                                                </div>
+                                                <div class="leave-reason">
+                                                    Week-end prolongé
+                                                </div>
+                                                <div class="leave-submit-date">
+                                                    Soumis le 16 Juin 2025
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -2594,9 +2599,8 @@
                                 <!-- Le contenu sera rempli dynamiquement -->
                             </div>
                         </div>
-                    <!-- </div> -->
+                    </div>
                 </section>
-
         </main>
     </div>
 
