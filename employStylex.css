@@ -32,7 +32,7 @@
         .dashboard-container {
             display: flex;
             min-height: 100vh;
-            margin: 10px;
+            margin: 5px;
             /* border-radius: 20px; */
             overflow: hidden;
             box-shadow: var(--shadow);
@@ -44,7 +44,7 @@
             background: linear-gradient(135deg, var(--primary-color), var(--primary-color));
             padding: 20px 0;
             position: fixed;
-            height: calc(100vh - 20px);
+            height: calc(100vh - 10px);
             overflow-y: hidden;
             transition: transform 0.3s ease;
             z-index: 1000;
@@ -108,8 +108,8 @@
 
         /* Main Content Area */
         .main-content {
-            flex: 1;
-            margin-left: 280px;
+            flex: 3;
+            margin-left: 265px;
             padding: 20px;
             transition: margin-left 0.3s ease;
             background: var(--light-bg);
@@ -1354,7 +1354,7 @@
        /* Section Note de Frais Styles */
         .expenses-page-container {
             display: flex;
-            height: calc(100vh - 50px);
+            height: calc(150vh - 50px);
             gap: 0;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
