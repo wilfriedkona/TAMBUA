@@ -1189,7 +1189,7 @@
 
         .leave-request-item {
             padding: 1rem;
-            border: 2px solid var(--border-color);
+            border: 1px solid var(--border-color);
             border-radius: 10px;
             margin-bottom: 1rem;
             cursor: pointer;
@@ -2235,7 +2235,7 @@
 .form-control {
     width: 100%;
     padding: 0.75rem 1rem;
-    border: 2px solid var(--border-color);
+    border: 1px solid var(--border-color);
     border-radius: 10px;
     font-size: 0.9rem;
     transition: all 0.3s ease;
@@ -3026,12 +3026,12 @@
 
 .leave-request-card {
     background: white;
-    border: 2px solid var(--border-color);
+    border: 1px solid var(--border-color);
     border-radius: 15px;
     padding: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.333);
 }
 
 .leave-request-card:hover {
@@ -3065,12 +3065,12 @@
 }
 
 .employee-position {
-    color: #6b7280;
+    color: #6b806f;
     font-size: 13px;
 }
 
 .leave-request-content {
-    space-y: 8px;
+    appearance: 8px;
 }
 
 .leave-type {
@@ -3167,7 +3167,7 @@
     justify-content: center;
     gap: 8px;
     padding: 12px 20px;
-    border: 2px solid var(--border-color);
+    border: 1px solid var(--border-color);
     border-radius: 10px;
     transition: all 0.3s ease;
     font-weight: 500;
@@ -3217,7 +3217,7 @@
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 10px;
-    border: 2px solid var(--border-color);
+    border: 1px solid var(--border-color);
 }
 
 /* Actions dans le panel de détails */
