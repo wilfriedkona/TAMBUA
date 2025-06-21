@@ -1392,6 +1392,8 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 8px;
+
+            align-items: center;
         }
 
         .filter-tab {
@@ -1409,6 +1411,9 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s ease;
+
+            min-width: auto;
+            white-space: nowrap;
         }
 
         .filter-tab:hover {
@@ -1782,8 +1787,25 @@
             
             .filter-tabs {
                 grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .search-input-wrapper {
+                width: 250px;
             }
         }
+
+        @media (max-width: 480px) {
+            .filter-tabs {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .search-input-wrapper {
+                width: 100%;
+                max-width: 280px;
+            }
+        }   
 
         /* Scrollbar personnalisée */
         .expenses-list::-webkit-scrollbar {
@@ -3009,6 +3031,16 @@
 
 
 /* Styles spécifiques pour la section leave-approvals */
+
+/* Option 1: Bordure simple tout autour */
+.expense-info-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f9fafb;
+    border-radius: 8px;
+    border: 2px solid #e5e7eb; /* Bordure grise tout autour */
+}
+
 .leave-approvals-main {
     transition: width 0.3s ease, margin-right 0.3s ease;
 }
@@ -3113,7 +3145,7 @@
     width: 500px;
     height: 100vh;
     background: white;
-    border-left: 2px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
     transition: right 0.3s ease;
     z-index: 1000;
     overflow-y: auto;

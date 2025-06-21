@@ -751,16 +751,10 @@
                         <div class="expense-details">
                             <div class="expense-details-content">
                                 <!-- Search and Filters -->
-                                <div style="margin-bottom: 30px;">
-                                    <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
-                                        <div style="flex: 1; min-width: 300px;">
-                                            <div class="search-input-wrapper">
-                                                <i class="fas fa-search"></i>
-                                                <input type="text" placeholder="Rechercher un employé..." class="payroll-search" id="employeeSearch">
-                                            </div>
-                                        </div>
-                                        <div class="filter-container">
-                                            <div class="filter-tabs">
+                                    <div style="margin-bottom: 30px;">
+                                        <!-- Filtres alignés horizontalement -->
+                                        <div class="filter-container" style="margin-bottom: 15px; margin-left: 8px;">
+                                            <div class="filter-tabs" style="display: flex; gap: 15px; flex-wrap: wrap;">
                                                 <button class="filter-tab active" onclick="filterEmployees('all')" data-filter="all">
                                                     <i class="fas fa-users"></i>
                                                     Tous
@@ -783,8 +777,17 @@
                                                 </button>
                                             </div>
                                         </div>
+                                        
+                                        <!-- Barre de recherche réduite et positionnée à gauche -->
+                                        <div style="margin-left: 8px;">
+                                            <div style="width: 700px;">
+                                                <div class="search-input-wrapper">
+                                                    <i class="fas fa-search"></i>
+                                                    <input type="text" placeholder="Rechercher un employé..." class="payroll-search" id="employeeSearch">
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
 
                                 <!-- Employees Grid -->
                                 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;" id="employeesGrid">
@@ -2262,7 +2265,7 @@
                 </section>
 
 
-                <!-- Section Leave Approvals - À ajouter dans adminHome.html -->
+                <!-- Section Leave Approvals  -->
                 <section id="leave-approvals" class="page-section">
                     <!-- <div class="expenses-page-container"> -->
                         <!-- Zone principale -->
@@ -2279,17 +2282,11 @@
                                 </button>
                             </div>
                             
-                            <!-- Search and Filters -->
-                            <div style="margin-bottom: 30px;">
-                                <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
-                                    <div style="flex: 1; min-width: 300px;">
-                                        <div class="search-input-wrapper">
-                                            <i class="fas fa-search"></i>
-                                            <input type="text" placeholder="Rechercher par nom ou type de congé..." class="payroll-search" id="leaveApprovalsSearch">
-                                        </div>
-                                    </div>
-                                    <div class="filter-container">
-                                        <div class="filter-tabs">
+                           <!-- Search and Filters -->
+                                <div style="margin-bottom: 30px;">
+                                    <!-- Filtres alignés horizontalement -->
+                                    <div class="filter-container" style="margin-bottom: 15px; margin-left: 8px;">
+                                        <div class="filter-tabs" style="display: flex; gap: 15px; flex-wrap: wrap;">
                                             <button class="filter-tab active" onclick="filterLeaveApprovals('all')" data-filter="all">
                                                 <i class="fas fa-list"></i>
                                                 Toutes
@@ -2312,8 +2309,17 @@
                                             </button>
                                         </div>
                                     </div>
+                                    
+                                    <!-- Barre de recherche réduite et positionnée à gauche -->
+                                    <div style="margin-left: 8px;">
+                                        <div style="width: 700px;">
+                                            <div class="search-input-wrapper">
+                                                <i class="fas fa-search"></i>
+                                                <input type="text" placeholder="Rechercher par nom ou type de congé..." class="payroll-search" id="leaveApprovalsSearch">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
 
                             <!-- Demandes Grid -->
                             <div class="leave-requests-grid" id="leaveRequestsGrid">
